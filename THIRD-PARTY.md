@@ -1,0 +1,16 @@
+# Third-party components / 第三方组件
+
+Studio Desk original code is MIT, copyright 2026 Zeruik / TechABJ. The ZTH logo retains studio brand rights. Linking or publishing third-party content does not change its license.
+
+| Component | Version | License / notice | Source |
+|---|---|---|---|
+| Electron | 45.0.0, Windows x64 | MIT; Chromium/Node bundled notices in LICENSE.electron.txt and LICENSES.chromium.html | https://github.com/electron/electron/releases/tag/v45.0.0 |
+| CPython embeddable | 3.14.10, Windows amd64 | PSF-2.0 and bundled third-party notices in runtime/python/LICENSE.txt | https://www.python.org/downloads/release/python-31410/ |
+| sharp | 0.35.5 | Apache-2.0; build-time only | https://github.com/lovell/sharp |
+| rcedit | 5.0.2 | MIT; build-time only | https://github.com/electron/rcedit |
+| jsdom | 30.1.3 | MIT; developer DOM tests only | https://github.com/jsdom/jsdom |
+| Inno Setup | 7 | Separate official license; build compiler, not a runtime dependency | https://jrsoftware.org/isinfo.php |
+
+Runtime versions and archive SHA-256 values are pinned in runtime-lock.json; npm build dependencies are pinned in build-runtime/package-lock.json. Official Python release and SPDX record were checked on 2026-11-06. Python archive SHA-256: 90905e64a840557d8c1bc4f5b74db3d7ee85e3ffb217611cac1c7813acea4159.
+
+The desktop installer bundles both runtimes. It does not install a global Python, run pip, register a Python command, change PATH or depend on a machine-wide Python. Generated public sites use local HTML/CSS/assets and do not bundle the Studio Desk desktop runtime. GitHub Pages/Cloudflare documentation and network services remain subject to their own terms.

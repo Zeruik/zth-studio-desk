@@ -1,0 +1,13 @@
+node_modules/
+build-runtime/node_modules/
+out/
+.cache/
+data/
+runtime/
+qa-output/
+.qa-work/
+__pycache__/
+*.pyc
+*.log
+*.zthdesk
+.desk-dev/

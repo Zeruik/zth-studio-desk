@@ -1,0 +1,8 @@
+{
+  "name": "zth-studio-desk",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "main": "desktop/main.cjs",
+  "author": "Zeruik / TechABJ"
+}

@@ -1,0 +1,206 @@
+{
+  "product": "ZTH Studio Desk",
+  "version": "1.0.0",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "size": 8,
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
+    },
+    {
+      "path": ".gitignore",
+      "size": 137,
+      "sha256": "d98f48f3473a43551a3fe3d2608a44585e4dd0c28f7736f48e8a7ca3ba315e6c"
+    },
+    {
+      "path": "API.md",
+      "size": 8738,
+      "sha256": "ec6346cc73b4d9c8f43fcf9af8c7b33d23145b2fe64fe2343b761d380ff787ce"
+    },
+    {
+      "path": "BUILD.md",
+      "size": 4059,
+      "sha256": "210ed3a17f2cc4c0d6c90f6ccda941313e378f20c5eb47b41cef3300b45457b6"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "size": 2673,
+      "sha256": "2a8cdc19d0eb134955d37ae9d059ec7df938a407ca92809b4a0c268f177b6ced"
+    },
+    {
+      "path": "CONTRACT.md",
+      "size": 6110,
+      "sha256": "6598d5afdcb012320b4466c0094fc48d3f97196ca2db28342585958f41d80a47"
+    },
+    {
+      "path": "DEPLOY.md",
+      "size": 7782,
+      "sha256": "73128c2dfdae60062ec50633c9ea229ad679995c9cc16f7109f97b6afc0e0c23"
+    },
+    {
+      "path": "LICENSE",
+      "size": 1223,
+      "sha256": "3e17ac721e3bf98b461d71b840b363759399992ce6a9504492a28903754e4acb"
+    },
+    {
+      "path": "README.md",
+      "size": 9471,
+      "sha256": "9bb6923b2b5eb0eb160e48082a593cf4a267af0760904d5fe4d29bf8cdc87cc1"
+    },
+    {
+      "path": "THIRD-PARTY.md",
+      "size": 1693,
+      "sha256": "f91ce9719c0ee756170bb74f3fc74827ed1e9e4cb4683d1726c5d42525bb8673"
+    },
+    {
+      "path": "app.js",
+      "size": 59046,
+      "sha256": "28436c683bdf57e1c414863a33f03b2aa92239a1d512131d15c95c80385ac245"
+    },
+    {
+      "path": "assets/zth-green-icon.svg",
+      "size": 108810,
+      "sha256": "3eb839ab7677c8684d5488411c6c6fbc41817b5d3cc08581b361e2173ed37b78"
+    },
+    {
+      "path": "backend.cjs",
+      "size": 14161,
+      "sha256": "dd9f365eb02df69a82ddb64be8b02449597296a39dd508b4e3cbb7ba8c9fd3fd"
+    },
+    {
+      "path": "build-product.cjs",
+      "size": 13744,
+      "sha256": "95142344879da9584e4335e8f62cd03985503a18aea55a2e03f5d8bb98573bad"
+    },
+    {
+      "path": "build-release.cjs",
+      "size": 458,
+      "sha256": "b8a68656a6d92286884ddac6f6a3e6581a4ad38dd0e45f76b6903ea8e0ad7772"
+    },
+    {
+      "path": "build-runtime/package-lock.json",
+      "size": 47148,
+      "sha256": "46e27eeb2ba6e3a0dbcdd8f877e501ab097e24ae429ffd7fcb217f7891b77c89"
+    },
+    {
+      "path": "build-runtime/package.json",
+      "size": 309,
+      "sha256": "b3860f64b8faa5146d2637508d728add2250029bf9aeaf94f4be2ea9ffec23fa"
+    },
+    {
+      "path": "core.js",
+      "size": 14958,
+      "sha256": "540bfd6e082a6668054adafafb99f5a98e90cdac8aa117419f3fb584ff4d7236"
+    },
+    {
+      "path": "desktop/main.cjs",
+      "size": 7635,
+      "sha256": "2d75a24e75a401ec246a349bbbf72d46a6f504c2560d49714110a4b9e1d0659e"
+    },
+    {
+      "path": "desktop/preload.cjs",
+      "size": 364,
+      "sha256": "f1ced80a5a89c9f78bc251a50684a272b510173b38ab611b15c897eab8aa1e64"
+    },
+    {
+      "path": "index.html",
+      "size": 714,
+      "sha256": "6b66df204f6d13418d4717f90eaef180888642e6db52a7b0089d33a9596df0d4"
+    },
+    {
+      "path": "installer-template.cjs",
+      "size": 11293,
+      "sha256": "d1c7bfdb25de637d5d11cf620f4900b3c1b4b955526daad3c34408b60002488f"
+    },
+    {
+      "path": "logo.svg",
+      "size": 108810,
+      "sha256": "3eb839ab7677c8684d5488411c6c6fbc41817b5d3cc08581b361e2173ed37b78"
+    },
+    {
+      "path": "package.json",
+      "size": 155,
+      "sha256": "b5a8c07d890c36e5a347e739ba53b5d67f1011ba7374f89788d83533947dda2d"
+    },
+    {
+      "path": "prepare-runtime.cjs",
+      "size": 313,
+      "sha256": "4dd931a7c333c6735687e9abf45a197ca789c00a45d89eb2624426510387f74f"
+    },
+    {
+      "path": "product.json",
+      "size": 446,
+      "sha256": "ef5280a8c7087c76b7b3619d48111356dcade5fb371e2c676a038c9ebce38dda"
+    },
+    {
+      "path": "python/github_pages.py",
+      "size": 10508,
+      "sha256": "974c984dcf73843bba8be806a257dd30480b409b52db3c771e1e413220c5ae74"
+    },
+    {
+      "path": "python/sitegen.py",
+      "size": 17173,
+      "sha256": "0bf18118dbdea70b14516bb54d3c5cfc68cd55fd2443af17da0a08ee6462c083"
+    },
+    {
+      "path": "python/validation.py",
+      "size": 10443,
+      "sha256": "fbda924253a8df1c2cc67589a8fd527143d3c00164c24b41aa72ba57c5d7459f"
+    },
+    {
+      "path": "python/worker.py",
+      "size": 10823,
+      "sha256": "b5c7dac7071fb697280c653160a2ee4723c9814ecf981fed7ad94181ab84e35c"
+    },
+    {
+      "path": "qa-backend.cjs",
+      "size": 9099,
+      "sha256": "200ed697d510eacbc02b4abe014ea10bc548a54589c86e7ec899bc731f06f4a4"
+    },
+    {
+      "path": "qa-core.cjs",
+      "size": 5532,
+      "sha256": "1ace50c90e179551eb877e6ce3fecf2c10fee7f38719be98a6d4e92ced246139"
+    },
+    {
+      "path": "qa-installer.cjs",
+      "size": 6775,
+      "sha256": "7d382435808fd824a205e90cfa45fd054c6a173a3618a28e917c115ed1cb257d"
+    },
+    {
+      "path": "qa-release.cjs",
+      "size": 5070,
+      "sha256": "448877f98ce0a2b01f5abf386190555e853e5ee1ff4ee2d9b82427ae17c71eb0"
+    },
+    {
+      "path": "qa-runtime.cjs",
+      "size": 2952,
+      "sha256": "7af1e634768da7c89b51be4f8847971e8a0e18581034b0c61e44b5703c62824e"
+    },
+    {
+      "path": "qa-ui.cjs",
+      "size": 10331,
+      "sha256": "e1b1ba05f45d57e3931ed42bac2fe4e9ce4f37b2075b9078b9185d63140d1b6b"
+    },
+    {
+      "path": "qa/worker_test.py",
+      "size": 17319,
+      "sha256": "9384e62304e69bda6f0f5908987cb5d91319b56449bf9463f278219578c2c140"
+    },
+    {
+      "path": "runtime-lock.json",
+      "size": 909,
+      "sha256": "6f7eac936150926daeb8f439f9afb0073558ccbceb7aae6829c218ae70b4888b"
+    },
+    {
+      "path": "runtime-tools.cjs",
+      "size": 5086,
+      "sha256": "fcec9cb6c82b9309fa49ca6f5be4a5575e912d86a6c96134517a8c44cb536b1d"
+    },
+    {
+      "path": "styles.css",
+      "size": 16654,
+      "sha256": "3787bdcceff77647dd77b0fbac3b5d319e6c1008c789643b0141dc86fd617cb7"
+    }
+  ]
+}

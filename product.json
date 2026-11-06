@@ -1,0 +1,15 @@
+{
+  "name": "ZTH Studio Desk",
+  "slug": "studio-desk",
+  "version": "1.0.0",
+  "id": "Zeruik.ZTH.StudioDesk",
+  "appId": "D96AFDD2-1D25-4217-8A8F-CFF76377DDC1",
+  "exe": "ZTH-Studio-Desk.exe",
+  "folder": "ZTHStudioDesk",
+  "releaseName": "ZTH-Studio-Desk-Windows-v1.0.0",
+  "sourceName": "zth-studio-desk-v1",
+  "iconSource": "assets/zth-green-icon.svg",
+  "background": "#f2f7f3",
+  "pythonVersion": "3.14.10",
+  "electronVersion": "45.0.0"
+}
