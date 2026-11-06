@@ -169,8 +169,8 @@
     },
     {
       "path": "qa-release.cjs",
-      "size": 5070,
-      "sha256": "448877f98ce0a2b01f5abf386190555e853e5ee1ff4ee2d9b82427ae17c71eb0"
+      "size": 5139,
+      "sha256": "1aff8f76871dc261bac24032ba98b7baec30ade163cfc9bf11e7387523251af3"
     },
     {
       "path": "qa-runtime.cjs",
