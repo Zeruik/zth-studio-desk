@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://zeruik.github.io/zth-studio-desk/sitemap.xml

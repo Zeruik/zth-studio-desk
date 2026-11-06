@@ -1,0 +1,36 @@
+{
+  "format": "zth-public-site",
+  "version": 1,
+  "files": [
+    {
+      "path": ".nojekyll",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "assets/site.css",
+      "size": 6298,
+      "sha256": "fe068138107698495ecebb0fcef0186de68838b7b4a74b9c7fafff2198338429"
+    },
+    {
+      "path": "index.html",
+      "size": 2418,
+      "sha256": "fe5d62cb8376128a9f6751fcd137c5e7591678ae54de7b3152e0a6b1cd15536b"
+    },
+    {
+      "path": "notes.html",
+      "size": 2463,
+      "sha256": "e93502692c7a566f6008eab2306eed37dcc26a27eda7612ea4e6280ea47ca3c3"
+    },
+    {
+      "path": "robots.txt",
+      "size": 85,
+      "sha256": "887a0e70c8a702d8fb16f96d77aa7ffa2bae2bf09bd48a7389c224b7efe97ab7"
+    },
+    {
+      "path": "sitemap.xml",
+      "size": 245,
+      "sha256": "08fe9b79374296213db754d1b9b3d2edda8d5521a2802f21f36c4a34c2de82f3"
+    }
+  ]
+}
