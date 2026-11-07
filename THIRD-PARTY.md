@@ -1,6 +1,6 @@
 # Third-party components / 第三方组件
 
-Studio Desk original code is MIT, copyright 2026 Zeruik / TechABJ. The ZTH logo retains studio brand rights. Linking or publishing third-party content does not change its license.
+Studio Desk original code is MIT, copyright 2026 理工阿白菌（阿白菌 / TechABJ）. The original ZTH logo and branding retain the separate rights described in ATTRIBUTION.md. Linking or publishing third-party content does not change its license.
 
 | Component | Version | License / notice | Source |
 |---|---|---|---|
@@ -14,3 +14,7 @@ Studio Desk original code is MIT, copyright 2026 Zeruik / TechABJ. The ZTH logo 
 Runtime versions and archive SHA-256 values are pinned in runtime-lock.json; npm build dependencies are pinned in build-runtime/package-lock.json. Official Python release and SPDX record were checked on 2026-11-06. Python archive SHA-256: 90905e64a840557d8c1bc4f5b74db3d7ee85e3ffb217611cac1c7813acea4159.
 
 The desktop installer bundles both runtimes. It does not install a global Python, run pip, register a Python command, change PATH or depend on a machine-wide Python. Generated public sites use local HTML/CSS/assets and do not bundle the Studio Desk desktop runtime. GitHub Pages/Cloudflare documentation and network services remain subject to their own terms.
+
+## Integrated studio modules
+
+Desk 2 embeds Screen Studio and Forge source modules under modules/ and retains their MIT license notices. They share the Desk Electron runtime; no second installed application or hidden desktop runtime is required. Original source versions and copied files are recorded by the module provenance documentation. Forge external tools and Screen generated-firmware libraries remain governed by their own licenses and are not converted to MIT by integration.

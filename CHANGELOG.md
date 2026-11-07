@@ -1,5 +1,16 @@
 # Changelog / 更新日志
 
+## 2.0.0 — Integrated workspace
+
+- 统一为赋形造物工作台，署名理工阿白菌（阿白菌 / TechABJ）；赋形造物工作室为向阳科创工作室旗下子工作室。MIT代码许可与原图形权利分开保留。 Correct studio/creator attribution with unchanged MIT code terms.
+- schema 2 增加工程简报、验收标准、BOM、资源、屏幕工程和任务目标；兼容 schema 1，保存前保留原件备份。 Schema 2 adds engineering workspace data while retaining schema 1 import/migration.
+- 共用一个桌面运行时，集成隔离的 Screen Studio 编辑器与 Forge 环境服务。 Screen and Forge modules share the Desk runtime.
+- 屏幕工程由当前完整项目保存；环境安装仍需独立原生确认，加载或导航不会执行任务。 Screen data stays with the project; environment actions need separate native confirmation.
+- 公共网站导出继续排除全部工程/运营私有数据；完整 .zthdesk 保持明文备份格式。 Public site exports exclude the private workspace; complete backups remain unencrypted.
+- 保持 Desk AppId、exe、安装目录与 data 存储；升级不修改独立旧工具及其资料。 Stable upgrade identity and installation data; standalone legacy tools are untouched.
+
+本版本的详细验收范围以发布记录为准；模块集成不等于真实硬件接线、烧录或环境安装已在每台电脑验证。 Hardware and machine-specific environment installation need separate acceptance.
+
 ## 1.0.0 — 2026-11-06
 
 首个独立 ZTH Studio Desk 桌面版本。它不修改已有 Academy、Screen Studio 或 Studio Forge 的项目、数据或安装配置。

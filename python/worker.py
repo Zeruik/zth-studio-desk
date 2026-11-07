@@ -4,6 +4,8 @@ from pathlib import Path
 # The isolated embedded interpreter excludes script/cwd paths. Trust only our own code directory.
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import datetime as dt
+import csv
+import io
 import json
 import os
 import re
@@ -128,6 +130,42 @@ def markdown(project):
     return '\n'.join(out).encode('utf-8')
 
 
+def compact_project(project):
+    data = json.dumps(project, ensure_ascii=False, separators=(',', ':'), allow_nan=False).encode('utf-8')
+    if len(data) > MAX_REQUEST:
+        fail('PROJECT_TOO_LARGE')
+    return data + (b'\n' if len(data) < MAX_REQUEST else b'')
+
+
+def handoff(project):
+    """A private working handoff, intentionally separate from public site generation."""
+    ws = project['workspace']
+    lines = ['# ' + project['name'].replace('\n', ' '), '', '> 私有项目交接 / PRIVATE PROJECT HANDOFF', '', '此包包含项目内部资料，不是公开网站。 / This package contains internal project data; do not publish it as a website.', '', '## 项目说明 / Brief', '', ws['brief'], '', '## 验收标准 / Acceptance', '', ws['acceptance'], '', '## 任务与关联 / Tasks and targets', '']
+    for task in project['operations']['tasks']:
+        target = task['target']
+        lines.extend(['### ' + task['title'].replace('\n', ' '), '', '- ID: ' + task['id'], '- Status: ' + task['status'], '- Due: ' + (task['due'] or '—'), '- Owner: ' + task['owner'].replace('\n', ' '), '- Target: ' + target['kind'] + (' / ' + target['ref'] if target['ref'] else ''), '', task['notes'], ''])
+    lines.extend(['## 物料 / Bill of materials', '', '详见 BOM.csv；合计是数量 × 单价，不含货币换算或税费。 / See BOM.csv; totals are quantity × unit cost, without tax or currency conversion.', '', 'Total: ' + format(sum(x['quantity'] * x['unitCost'] for x in ws['bom']), '.12g'), '', '## 资料与环境计划 / Resources and environment plans', ''])
+    for resource in ws['resources']:
+        lines.extend(['### ' + resource['title'].replace('\n', ' '), '', '- Kind: ' + resource['kind'], '- URL: ' + resource['url'], '', resource['notes'], ''])
+    lines.extend(['## 显示屏 / Display', '', 'screen.project.zthscreen 是可编辑设计；代码需在工作台内单独生成 ZIP。 / screen.project.zthscreen is editable design data; generate firmware code separately in the workspace.' if ws['screen'] else '本项目未添加显示屏设计。 / No screen design is attached.', '', '完整 project.zthdesk 是未加密 JSON，可用于恢复项目。此包不含本机环境安装缓存、日志、部署 Token 或自动执行脚本。 / The complete project.zthdesk is unencrypted JSON for restoration. No local installation caches, logs, deployment tokens or automatically executable scripts are added.'])
+    stream = io.StringIO(newline='')
+    writer = csv.writer(stream, lineterminator='\r\n')
+    writer.writerow(['ID', 'Name', 'Quantity', 'Unit', 'Unit cost', 'Subtotal', 'Status', 'URL', 'Notes'])
+    def cell(value):
+        value = str(value)
+        candidate = value.lstrip('\ufeff \t\r\n\v\f')
+        return "'" + value if candidate[:1] in ('=', '+', '-', '@') else value
+    for entry in ws['bom']:
+        writer.writerow([cell(entry['id']), cell(entry['name']), entry['quantity'], cell(entry['unit']), entry['unitCost'], entry['quantity'] * entry['unitCost'], entry['status'], cell(entry['link']), cell(entry['notes'])])
+    files = {'project.zthdesk': compact_project(project), 'PROJECT.md': ('\n'.join(lines) + '\n').encode('utf-8'), 'BOM.csv': b'\xef\xbb\xbf' + stream.getvalue().encode('utf-8')}
+    for index, draft in enumerate(project['operations']['drafts'], 1):
+        data = '# ' + draft['title'].replace('\n', ' ') + '\n\nTags: ' + ', '.join(draft['tags']) + '\n\n' + draft['body'] + '\n'
+        files['drafts/' + str(index).zfill(3) + '-' + draft['id'] + '.md'] = data.encode('utf-8')
+    if ws['screen'] is not None:
+        files['screen.project.zthscreen'] = json.dumps(ws['screen'], ensure_ascii=False, separators=(',', ':')).encode('utf-8')
+    return files
+
+
 def dns_check(site, resolver=None):
     host = domain(site['domain'])
     if not host:
@@ -144,7 +182,7 @@ def dns_check(site, resolver=None):
 def handle(request, github_client=None):
     request = obj(request, ('task', 'project', 'options', 'outputDir'))
     task = request.get('task')
-    allowed = {'build': {'pageSlug'}, 'audit': set(), 'backup': set(), 'calendar': set(), 'drafts': set(), 'dns': set(), 'deploy': {'owner', 'repo', 'token', 'domain', 'confirmPublic'}}
+    allowed = {'build': {'pageSlug'}, 'audit': set(), 'backup': set(), 'handoff': set(), 'calendar': set(), 'drafts': set(), 'dns': set(), 'deploy': {'owner', 'repo', 'token', 'domain', 'confirmPublic'}}
     if not isinstance(task, str) or task not in allowed:
         fail('TASK_INVALID')
     options = obj(request.get('options', {}), allowed[task])
@@ -168,8 +206,12 @@ def handle(request, github_client=None):
             result.update(deploy(project, files, {**options, 'domain': custom}, client=github_client))
             result.pop('previewHtml', None)
         return result
+    if task == 'handoff':
+        files = handoff(project)
+        artifact = output.zip('private-handoff.zip', files)
+        return {'artifactPath': artifact, 'zipPath': artifact, 'outputDir': str(output.root), 'private': True, 'encrypted': False, 'files': [{'path': name, 'size': len(data)} for name, data in sorted(files.items())]}
     if task == 'backup':
-        name, data = 'project.zthdesk', (json.dumps(project, ensure_ascii=False, indent=2) + '\n').encode('utf-8')
+        name, data = 'project.zthdesk', compact_project(project)
         extra = {'private': True, 'encrypted': False}
     elif task == 'calendar':
         data, count = calendar(project)

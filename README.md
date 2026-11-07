@@ -1,8 +1,14 @@
-# ZTH Studio Desk 1.0.0
+# 赋形造物工作台 / ZTH Studio Desk 2.0.0
 
-面向小型工作室的本地桌面工作台：把运营任务、活动日历、文案草稿和可发布的多页网站放在一个项目中。代码采用 MIT 许可；原工作室图形标识的权利单独保留。作者署名：Zeruik / TechABJ。
+面向小型工作室的本地桌面工作台：在同一个项目里管理工程简报、验收清单、物料、屏幕界面、环境准备、运营任务、活动日历、文案草稿和多页网站。赋形造物工作室是向阳科创工作室旗下的子工作室。创作者与权利人为理工阿白菌（阿白菌 / TechABJ）；代码采用 MIT 许可，原工作室图形标识的权利单独保留。
 
-A local desktop workspace for small studios: organise work, prepare drafts and events, and build a real static website from the same project. Code is MIT licensed; original studio artwork retains its separate rights. Attribution: Zeruik / TechABJ.
+An integrated local workspace for small studios: project briefs, acceptance criteria, bills of materials, embedded screen design, environment preparation, operations, drafts, events and static websites. 赋形造物工作室 is a subsidiary studio of 向阳科创工作室. Creator and rightsholder: 理工阿白菌（阿白菌 / TechABJ）. Code remains MIT licensed; original artwork retains separate rights.
+
+## 创作者 / Creator
+
+理工阿白菌（阿白菌 / TechABJ）为工作室创作这款软件，专注于将工程学习、动手制作与工作室运营结合起来的工具。公开代码账户为 Zeruik。详细署名和素材权利见 [ATTRIBUTION.md](ATTRIBUTION.md)。
+
+TechABJ created this software for the studio, focusing on tools that bring engineering learning, hands-on making and studio operations together. The public code account is Zeruik. See [ATTRIBUTION.md](ATTRIBUTION.md) for attribution and artwork rights.
 
 ## 开始使用 / Start here
 
@@ -19,6 +25,9 @@ Extract the Windows release, run its installer, and choose a writable English-on
 | Area | 中文 | English |
 |---|---|---|
 | 项目 / Projects | 本地保存、导入导出完整项目、编辑撤销/重做 | Local projects, complete import/export, editing undo/redo |
+| 工程 / Engineering | 简报、验收标准、物料清单和引用资源 | Briefs, acceptance criteria, BOM and resource references |
+| 屏幕 / Screen | 集成屏幕编辑与真实代码导出，工程由当前项目保存 | Integrated screen editor and code export, stored in the current project |
+| 环境 / Environment | 集成 Forge 检测、方案、执行确认与进度 | Integrated Forge inspection, plans, confirmations and progress |
 | 运营 / Operations | 任务状态、日期、负责人、渠道、备注和月历 | Tasks, owners, channels, notes and calendar |
 | 草稿 / Drafts | 标题、正文、标签，导出 Markdown | Draft titles, bodies, tags and Markdown export |
 | 网站 / Website | Studio、Editorial、Portfolio 三种主题，多页导航，七类内容区块 | Three visual themes, multipage navigation and seven section types |
@@ -33,8 +42,8 @@ The exported site uses semantic HTML, responsive CSS, local images and relative 
 
 ## 保存、迁移与隐私 / Storage and privacy
 
-- 项目文件包含工作空间名称、运营任务、草稿、设置和图片。完整 `.zthdesk` 备份是可移植 JSON，**没有加密**；不要当作公开网站上传。
-- `site.zip` 只有公开的 `site` 内容和生成资源。部署使用相同公开文件，另加一个不含明文项目编号的所有权摘要标记。运营内容、Token、历史任务日志、私有项目名称不写入网站或 Git 提交。
+- 项目文件包含工作空间名称、工程简报、验收标准、物料、屏幕工程、资源引用、运营任务、草稿、设置和图片。完整 `.zthdesk` 备份是可移植 JSON，**没有加密**；不要当作公开网站上传。
+- `site.zip` 只有公开的 `site` 内容和生成资源。部署使用相同公开文件，另加一个不含明文项目编号的所有权摘要标记。工程工作区、BOM、屏幕工程、运营内容、Token、历史任务日志、私有项目名称不写入网站或 Git 提交。
 - Github Token 只用于当次明确发起的部署，通过子进程标准输入传递，未写入项目、任务历史、命令参数或导出文件。进程结束后不留应用内凭据缓存；这不等于能阻止操作系统级内存检查。
 - 更新或卸载前先导出完整项目并检查文件能重新导入。恢复备份时保留原项目身份，才能继续管理对应发布分支；复制为新的项目身份后，不应接管旧身份的网站。
 - 手动导出的 ZIP/备份由用户管理；卸载应用不会撤销已公开的网页、远程提交或外部 DNS 设置。删除一个本地项目也不会取消远程发布。
@@ -45,7 +54,23 @@ Full project backups are portable **unencrypted JSON**, including private operat
 
 日常编辑、保存、预览、静态构建、链接审计、网站 ZIP、完整备份、日历和草稿导出全部在本地执行。检查不抓取外部 HTTPS 链接，因此不会宣称所有外部链接仍然可访问。GitHub 部署需要联网与用户授权；DNS 检查需要本机 DNS 能解析相应域名。自动构建是应用打开期间的可选功能，不会创建系统启动项或后台计划任务。
 
-Editing, local previews, builds, audits and exports run offline. The audit validates internal destinations without crawling external URLs. GitHub deployment and explicit DNS lookups require connectivity. Optional automatic building operates only while the app is open; it does not install an operating-system scheduler or startup service.
+Project editing, screen code generation, local website previews/builds/audits and exports run offline. The audit validates internal destinations without crawling external URLs. GitHub deployment and explicit DNS lookups require connectivity. Optional automatic building operates only while the app is open; it does not install an operating-system scheduler or startup service.
+
+### 环境任务的独立边界 / Environment task boundaries
+
+Forge 模块只有在你主动点击时才检测环境。系统安装必须先审阅方案并通过原生确认；导入项目、任务跳转或打开应用不会执行安装。WSL、Ubuntu、ROS、VC++ 与 Build Tools 大型组件没有装入这个 ZIP；相关安装仍可能需要网络、管理员权限和手动重启。取消不等于回滚，卸载工作台不会删除已建立的外部开发环境。屏幕编辑与代码导出也不等于完成真实接线或烧录。
+
+Forge inspects the machine only on explicit action. Environment changes require a reviewed plan and native confirmation; loading a project or following a task target never starts installation. Large WSL/Ubuntu/ROS/Microsoft packages are not bundled and may need network access, administrator rights and a manual restart. Cancellation is not rollback; uninstalling Desk does not remove those environments. Screen code export does not validate physical wiring or flash hardware.
+
+## 升级与整合 / Upgrading and integration
+
+2.0.0 沿用 Desk 1 的安装标识、安装文件夹和 data 存储。schema 1 项目可在内存中迁移到 schema 2，保留原字段；保存迁移结果前会备份原文件字节。升级前仍应另行导出完整项目。换安装目录时，先正常退出并完整复制整个旧目录（包括 data），不要只复制 exe。
+
+Version 2 retains the Desk 1 installer identity, folder and data storage. Schema 1 is migrated in memory without losing existing fields; saving retains a backup of original file bytes. Export an independent backup before upgrading. When changing folders, close the app and copy the complete old folder including data before running Setup.
+
+屏幕与环境模块共享当前桌面运行时；屏幕工程属于当前 .zthdesk 项目，隔离子界面不能直接访问本机接口。旧版独立 Forge、Screen Studio 和 Academy 安装及个人资料不会被自动导入或删除。
+
+Screen and environment modules share the desktop runtime. Screen documents belong to the current .zthdesk project, while the sandboxed child editor has no direct native API. Existing standalone Forge, Screen Studio and Academy installations/data are neither silently imported nor removed.
 
 ## 部署与域名 / Publishing and domains
 

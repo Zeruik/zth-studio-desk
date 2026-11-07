@@ -1,6 +1,6 @@
 {
   "product": "ZTH Studio Desk",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "files": [
     {
       "path": ".gitattributes",
@@ -18,14 +18,19 @@
       "sha256": "ec6346cc73b4d9c8f43fcf9af8c7b33d23145b2fe64fe2343b761d380ff787ce"
     },
     {
+      "path": "ATTRIBUTION.md",
+      "size": 1153,
+      "sha256": "ad3c9b23cbe63595818f568b9d2fd741d0c7c5695fb92c5e5d35f65d0ac1779a"
+    },
+    {
       "path": "BUILD.md",
-      "size": 4059,
-      "sha256": "210ed3a17f2cc4c0d6c90f6ccda941313e378f20c5eb47b41cef3300b45457b6"
+      "size": 4560,
+      "sha256": "9100d33b3bb8d876b6dda7d9dc15a59ddc5db707e998e5fbb541fb6adf57567c"
     },
     {
       "path": "CHANGELOG.md",
-      "size": 2673,
-      "sha256": "2a8cdc19d0eb134955d37ae9d059ec7df938a407ca92809b4a0c268f177b6ced"
+      "size": 4171,
+      "sha256": "199556f36116f0c7d906d0a2a3f6a82141a00be3e87ff8a49594cee66f615f4b"
     },
     {
       "path": "CONTRACT.md",
@@ -39,23 +44,23 @@
     },
     {
       "path": "LICENSE",
-      "size": 1223,
-      "sha256": "3e17ac721e3bf98b461d71b840b363759399992ce6a9504492a28903754e4acb"
+      "size": 1414,
+      "sha256": "0774d6a389c712ea2949e3dfba69783060c55a060e58b1df5dea9838bc0bbd34"
     },
     {
       "path": "README.md",
-      "size": 9471,
-      "sha256": "9bb6923b2b5eb0eb160e48082a593cf4a267af0760904d5fe4d29bf8cdc87cc1"
+      "size": 13230,
+      "sha256": "df6373679785a1e3c45683b216bbc0f7726e718023514f4e25a37a2ae6b33b99"
     },
     {
       "path": "THIRD-PARTY.md",
-      "size": 1693,
-      "sha256": "f91ce9719c0ee756170bb74f3fc74827ed1e9e4cb4683d1726c5d42525bb8673"
+      "size": 2252,
+      "sha256": "32926dfad14d320d06a95c34a119a01dafe9f63c130cab27b4b14f2c9bdb2906"
     },
     {
       "path": "app.js",
-      "size": 59046,
-      "sha256": "28436c683bdf57e1c414863a33f03b2aa92239a1d512131d15c95c80385ac245"
+      "size": 75659,
+      "sha256": "2aaf12a09824e445118a39f2b0791cad0e839c9c4e9627c5343d164a5d92e184"
     },
     {
       "path": "assets/zth-green-icon.svg",
@@ -64,13 +69,13 @@
     },
     {
       "path": "backend.cjs",
-      "size": 14161,
-      "sha256": "dd9f365eb02df69a82ddb64be8b02449597296a39dd508b4e3cbb7ba8c9fd3fd"
+      "size": 15807,
+      "sha256": "e53bcedc20855d629351a96eb4aee64b42ebf50723dc8e9115c6bdccc426cef9"
     },
     {
       "path": "build-product.cjs",
-      "size": 13744,
-      "sha256": "95142344879da9584e4335e8f62cd03985503a18aea55a2e03f5d8bb98573bad"
+      "size": 14372,
+      "sha256": "54cd4056c9a9679d576f32b8bea3f2ce540f425becb05f8e0c09788181b12b05"
     },
     {
       "path": "build-release.cjs",
@@ -80,37 +85,42 @@
     {
       "path": "build-runtime/package-lock.json",
       "size": 47148,
-      "sha256": "46e27eeb2ba6e3a0dbcdd8f877e501ab097e24ae429ffd7fcb217f7891b77c89"
+      "sha256": "b5077b7fdac3d7822b65b726613c9aee18e85dea4095d25b37af196ef51bbaa6"
     },
     {
       "path": "build-runtime/package.json",
       "size": 309,
-      "sha256": "b3860f64b8faa5146d2637508d728add2250029bf9aeaf94f4be2ea9ffec23fa"
+      "sha256": "7f987e7cc410e583d84705f0a58cc17ed9a0cb1c657a95afa03e41bd412bc557"
     },
     {
       "path": "core.js",
-      "size": 14958,
-      "sha256": "540bfd6e082a6668054adafafb99f5a98e90cdac8aa117419f3fb584ff4d7236"
+      "size": 19239,
+      "sha256": "d381393fc21bdacd911ffda7f20774463687b185382a05b6e96609e3abde63ac"
+    },
+    {
+      "path": "desktop/integrations.cjs",
+      "size": 4240,
+      "sha256": "b18b178fe1252def4a08eba0d57db782fb08f347f7df6bbf228875459273e954"
     },
     {
       "path": "desktop/main.cjs",
-      "size": 7635,
-      "sha256": "2d75a24e75a401ec246a349bbbf72d46a6f504c2560d49714110a4b9e1d0659e"
+      "size": 9189,
+      "sha256": "7ee5700c28f668799e25ba82c4375b5468cae9896105528586a56e206282be4f"
     },
     {
       "path": "desktop/preload.cjs",
-      "size": 364,
-      "sha256": "f1ced80a5a89c9f78bc251a50684a272b510173b38ab611b15c897eab8aa1e64"
+      "size": 631,
+      "sha256": "822e30b1d32c46103178e5f976f7ee90bda0083c779107fd65ef93cd648f48f3"
     },
     {
       "path": "index.html",
-      "size": 714,
-      "sha256": "6b66df204f6d13418d4717f90eaef180888642e6db52a7b0089d33a9596df0d4"
+      "size": 966,
+      "sha256": "00a1baca3ba05daedb5ccc4b2cacaf63705aad74450c3bedf9918f077255e68d"
     },
     {
       "path": "installer-template.cjs",
-      "size": 11293,
-      "sha256": "d1c7bfdb25de637d5d11cf620f4900b3c1b4b955526daad3c34408b60002488f"
+      "size": 11807,
+      "sha256": "fc53e949b1b38ababb202300495e42f5202b46e58502cc775e8aa0d42059d0cf"
     },
     {
       "path": "logo.svg",
@@ -118,9 +128,79 @@
       "sha256": "3eb839ab7677c8684d5488411c6c6fbc41817b5d3cc08581b361e2173ed37b78"
     },
     {
+      "path": "modules/forge/LICENSE",
+      "size": 1073,
+      "sha256": "4ec950bd1257e44455aac2d4327dc4363b3c30050a3e36324f7e25d380cd9b1d"
+    },
+    {
+      "path": "modules/forge/backend.cjs",
+      "size": 27489,
+      "sha256": "1ed5ac88ddfe79539056950fb2cd1386e2246e3e67e2e51f9a10872b40214c2c"
+    },
+    {
+      "path": "modules/forge/catalog-browser.js",
+      "size": 6126,
+      "sha256": "258ccbfdbe15da735a6f2e72eada9d8aeea590cbc4bb79e970a17ba14b898870"
+    },
+    {
+      "path": "modules/forge/catalog.cjs",
+      "size": 6295,
+      "sha256": "622d3bd27b973efddf8d7034e846c2210e09271a8a2a58ef570a8daa89a7a5e7"
+    },
+    {
+      "path": "modules/integration.css",
+      "size": 2373,
+      "sha256": "ad31cd65788beaea377a69ef8c3f0600d238a8ef7b09190e55a8caf9b49fc864"
+    },
+    {
+      "path": "modules/integration.js",
+      "size": 15093,
+      "sha256": "2f287e5367431ae9741211aa0ffafd695f6726a5f156cad1acd777cce42fa21e"
+    },
+    {
+      "path": "modules/screen/LICENSE",
+      "size": 1223,
+      "sha256": "3e17ac721e3bf98b461d71b840b363759399992ce6a9504492a28903754e4acb"
+    },
+    {
+      "path": "modules/screen/adapter.js",
+      "size": 2098,
+      "sha256": "0a785890c3a78d46333e247cbc69d9243cfee58079692f712aceef3e7b5f98a8"
+    },
+    {
+      "path": "modules/screen/app.js",
+      "size": 39238,
+      "sha256": "f8527567c5516c6e15740fb24e84eed4995ec8bd366c67b267417cb5815050d1"
+    },
+    {
+      "path": "modules/screen/assets/zth-green.svg",
+      "size": 108810,
+      "sha256": "3eb839ab7677c8684d5488411c6c6fbc41817b5d3cc08581b361e2173ed37b78"
+    },
+    {
+      "path": "modules/screen/core.js",
+      "size": 34970,
+      "sha256": "ce84b2e0918f60322c64bd51287dcc074f9433a2113eed89e05adde458be9228"
+    },
+    {
+      "path": "modules/screen/desk-theme.css",
+      "size": 2174,
+      "sha256": "6298de1b543b1cad1d66f5df8458854fb8d765a38c829bb55ac9228e9a1a48f0"
+    },
+    {
+      "path": "modules/screen/index.html",
+      "size": 832,
+      "sha256": "5a3254e53d6f4b767672df25da91e5bc9d723072c17c465e59250d542d56e793"
+    },
+    {
+      "path": "modules/screen/styles.css",
+      "size": 8010,
+      "sha256": "c19f6d0baecba4c04e76fc43da42efc453a861bf748aa3009373cb8004dffb87"
+    },
+    {
       "path": "package.json",
-      "size": 155,
-      "sha256": "b5a8c07d890c36e5a347e739ba53b5d67f1011ba7374f89788d83533947dda2d"
+      "size": 179,
+      "sha256": "e464f09a58427fd0a5e3b48aa3649c1c7a238ed307358830c6db8580ffe5eeb1"
     },
     {
       "path": "prepare-runtime.cjs",
@@ -129,13 +209,18 @@
     },
     {
       "path": "product.json",
-      "size": 446,
-      "sha256": "ef5280a8c7087c76b7b3619d48111356dcade5fb371e2c676a038c9ebce38dda"
+      "size": 905,
+      "sha256": "0be138a775aa621f96b4d0e24d431daac7b76c0bbe73f7494f5c3d03706324ed"
     },
     {
       "path": "python/github_pages.py",
       "size": 10508,
       "sha256": "974c984dcf73843bba8be806a257dd30480b409b52db3c771e1e413220c5ae74"
+    },
+    {
+      "path": "python/screen_schema.py",
+      "size": 6429,
+      "sha256": "e71547dba4ebddedee57a4721185db0ff54618933bf984a5ff797757023a70de"
     },
     {
       "path": "python/sitegen.py",
@@ -144,13 +229,13 @@
     },
     {
       "path": "python/validation.py",
-      "size": 10443,
-      "sha256": "fbda924253a8df1c2cc67589a8fd527143d3c00164c24b41aa72ba57c5d7459f"
+      "size": 12939,
+      "sha256": "f859287262ef64759178826e63081a1bec07e203dcec3a1910726acf098f162f"
     },
     {
       "path": "python/worker.py",
-      "size": 10823,
-      "sha256": "b5c7dac7071fb697280c653160a2ee4723c9814ecf981fed7ad94181ab84e35c"
+      "size": 14888,
+      "sha256": "cefb7b5d795edc4cb53f54426401769c2718636162c365a48ac94630e3e04066"
     },
     {
       "path": "qa-backend.cjs",
@@ -159,18 +244,28 @@
     },
     {
       "path": "qa-core.cjs",
-      "size": 5532,
-      "sha256": "1ace50c90e179551eb877e6ce3fecf2c10fee7f38719be98a6d4e92ced246139"
+      "size": 8223,
+      "sha256": "cde7df9710afb34e9e77d09dbf12627b5c691bef604a49f454f7f14f8e18ee51"
     },
     {
       "path": "qa-installer.cjs",
-      "size": 6775,
-      "sha256": "7d382435808fd824a205e90cfa45fd054c6a173a3618a28e917c115ed1cb257d"
+      "size": 7122,
+      "sha256": "691ebc7f9d8bb37b69b09c69dcee545a0895fd3e749f172140d14962ff074b52"
+    },
+    {
+      "path": "qa-native-guards.cjs",
+      "size": 3324,
+      "sha256": "5c657ee57b1f31db1d886546f1bccb7634685e09f4d3a4558f04b6578f672ab4"
+    },
+    {
+      "path": "qa-project-v2.cjs",
+      "size": 4736,
+      "sha256": "63ec6bb7ef34826ca2356b482fde7e4fdb47d4f876fa0ee036c1d95556b3c127"
     },
     {
       "path": "qa-release.cjs",
-      "size": 5139,
-      "sha256": "1aff8f76871dc261bac24032ba98b7baec30ade163cfc9bf11e7387523251af3"
+      "size": 5205,
+      "sha256": "732af44a05d5598d0030581b83e58042c24eb7099f5c9896631a0f246cadcbf4"
     },
     {
       "path": "qa-runtime.cjs",
@@ -179,13 +274,13 @@
     },
     {
       "path": "qa-ui.cjs",
-      "size": 10331,
-      "sha256": "e1b1ba05f45d57e3931ed42bac2fe4e9ce4f37b2075b9078b9185d63140d1b6b"
+      "size": 14627,
+      "sha256": "23088fa52439e6282d50f071461541532a5954c24b680b9e315bad6d4b586eab"
     },
     {
       "path": "qa/worker_test.py",
       "size": 17319,
-      "sha256": "9384e62304e69bda6f0f5908987cb5d91319b56449bf9463f278219578c2c140"
+      "sha256": "b831c75ee086d08e092d727a079b69b6a8de2c7a64b76c878d6280ac08e38f80"
     },
     {
       "path": "runtime-lock.json",
@@ -199,8 +294,8 @@
     },
     {
       "path": "styles.css",
-      "size": 16654,
-      "sha256": "3787bdcceff77647dd77b0fbac3b5d319e6c1008c789643b0141dc86fd617cb7"
+      "size": 22708,
+      "sha256": "65ced37733199f2f447dce77984b2393cec4a5b258a7d6fdf55d5c2014a6f408"
     }
   ]
 }

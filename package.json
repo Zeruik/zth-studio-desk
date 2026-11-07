@@ -1,8 +1,8 @@
 {
   "name": "zth-studio-desk",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "license": "MIT",
   "main": "desktop/main.cjs",
-  "author": "Zeruik / TechABJ"
+  "author": "理工阿白菌（阿白菌 / TechABJ）"
 }

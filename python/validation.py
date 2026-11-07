@@ -3,6 +3,7 @@ import base64
 import binascii
 import datetime as dt
 import ipaddress
+import math
 import re
 from urllib.parse import urlsplit
 
@@ -122,8 +123,8 @@ def timestamp(value):
 
 
 def validate(project):
-    p = obj(project, "format schema producer id name updatedAt settings operations site".split())
-    if p.get("format") != "zth-desk-project" or type(p.get("schema")) is not int or p["schema"] != 1:
+    p = obj(project, "format schema producer id name updatedAt settings operations site workspace".split())
+    if p.get("format") != "zth-desk-project" or type(p.get("schema")) is not int or p["schema"] not in (1, 2):
         fail("SCHEMA_UNSUPPORTED", "项目版本不受支持；原文件未修改 / Unsupported project version; original file is unchanged.")
     producer = p.get('producer')
     if not isinstance(producer, str) or len(producer) > 48 or not re.fullmatch(r'(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?', producer):
@@ -131,10 +132,10 @@ def validate(project):
     settings = obj(p.get("settings"), "language theme autoBuild".split())
     operations = obj(p.get("operations"), "tasks drafts".split())
     site = obj(p.get("site"), "title description language theme accent domain basePath pages assets".split())
-    result = {"format": "zth-desk-project", "schema": 1, "producer": producer, "id": ident(p.get("id")), "name": text(p.get("name"), 120, True), "updatedAt": timestamp(p.get("updatedAt", "")), "settings": {"language": choice(settings.get("language", "zh"), ("zh", "en")), "theme": choice(settings.get("theme", "warm"), ("warm", "light", "dark")), "autoBuild": boolean(settings.get("autoBuild", False))}, "operations": {}, "site": {}}
+    result = {"format": "zth-desk-project", "schema": 2, "producer": producer, "id": ident(p.get("id")), "name": text(p.get("name"), 120, True), "updatedAt": timestamp(p.get("updatedAt", "")), "settings": {"language": choice(settings.get("language", "zh"), ("zh", "en")), "theme": choice(settings.get("theme", "warm"), ("warm", "light", "dark")), "autoBuild": boolean(settings.get("autoBuild", False))}, "operations": {}, "site": {}}
     tasks = []
     for task in array(operations.get("tasks", []), 500):
-        t = obj(task, "id title owner due status channel notes".split())
+        t = obj(task, "id title owner due status channel notes target".split())
         due = text(t.get("due", ""), 10)
         if due:
             try:
@@ -143,7 +144,12 @@ def validate(project):
                 dt.date.fromisoformat(due)
             except ValueError:
                 fail("DATE_INVALID")
-        tasks.append({"id": ident(t.get("id")), "title": text(t.get("title"), 160, True), "owner": text(t.get("owner", ""), 80), "due": due, "status": choice(t.get("status", "idea"), ("idea", "doing", "review", "done")), "channel": choice(t.get("channel", "other"), ("web", "wechat", "canva", "event", "other")), "notes": text(t.get("notes", ""), 8000)})
+        target = obj(t.get('target', {'kind': 'none', 'ref': ''}), ('kind', 'ref'))
+        target_kind = choice(target.get('kind', 'none'), ('none', 'screen', 'site', 'draft', 'environment'))
+        target_ref = text(target.get('ref', ''), 64)
+        if target_ref:
+            ident(target_ref)
+        tasks.append({"target": {'kind': target_kind, 'ref': target_ref}, "id": ident(t.get("id")), "title": text(t.get("title"), 160, True), "owner": text(t.get("owner", ""), 80), "due": due, "status": choice(t.get("status", "idea"), ("idea", "doing", "review", "done")), "channel": choice(t.get("channel", "other"), ("web", "wechat", "canva", "event", "other")), "notes": text(t.get("notes", ""), 8000)})
     drafts = []
     for draft in array(operations.get("drafts", []), 200):
         d = obj(draft, "id title body tags updatedAt".split())
@@ -207,4 +213,25 @@ def validate(project):
     if sum(p["slug"] == "index" for p in public["pages"]) != 1:
         fail("INDEX_REQUIRED", "网站需要且仅需要一个 index 首页 / Exactly one index home page is required.")
     result["site"] = public
+    from screen_schema import validate_screen
+    if p['schema'] == 1 and 'workspace' in p:
+        fail('SCHEMA_INVALID')
+    workspace = obj(p.get('workspace', {'brief': '', 'acceptance': '', 'bom': [], 'screen': None, 'resources': []}), ('brief', 'acceptance', 'bom', 'screen', 'resources'))
+    ws = {'brief': text(workspace.get('brief', ''), 20000), 'acceptance': text(workspace.get('acceptance', ''), 20000), 'bom': [], 'screen': validate_screen(workspace.get('screen')), 'resources': []}
+    def amount(value, maximum):
+        if type(value) not in (int, float) or not math.isfinite(value) or not 0 <= value <= maximum:
+            fail('AMOUNT_INVALID')
+        return value
+    for item in array(workspace.get('bom', []), 200):
+        item = obj(item, ('id', 'name', 'quantity', 'unit', 'unitCost', 'status', 'link', 'notes'))
+        href = link(item.get('link', ''))
+        if href and not href.lower().startswith('https://'):
+            fail('BOM_LINK_INVALID')
+        ws['bom'].append({'id': ident(item.get('id')), 'name': text(item.get('name'), 240, True), 'quantity': amount(item.get('quantity'), 1e6), 'unit': text(item.get('unit', ''), 32), 'unitCost': amount(item.get('unitCost'), 1e7), 'status': choice(item.get('status', 'needed'), ('needed', 'ordered', 'ready')), 'link': href, 'notes': text(item.get('notes', ''), 4000)})
+    unique(ws['bom'])
+    for resource in array(workspace.get('resources', []), 100):
+        resource = obj(resource, ('id', 'title', 'url', 'kind', 'notes'))
+        ws['resources'].append({'id': ident(resource.get('id')), 'title': text(resource.get('title'), 240, True), 'url': link(resource.get('url', '')), 'kind': choice(resource.get('kind', 'reference'), ('reference', 'design', 'learning', 'environment')), 'notes': text(resource.get('notes', ''), 8000)})
+    unique(ws['resources'])
+    result['workspace'] = ws
     return result

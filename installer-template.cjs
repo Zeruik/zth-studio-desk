@@ -7,7 +7,10 @@ AppId={{${config.appId}}
 AppName={#AppName}
 AppVersion={#AppVersion}
 VersionInfoVersion=${config.version}.0
-AppPublisher=Zeruik / TechABJ
+AppPublisher=${config.creator||'Zeruik / TechABJ'}
+AppCopyright=Copyright 2026 ${config.creator||'Zeruik / TechABJ'}
+VersionInfoCompany=${config.studio||'ZTH Studio'}
+VersionInfoDescription=${config.displayName||config.name} / ${config.name}
 AppPublisherURL=mailto:zeruik@qq.com
 DefaultDirName={code:DefaultInstallFolder}
 DefaultGroupName={#AppName}
@@ -36,10 +39,10 @@ RestartApplications=no
 Name: "chinesesimp"; MessagesFile: "compiler:Languages\ChineseSimplified.isl"
 Name: "english"; MessagesFile: "compiler:Default.isl"
 [Messages]
-chinesesimp.WelcomeLabel1=欢迎使用 {#AppName}
-chinesesimp.WelcomeLabel2=本安装包已包含 Electron 与 Python 便携运行环境，安装和运行助手无需另外安装 Node.js、Python 或浏览器。%n%n安装器不会修改 PATH、注册系统 Python 或安装全局依赖。网站发布和 DNS 查询需要您明确操作后才联网。%n%n请使用英文安装路径。运行时与个人数据均保存在所选安装目录。data 子文件夹卸载时保留。请勿选择 Program Files 等不可写位置。
+chinesesimp.WelcomeLabel1=欢迎使用 ${config.displayName||config.name}
+chinesesimp.WelcomeLabel2=${config.studio||'ZTH Studio'} · ${config.parentStudio||''}旗下子工作室%n创作者与权利人：${config.creator||'TechABJ'}%n%n本安装包已包含 Electron 与 Python 便携运行环境，安装和运行助手无需另外安装 Node.js、Python 或浏览器。%n%n安装器不会修改 PATH、注册系统 Python 或安装全局依赖。网站发布和 DNS 查询需要您明确操作后才联网。%n%n请使用英文安装路径。运行时与个人数据均保存在所选安装目录。data 子文件夹卸载时保留。请勿选择 Program Files 等不可写位置。
 english.WelcomeLabel1=Welcome to {#AppName}
-english.WelcomeLabel2=Electron and portable Python runtimes are included. No separate Node.js, Python or browser is needed.%n%nSetup does not edit PATH or register global Python. Website publishing and DNS checks need explicit user actions.%n%nUse an English installation path. Runtimes and personal data stay inside the installation folder; data is retained on uninstall. Choose a writable folder outside Program Files.
+english.WelcomeLabel2=${config.studio||'ZTH Studio'}, a subsidiary studio of ${config.parentStudio||''}.%nCreator and rightsholder: ${config.creator||'TechABJ'}%n%nElectron and portable Python runtimes are included. No separate Node.js, Python or browser is needed.%n%nSetup does not edit PATH or register global Python. Website publishing and DNS checks need explicit user actions.%n%nUse an English installation path. Runtimes and personal data stay inside the installation folder; data is retained on uninstall. Choose a writable folder outside Program Files.
 [CustomMessages]
 chinesesimp.StartMenu=创建开始菜单快捷方式
 english.StartMenu=Create a Start menu shortcut

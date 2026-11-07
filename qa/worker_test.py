@@ -158,7 +158,7 @@ class WorkerTests(unittest.TestCase):
         with self.assertRaises(DeskError):
             validate(p)
     def test_validation_and_output_boundaries(self):
-        for mutate in [lambda p: p.update(schema=2), lambda p: p['site'].update(secret='x'), lambda p: p['site']['pages'][0].update(slug='../secret'), lambda p: p['operations']['tasks'][0].update(due='2026-02-30')]:
+        for mutate in [lambda p: p.update(schema=3), lambda p: p['site'].update(secret='x'), lambda p: p['site']['pages'][0].update(slug='../secret'), lambda p: p['operations']['tasks'][0].update(due='2026-02-30')]:
             p = fixture()
             mutate(p)
             with self.assertRaises(DeskError):
