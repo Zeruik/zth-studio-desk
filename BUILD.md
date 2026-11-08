@@ -30,4 +30,6 @@ Renderer/core checks: run node qa-core.cjs. For standalone source DOM checks, ru
 
 ## Brand and version identity
 
+Additional integrated checks: `node qa-native-guards.cjs` and `node qa-project-v2.cjs <absolute-path-to-bundled-python.exe>`. These use synthetic projects; the native guard test replaces the environment service and performs no system installation. Source documentation can advance after a release: use the tagged source for an exact installer snapshot, and verify its SOURCE-MANIFEST.json. Documentation-only commits do not replace historical release ZIPs or their checksums.
+
 Product name: 赋形造物工作台 / ZTH Studio Desk. Studio: 赋形造物工作室, a subsidiary of 向阳科创工作室. Creator/rightsholder: 理工阿白菌（阿白菌 / TechABJ）. Public Git identity remains Zeruik with a GitHub noreply address. Stable AppId, executable and installation folder are unchanged from Desk 1; do not regenerate them for updates. MIT code and separately reserved original artwork rights are described in LICENSE and ATTRIBUTION.md.

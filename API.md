@@ -1,4 +1,4 @@
-# Studio Desk 1.0.0 API / 引擎协议
+# Studio Desk 2.0.0 API / 引擎协议
 
 这是本地应用与独立 Python 子进程之间的协议，不是可公开监听的 HTTP 服务。标准输出只含一个 UTF-8 JSON 响应；没有服务器端口、pip 依赖或 shell 命令执行。
 
@@ -15,7 +15,7 @@ python -I -B python/worker.py
 Send JSON on stdin and close the input stream. The 32 MiB bound includes encoded assets and structural overhead. Never put credentials in command arguments, environment variables or temporary request files. The worker adds only its own trusted code directory to `sys.path`.
 
 ```json
-{"task":"build","project":{"format":"zth-desk-project","schema":1},"options":{"pageSlug":"index"},"outputDir":"D:/Desk/data/exports/example/job1"}
+{"task":"build","project":{"format":"zth-desk-project","schema":2},"options":{"pageSlug":"index"},"outputDir":"D:/Desk/data/exports/example/job1"}
 ```
 
 上面只展示请求结构，`project` 必须提供完整项目，不能只传两个字段。`outputDir` 必须已存在、绝对且为空，不得经过 symlink/junction。主进程负责创建每个任务唯一目录、校验它处于自己的数据根目录；引擎再次检查并只在这个目录内写固定产物。不覆盖已有产物，不读取用户提供的源文件路径。
@@ -52,7 +52,7 @@ The calendar exports dated tasks as all-day events with an exclusive next-day en
 
 ## Project schema / 项目结构
 
-完整形状见 [CONTRACT.md](CONTRACT.md)。未知字段、未来 schema、重复编号和非法类型被拒绝。格式为 `format=zth-desk-project`, `schema=1`；`producer` 是合法 semver，本版本保存时写 `1.0.0`，兼容检查以 schema 和严格字段为准，导入不抹除原 producer。必需顶层字段：`id,name,updatedAt,settings,operations,site`；`updatedAt` 为 UTC ISO 时间，如 `2026-11-06T08:00:00.000Z`。
+完整形状见 [CONTRACT.md](CONTRACT.md)。未知字段、未来 schema、重复编号和非法类型被拒绝。格式为 `format=zth-desk-project`, `schema=2`（兼容读入 schema 1）；`producer` 是合法 semver，本版本保存时写 `2.0.0`，兼容检查以 schema 和严格字段为准，导入不抹除原 producer。必需顶层字段：`id,name,updatedAt,settings,operations,site,workspace`；`updatedAt` 为 UTC ISO 时间，如 `2026-11-06T08:00:00.000Z`。
 
 Unknown fields, unsupported schemas, duplicate IDs and invalid types are rejected. Valid producer semver is preserved on import; native saving updates it to the saving app version. Each ID matches `[A-Za-z][A-Za-z0-9_-]{0,63}`. IDs and slugs exclude Windows device names such as CON and NUL. A website has exactly one `index` page; other slugs use lowercase ASCII letters/digits separated by hyphens, at most 64 characters.
 
@@ -79,6 +79,23 @@ Only explicitly referenced images become public. No SVG or arbitrary files are i
 
 Local outputs can be partial after interruption; they are never silently treated as a complete build. The native host terminates cancelled workers. A completed remote commit cannot be cancelled or rolled back by killing a process. If upload succeeded but Pages configuration failed, the result retains `uploaded:true` and `pagesStatus:configuration_required`. Network loss during a remote write can leave its outcome uncertain; inspect the repository before retrying.
 
-## Tests / 测试
+## Integrated desktop APIs / 整合桌面接口
+
+These methods are exposed only through the trusted top-frame `window.studioDesk` bridge; they are not network endpoints.
+
+- `exportScreen({project,rasters})`: validates the complete schema 2 project and its screen model, then generates code from bundled templates. Raster keys, dimensions and values must match visible text/image/button widgets; extra or missing resources fail. The host accepts no arbitrary filenames or code. Limits: 12 MiB screen model within the 32 MiB project, 16 MiB serialized rasters, 32 MiB generated ZIP. Returns a completed `screen` job with `result:{zipPath,outputDir,files}` and `saved:{path}|null`. Cancelling the save-copy dialog leaves the generated job artifact available locally.
+- `forge(method,...args)`: allows only `catalog`, `history`, `detect`, `deepDetect`, `createPlan`, `getPlan`, `exportPlan`, `start`, `cancel`, `resume`, `job`, `selectDirectory`, `selectRootfs`, `importCache`. At most one argument, serialized arguments <=64 KiB. `start`, `resume` and distro-starting `deepDetect` require native confirmation; callers cannot supply `confirmed:true`. Plan generation/navigation/import never executes installation. Resume needs a known job from the current session; existing system changes are not rolled back on cancellation.
+- `onForgeProgress(callback)`: subscribes to progress and returns an unsubscribe function. Environment cache/history lives under `data/environment`, not in exported project files.
+- `run({task:'handoff',project,options:{}})`: creates `private-handoff.zip`, with `project.zthdesk`, `PROJECT.md`, formula-protected `BOM.csv`, draft Markdown files and an optional `screen.project.zthscreen`. This is an unencrypted private package, not a public site. Firmware code is exported separately through the screen editor. Environment caches, deployment tokens and system logs are excluded.
+
+Schema 2 adds `workspace:{brief,acceptance,bom,screen,resources}`. Brief/acceptance: 20,000 characters each; BOM: 200 entries; resources: 100 entries. BOM entries contain `id,name,quantity,unit,unitCost,status,link,notes`; status is `needed|ordered|ready`. Resources contain `id,title,url,kind,notes`; kind is `reference|design|learning|environment`. Screen is null or a valid bundled ScreenCore schema 1 project. Tasks add `target:{kind,ref}` where kind is `none|screen|site|draft|environment`; targets navigate only. Public website projection excludes this entire workspace and all operations data.
+
+Reading schema 1 migrates in memory without rewriting its source. Native saving backs up existing readable file bytes before replacement, retains five rotated backups, and writes compact JSON. Future/invalid schemas fail rather than overwriting existing projects. `.zthdesk` is distinct from Academy's encrypted `.zth`.
+
+The desktop uses the local `zthdesk://app/` protocol for bundled files, without a listening HTTP port. The embedded screen frame has `allow-scripts allow-downloads` but no `allow-same-origin`. Host messaging checks frame identity, nonce and current project; native IPC checks the top frame. The website preview grants no scripts. Renderer connections are restricted to the local application scheme; optional online publishing/installations run through reviewed native operations.
+
+## Regression commands / 回归命令
 
 `python -I -B qa/worker_test.py` uses synthetic data and a fake GitHub client. It checks output content, byte hashes, privacy separation, malformed inputs, calendar folding, branch ownership, non-force updates, drift, custom-domain paths and partial success. It performs no real deployment or DNS write.
+
+`node qa-native-guards.cjs` uses a synthetic environment service and cannot install software. `node qa-project-v2.cjs <bundled-python.exe>` exercises real Python with synthetic projects: original-byte migration backup, private/public separation, full backup, trusted screen export and future-schema rejection.

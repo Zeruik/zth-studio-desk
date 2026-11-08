@@ -14,8 +14,8 @@
     },
     {
       "path": "API.md",
-      "size": 8738,
-      "sha256": "ec6346cc73b4d9c8f43fcf9af8c7b33d23145b2fe64fe2343b761d380ff787ce"
+      "size": 12413,
+      "sha256": "b93477afb60dce61a1d0cae888c65130604aff2b3dcbff39f522b609911ec595"
     },
     {
       "path": "ATTRIBUTION.md",
@@ -24,8 +24,8 @@
     },
     {
       "path": "BUILD.md",
-      "size": 4560,
-      "sha256": "9100d33b3bb8d876b6dda7d9dc15a59ddc5db707e998e5fbb541fb6adf57567c"
+      "size": 5037,
+      "sha256": "bfaa437d9c3880c277deddc2d216870f600651762479ef2c22c608c43da7fa23"
     },
     {
       "path": "CHANGELOG.md",
@@ -34,8 +34,8 @@
     },
     {
       "path": "CONTRACT.md",
-      "size": 6110,
-      "sha256": "6598d5afdcb012320b4466c0094fc48d3f97196ca2db28342585958f41d80a47"
+      "size": 7005,
+      "sha256": "e898d2cf1494a03377dccf2a1475cd4f84fd98e070f2c18adc62d55b6dcf9ee3"
     },
     {
       "path": "DEPLOY.md",
