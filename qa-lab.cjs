@@ -1,0 +1,10 @@
+'use strict';
+const assert=require('node:assert/strict'),R=require('./modules/lab-records.js'),{solve}=require('./modules/lab.js');
+const s={v:5,r1:10000,r2:10000,load:null,c:.0001,time:.5,prediction:'down',note:'Observation\nA second line'};
+assert.deepEqual(R.decode('Private report\n'+R.encode(s)),s);
+for(const bad of [{...s,c:0},{...s,time:Infinity},{...s,load:-1},{...s,note:'x'.repeat(4001)},{...s,prediction:'execute'}])assert.throws(()=>R.encode(bad));
+assert.equal(R.decode('Old plain-text report'),null);assert.equal(R.decode('ZTH_LAB_SNAPSHOT_V1:{bad'),null);
+const a=solve(5,10000,10000,Infinity,.0001,.5),b=solve(5,10000,10000,10000,.0001,.5),slow=solve(5,10000,10000,Infinity,.001,.5);
+assert.equal(a.out,2.5);assert.equal(a.tau,.5);assert.ok(Math.abs(a.capacitor/2.5-(1-Math.exp(-1)))<1e-12);assert.ok(b.out<a.out);assert.ok(slow.capacitor<a.capacitor);assert.equal(slow.out,a.out);
+assert.equal(solve(5,10000,10000,Infinity,.0001,0).capacitor,0);assert.ok(Math.abs(solve(5,10000,10000,Infinity,.0001,2.5).capacitor/2.5-.993262053)<1e-9);
+console.log('PASS snapshot roundtrip, malformed/legacy boundaries, loading, common-time comparison and RC endpoints');

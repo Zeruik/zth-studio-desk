@@ -1,6 +1,6 @@
 {
   "product": "ZTH Studio Desk",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "files": [
     {
       "path": ".gitattributes",
@@ -20,7 +20,7 @@
     {
       "path": "ATTRIBUTION.md",
       "size": 1153,
-      "sha256": "3917d454f73254e94ef3cf6e889248c9521180145aab6a37fb63cdd09b83bc64"
+      "sha256": "f31f07d68386869947b0263f62f472b0234a3727aa988bbae6111ef34f522747"
     },
     {
       "path": "BUILD.md",
@@ -29,8 +29,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "size": 4651,
-      "sha256": "6356eb520e571a5ca63ce8dc35cd6c835d5a6fb3ab283a6b86df4c75a078e134"
+      "size": 5522,
+      "sha256": "2fc273496dc22ad5bfbff164fcd9a8b5d738cb8af6b08c0229cf22c103233298"
     },
     {
       "path": "CONTRACT.md",
@@ -50,7 +50,7 @@
     {
       "path": "README.md",
       "size": 13230,
-      "sha256": "8753a85ad460aef49575ac466c343455d9e62882ac0957d02aedae2644f69da7"
+      "sha256": "d1bab2f42b683efb7a3202b8d0eb7a379bf97f083a10007677e16ce4831fbc15"
     },
     {
       "path": "THIRD-PARTY.md",
@@ -59,8 +59,8 @@
     },
     {
       "path": "app.js",
-      "size": 75832,
-      "sha256": "a825b6137df78f94ec855f7728b19156e71cf3f94e297f3f84f4a0f9bbcffdcf"
+      "size": 76278,
+      "sha256": "c09341059fee8f33601b9db6fc75e74078a0c47080d71e011c4a813c3e1efc7c"
     },
     {
       "path": "assets/zth-green-icon.svg",
@@ -74,8 +74,8 @@
     },
     {
       "path": "build-product.cjs",
-      "size": 14389,
-      "sha256": "e411ebf97351c892aceef4549eb4902413d045b17b5bef87edcc761ae2eaa2e7"
+      "size": 14427,
+      "sha256": "2120da988d8d27cc3d5577838385c513532656972e056efa8b76d92c1b09a7c2"
     },
     {
       "path": "build-release.cjs",
@@ -95,7 +95,7 @@
     {
       "path": "core.js",
       "size": 19239,
-      "sha256": "01c705af32cc9fc27b96ffe088ef5d1f9ad7a632b9cf8237569d0af16047754d"
+      "sha256": "373c72534f407fd8aacbf78cc74cee056cbd31cf7ed5562a68c91439257ae9d0"
     },
     {
       "path": "desktop/integrations.cjs",
@@ -114,8 +114,8 @@
     },
     {
       "path": "index.html",
-      "size": 1010,
-      "sha256": "c1a26b1276113e017a9a7a3f9087fe0d5d722726e9a087b30de8e34311ec7086"
+      "size": 1062,
+      "sha256": "01879b3579ef76eddd20ad308cf34faf5594687bf817a6070c6e6ec42bb9c6bf"
     },
     {
       "path": "installer-template.cjs",
@@ -158,9 +158,14 @@
       "sha256": "2f287e5367431ae9741211aa0ffafd695f6726a5f156cad1acd777cce42fa21e"
     },
     {
+      "path": "modules/lab-records.js",
+      "size": 1268,
+      "sha256": "c2f9b897bae7e05876f0bdc8e371a279573489c4871505e5eb18a36a99ed0a8e"
+    },
+    {
       "path": "modules/lab.js",
-      "size": 11608,
-      "sha256": "7181a6aa0ba16604e5b5d57a676167ef50d4ac19b9eec31b01673659a128f9ee"
+      "size": 16130,
+      "sha256": "42fc54dfb972ddbf73ac754d79c70416e6ef8d9daa1af4d5ae77d634090b61f9"
     },
     {
       "path": "modules/screen/LICENSE",
@@ -205,7 +210,7 @@
     {
       "path": "package.json",
       "size": 179,
-      "sha256": "ba46a67a5627ef0a3e774cc449239e699de67af263eb7c13725eee870e25e184"
+      "sha256": "7a69e0fa41e3e0ad86442a7712717a15e4423825c27e206edb78fcfe17810cc5"
     },
     {
       "path": "prepare-runtime.cjs",
@@ -215,7 +220,7 @@
     {
       "path": "product.json",
       "size": 907,
-      "sha256": "adafd36f5fd586ffc3990538bbe1679d49f022ebedf2694b9f59c9b364012b05"
+      "sha256": "595771018443a84b3a5cfe1c13c30fb0ba12d3fb9e87b883e4e98eaf3619ec44"
     },
     {
       "path": "python/github_pages.py",
@@ -256,6 +261,11 @@
       "path": "qa-installer.cjs",
       "size": 7122,
       "sha256": "691ebc7f9d8bb37b69b09c69dcee545a0895fd3e749f172140d14962ff074b52"
+    },
+    {
+      "path": "qa-lab.cjs",
+      "size": 1174,
+      "sha256": "924ba5c2b89f7009bf495485ce034b5077a1e79448ff256be1ddcf49c680850d"
     },
     {
       "path": "qa-native-guards.cjs",

@@ -33,3 +33,12 @@ This release does not provide online collaboration, cloud sync, arbitrary HTML/J
 ## 2.1.0 — Engineering experiments
 
 Added a bilingual loaded-divider and RC learning bench: adjustable supply/resistors/load/capacitance, numerical outputs, animated charging curve, pause/reset, prediction feedback and four progressive explanations. Save an experiment directly as a private draft with suggested BOM items and a linked physical-verification task. Ideal analytical model only; no SPICE or hardware validation claim. Reports remain excluded from public websites.
+
+## 2.2.0 — Repeatable experiments
+
+- Restore saved experiment parameters and observation notes from bounded inert snapshots. Older plain-text reports remain readable and unchanged.
+- Capture A and compare against B on shared physical time/voltage axes; capacitance changes now visibly change charging speed.
+- Return from an experiment draft to the corresponding restored experiment. Unrecorded in-session values survive navigation; permanent recovery requires saving a report.
+- Pause/reset stop animation scheduling; final charging values update at the endpoint. Labels follow the selected language.
+- Saving failures are visible, duplicate concurrent saves are blocked, and report/BOM/task additions preserve project undo history.
+- Snapshot validation rejects invalid ranges and malformed input. No user profiles, saves or developer logs are part of the release.

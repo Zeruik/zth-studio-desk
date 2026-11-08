@@ -1,4 +1,4 @@
-# 赋形造物工作台 / ZTH Studio Desk 2.1.0
+# 赋形造物工作台 / ZTH Studio Desk 2.2.0
 
 面向小型工作室的本地桌面工作台：在同一个项目里管理工程简报、验收清单、物料、屏幕界面、环境准备、运营任务、活动日历、文案草稿和多页网站。赋形造物工作室是向阳科创工作室旗下的子工作室。创作者与权利人为理工阿白菌（阿白菌 / TechABJ）；代码采用 MIT 许可，原工作室图形标识的权利单独保留。
 
@@ -64,7 +64,7 @@ Forge inspects the machine only on explicit action. Environment changes require 
 
 ## 升级与整合 / Upgrading and integration
 
-2.1.0 沿用 Desk 1 的安装标识、安装文件夹和 data 存储。schema 1 项目可在内存中迁移到 schema 2，保留原字段；保存迁移结果前会备份原文件字节。升级前仍应另行导出完整项目。换安装目录时，先正常退出并完整复制整个旧目录（包括 data），不要只复制 exe。
+2.2.0 沿用 Desk 1 的安装标识、安装文件夹和 data 存储。schema 1 项目可在内存中迁移到 schema 2，保留原字段；保存迁移结果前会备份原文件字节。升级前仍应另行导出完整项目。换安装目录时，先正常退出并完整复制整个旧目录（包括 data），不要只复制 exe。
 
 Version 2 retains the Desk 1 installer identity, folder and data storage. Schema 1 is migrated in memory without losing existing fields; saving retains a backup of original file bytes. Export an independent backup before upgrading. When changing folders, close the app and copy the complete old folder including data before running Setup.
 
