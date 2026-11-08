@@ -1,6 +1,6 @@
 # 创作与署名 / Creation and attribution
 
-**作品**：赋形造物工作台 / ZTH Studio Desk 2.0.0。
+**作品**：赋形造物工作台 / ZTH Studio Desk 2.1.0。
 **工作室**：赋形造物工作室，向阳科创工作室旗下的子工作室。
 **创作者与权利人**：理工阿白菌（阿白菌 / TechABJ）。
 **公开代码账户**：Zeruik。

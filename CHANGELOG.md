@@ -29,3 +29,7 @@ First independent ZTH Studio Desk release. Existing Academy, Screen Studio and S
 Known limits / 已知范围：本版本不提供多人在线协作、云同步、任意 HTML/JavaScript 插件、微信/Canva 自动发送、系统后台定时任务、DNS 自动修改或外部链接抓取。日历为全天日期，网站联系区块没有后端表单服务。GitHub 仓库须先初始化；取消无法撤回已提交的远程版本。
 
 This release does not provide online collaboration, cloud sync, arbitrary HTML/JS plugins, automatic social posting, OS-level scheduling, DNS mutation or external-link crawling. Calendar events are all-day dates. Contact sections have no form backend. GitHub repositories must be initialized; cancellation cannot undo a completed remote commit.
+
+## 2.1.0 — Engineering experiments
+
+Added a bilingual loaded-divider and RC learning bench: adjustable supply/resistors/load/capacitance, numerical outputs, animated charging curve, pause/reset, prediction feedback and four progressive explanations. Save an experiment directly as a private draft with suggested BOM items and a linked physical-verification task. Ideal analytical model only; no SPICE or hardware validation claim. Reports remain excluded from public websites.
