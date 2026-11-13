@@ -4212,7 +4212,7 @@ return{tracks,selected,plan,pick,dependencyOrder,guidance,get allLibrary(){retur
       __defProp(target, name, { get: all[name], enumerable: true });
   };
 
-  // qa/desktop-runtime/node_modules/three/build/three.module.js
+  // dev-notes/cross-platform-major-20261113/clean-root-tools/node_modules/three/build/three.module.js
   var three_module_exports = {};
   __export(three_module_exports, {
     ACESFilmicToneMapping: () => ACESFilmicToneMapping,
@@ -4661,7 +4661,7 @@ return{tracks,selected,plan,pick,dependencyOrder,guidance,get allLibrary(){retur
     warnOnce: () => warnOnce
   });
 
-  // qa/desktop-runtime/node_modules/three/build/three.core.js
+  // dev-notes/cross-platform-major-20261113/clean-root-tools/node_modules/three/build/three.core.js
   /**
    * @license
    * Copyright 2010-2026 Three.js Authors
@@ -36641,7 +36641,7 @@ return{tracks,selected,plan,pick,dependencyOrder,guidance,get allLibrary(){retur
     }
   }
 
-  // qa/desktop-runtime/node_modules/three/build/three.module.js
+  // dev-notes/cross-platform-major-20261113/clean-root-tools/node_modules/three/build/three.module.js
   /**
    * @license
    * Copyright 2010-2026 Three.js Authors
@@ -48144,7 +48144,7 @@ void main() {
     }
   };
 
-  // qa/desktop-runtime/node_modules/three/examples/jsm/controls/OrbitControls.js
+  // dev-notes/cross-platform-major-20261113/clean-root-tools/node_modules/three/examples/jsm/controls/OrbitControls.js
   var _changeEvent = { type: "change" };
   var _startEvent = { type: "start" };
   var _endEvent = { type: "end" };
@@ -49060,7 +49060,964 @@ void main() {
     }
   }
 
-  // qa/desktop-runtime/node_modules/three/examples/jsm/geometries/RoundedBoxGeometry.js
+  // dev-notes/cross-platform-major-20261113/clean-root-tools/node_modules/three/examples/jsm/renderers/Projector.js
+  var RenderableObject = class {
+    constructor() {
+      this.id = 0;
+      this.object = null;
+      this.z = 0;
+      this.renderOrder = 0;
+    }
+  };
+  var RenderableFace = class {
+    constructor() {
+      this.id = 0;
+      this.v1 = new RenderableVertex();
+      this.v2 = new RenderableVertex();
+      this.v3 = new RenderableVertex();
+      this.normalModel = new Vector3();
+      this.vertexNormalsModel = [new Vector3(), new Vector3(), new Vector3()];
+      this.vertexNormalsLength = 0;
+      this.color = new Color();
+      this.material = null;
+      this.uvs = [new Vector2(), new Vector2(), new Vector2()];
+      this.z = 0;
+      this.renderOrder = 0;
+    }
+  };
+  var RenderableVertex = class {
+    constructor() {
+      this.position = new Vector3();
+      this.positionWorld = new Vector3();
+      this.positionScreen = new Vector4();
+      this.visible = true;
+    }
+    copy(vertex2) {
+      this.positionWorld.copy(vertex2.positionWorld);
+      this.positionScreen.copy(vertex2.positionScreen);
+    }
+  };
+  var RenderableLine = class {
+    constructor() {
+      this.id = 0;
+      this.v1 = new RenderableVertex();
+      this.v2 = new RenderableVertex();
+      this.vertexColors = [new Color(), new Color()];
+      this.material = null;
+      this.z = 0;
+      this.renderOrder = 0;
+    }
+  };
+  var RenderableSprite = class {
+    constructor() {
+      this.id = 0;
+      this.object = null;
+      this.x = 0;
+      this.y = 0;
+      this.z = 0;
+      this.rotation = 0;
+      this.scale = new Vector2();
+      this.material = null;
+      this.renderOrder = 0;
+    }
+  };
+  var Projector = class {
+    /**
+     * Constructs a new projector.
+     */
+    constructor() {
+      let _object, _objectCount, _objectPoolLength = 0, _vertex2, _vertexCount, _vertexPoolLength = 0, _face, _faceCount, _facePoolLength = 0, _line, _lineCount, _linePoolLength = 0, _sprite, _spriteCount, _spritePoolLength = 0, _modelMatrix, _clipInput = [], _clipOutput = [];
+      const _renderData = { objects: [], lights: [], elements: [] }, _vector3 = new Vector3(), _vector42 = new Vector4(), _clipBox = new Box3(new Vector3(-1, -1, -1), new Vector3(1, 1, 1)), _boundingBox = new Box3(), _points3 = new Array(3), _viewMatrix = new Matrix4(), _viewProjectionMatrix = new Matrix4(), _modelViewProjectionMatrix = new Matrix4(), _frustum2 = new Frustum(), _objectPool = [], _vertexPool = [], _facePool = [], _linePool = [], _spritePool = [], _clipVertexPool = [], _clipPos1 = new Vector4(), _clipPos2 = new Vector4(), _clipPos3 = new Vector4(), _screenVertexPool = [], _clipInputVertices = [null, null, null], _clipPlanes = [
+        { sign: 1 },
+        { sign: -1 }
+      ];
+      function RenderList() {
+        const normals = [];
+        const colors = [];
+        const uvs = [];
+        let object = null;
+        const normalMatrix = new Matrix3();
+        function setObject(value) {
+          object = value;
+          normalMatrix.getNormalMatrix(object.matrixWorld);
+          normals.length = 0;
+          colors.length = 0;
+          uvs.length = 0;
+        }
+        function projectVertex(vertex2) {
+          const position = vertex2.position;
+          const positionWorld = vertex2.positionWorld;
+          const positionScreen = vertex2.positionScreen;
+          positionWorld.copy(position).applyMatrix4(_modelMatrix);
+          positionScreen.copy(positionWorld).applyMatrix4(_viewProjectionMatrix);
+          const invW = 1 / positionScreen.w;
+          positionScreen.x *= invW;
+          positionScreen.y *= invW;
+          positionScreen.z *= invW;
+          vertex2.visible = positionScreen.x >= -1 && positionScreen.x <= 1 && positionScreen.y >= -1 && positionScreen.y <= 1 && positionScreen.z >= -1 && positionScreen.z <= 1;
+        }
+        function pushVertex(x, y, z) {
+          _vertex2 = getNextVertexInPool();
+          _vertex2.position.set(x, y, z);
+          projectVertex(_vertex2);
+        }
+        function pushNormal(x, y, z) {
+          normals.push(x, y, z);
+        }
+        function pushColor(r, g, b) {
+          colors.push(r, g, b);
+        }
+        function pushUv(x, y) {
+          uvs.push(x, y);
+        }
+        function checkTriangleVisibility(v1, v2, v3) {
+          if (v1.visible === true || v2.visible === true || v3.visible === true) return true;
+          _points3[0] = v1.positionScreen;
+          _points3[1] = v2.positionScreen;
+          _points3[2] = v3.positionScreen;
+          return _clipBox.intersectsBox(_boundingBox.setFromPoints(_points3));
+        }
+        function checkBackfaceCulling(v1, v2, v3) {
+          return (v3.positionScreen.x - v1.positionScreen.x) * (v2.positionScreen.y - v1.positionScreen.y) - (v3.positionScreen.y - v1.positionScreen.y) * (v2.positionScreen.x - v1.positionScreen.x) < 0;
+        }
+        function pushLine(a, b) {
+          const v1 = _vertexPool[a];
+          const v2 = _vertexPool[b];
+          v1.positionScreen.copy(v1.position).applyMatrix4(_modelViewProjectionMatrix);
+          v2.positionScreen.copy(v2.position).applyMatrix4(_modelViewProjectionMatrix);
+          if (clipLine(v1.positionScreen, v2.positionScreen) === true) {
+            v1.positionScreen.multiplyScalar(1 / v1.positionScreen.w);
+            v2.positionScreen.multiplyScalar(1 / v2.positionScreen.w);
+            _line = getNextLineInPool();
+            _line.id = object.id;
+            _line.v1.copy(v1);
+            _line.v2.copy(v2);
+            _line.z = Math.max(v1.positionScreen.z, v2.positionScreen.z);
+            _line.renderOrder = object.renderOrder;
+            _line.material = object.material;
+            if (object.material.vertexColors) {
+              _line.vertexColors[0].fromArray(colors, a * 3);
+              _line.vertexColors[1].fromArray(colors, b * 3);
+            }
+            _renderData.elements.push(_line);
+          }
+        }
+        function pushTriangle(a, b, c, material) {
+          const v1 = _vertexPool[a];
+          const v2 = _vertexPool[b];
+          const v3 = _vertexPool[c];
+          const w1 = v1.positionScreen.w;
+          const w2 = v2.positionScreen.w;
+          const w3 = v3.positionScreen.w;
+          const nearDist1 = w1 * (v1.positionScreen.z + 1);
+          const nearDist2 = w2 * (v2.positionScreen.z + 1);
+          const nearDist3 = w3 * (v3.positionScreen.z + 1);
+          const farDist1 = w1 * (1 - v1.positionScreen.z);
+          const farDist2 = w2 * (1 - v2.positionScreen.z);
+          const farDist3 = w3 * (1 - v3.positionScreen.z);
+          if (nearDist1 < 0 && nearDist2 < 0 && nearDist3 < 0 || farDist1 < 0 && farDist2 < 0 && farDist3 < 0) {
+            return;
+          }
+          if (nearDist1 >= 0 && nearDist2 >= 0 && nearDist3 >= 0 && farDist1 >= 0 && farDist2 >= 0 && farDist3 >= 0) {
+            if (checkTriangleVisibility(v1, v2, v3) === false) return;
+            if (material.side === DoubleSide || checkBackfaceCulling(v1, v2, v3) === true) {
+              _face = getNextFaceInPool();
+              _face.id = object.id;
+              _face.v1.copy(v1);
+              _face.v2.copy(v2);
+              _face.v3.copy(v3);
+              _face.z = (v1.positionScreen.z + v2.positionScreen.z + v3.positionScreen.z) / 3;
+              _face.renderOrder = object.renderOrder;
+              _vector3.subVectors(v3.position, v2.position);
+              _vector42.subVectors(v1.position, v2.position);
+              _vector3.cross(_vector42);
+              _face.normalModel.copy(_vector3);
+              _face.normalModel.applyMatrix3(normalMatrix).normalize();
+              for (let i = 0; i < 3; i++) {
+                const normal = _face.vertexNormalsModel[i];
+                normal.fromArray(normals, arguments[i] * 3);
+                normal.applyMatrix3(normalMatrix).normalize();
+                const uv = _face.uvs[i];
+                uv.fromArray(uvs, arguments[i] * 2);
+              }
+              _face.vertexNormalsLength = 3;
+              _face.material = material;
+              if (material.vertexColors) {
+                _face.color.fromArray(colors, a * 3);
+              }
+              _renderData.elements.push(_face);
+            }
+            return;
+          }
+          _clipPos1.set(v1.positionScreen.x * w1, v1.positionScreen.y * w1, v1.positionScreen.z * w1, w1);
+          _clipPos2.set(v2.positionScreen.x * w2, v2.positionScreen.y * w2, v2.positionScreen.z * w2, w2);
+          _clipPos3.set(v3.positionScreen.x * w3, v3.positionScreen.y * w3, v3.positionScreen.z * w3, w3);
+          _clipInputVertices[0] = _clipPos1;
+          _clipInputVertices[1] = _clipPos2;
+          _clipInputVertices[2] = _clipPos3;
+          const clippedCount = clipTriangle(_clipInputVertices);
+          if (clippedCount < 3) return;
+          for (let i = 0; i < clippedCount; i++) {
+            const cv = _clipInput[i];
+            let sv = _screenVertexPool[i];
+            if (!sv) {
+              sv = new RenderableVertex();
+              _screenVertexPool[i] = sv;
+            }
+            const invW = 1 / cv.w;
+            sv.positionScreen.set(cv.x * invW, cv.y * invW, cv.z * invW, 1);
+            sv.positionWorld.copy(v1.positionWorld);
+            sv.visible = true;
+          }
+          for (let i = 1; i < clippedCount - 1; i++) {
+            const tv1 = _screenVertexPool[0];
+            const tv2 = _screenVertexPool[i];
+            const tv3 = _screenVertexPool[i + 1];
+            if (material.side === DoubleSide || checkBackfaceCulling(tv1, tv2, tv3) === true) {
+              _face = getNextFaceInPool();
+              _face.id = object.id;
+              _face.v1.copy(tv1);
+              _face.v2.copy(tv2);
+              _face.v3.copy(tv3);
+              _face.z = (tv1.positionScreen.z + tv2.positionScreen.z + tv3.positionScreen.z) / 3;
+              _face.renderOrder = object.renderOrder;
+              _vector3.subVectors(v3.position, v2.position);
+              _vector42.subVectors(v1.position, v2.position);
+              _vector3.cross(_vector42);
+              _face.normalModel.copy(_vector3);
+              _face.normalModel.applyMatrix3(normalMatrix).normalize();
+              for (let j = 0; j < 3; j++) {
+                const normal = _face.vertexNormalsModel[j];
+                normal.fromArray(normals, arguments[j] * 3);
+                normal.applyMatrix3(normalMatrix).normalize();
+                const uv = _face.uvs[j];
+                uv.fromArray(uvs, arguments[j] * 2);
+              }
+              _face.vertexNormalsLength = 3;
+              _face.material = material;
+              if (material.vertexColors) {
+                _face.color.fromArray(colors, a * 3);
+              }
+              _renderData.elements.push(_face);
+            }
+          }
+        }
+        return {
+          setObject,
+          projectVertex,
+          checkTriangleVisibility,
+          checkBackfaceCulling,
+          pushVertex,
+          pushNormal,
+          pushColor,
+          pushUv,
+          pushLine,
+          pushTriangle
+        };
+      }
+      const renderList = new RenderList();
+      function projectObject(object) {
+        if (object.visible === false) return;
+        if (object.isLight) {
+          _renderData.lights.push(object);
+        } else if (object.isMesh || object.isLine || object.isPoints) {
+          if (object.material.visible === false) return;
+          if (object.frustumCulled === true && _frustum2.intersectsObject(object) === false) return;
+          addObject(object);
+        } else if (object.isSprite) {
+          if (object.material.visible === false) return;
+          if (object.frustumCulled === true && _frustum2.intersectsSprite(object) === false) return;
+          addObject(object);
+        }
+        const children = object.children;
+        for (let i = 0, l = children.length; i < l; i++) {
+          projectObject(children[i]);
+        }
+      }
+      function addObject(object) {
+        _object = getNextObjectInPool();
+        _object.id = object.id;
+        _object.object = object;
+        _vector3.setFromMatrixPosition(object.matrixWorld);
+        _vector3.applyMatrix4(_viewProjectionMatrix);
+        _object.z = _vector3.z;
+        _object.renderOrder = object.renderOrder;
+        _renderData.objects.push(_object);
+      }
+      this.projectScene = function(scene, camera, sortObjects, sortElements) {
+        _faceCount = 0;
+        _lineCount = 0;
+        _spriteCount = 0;
+        _renderData.elements.length = 0;
+        if (scene.matrixWorldAutoUpdate === true) scene.updateMatrixWorld();
+        if (camera.parent === null && camera.matrixWorldAutoUpdate === true) camera.updateMatrixWorld();
+        _viewMatrix.copy(camera.matrixWorldInverse);
+        _viewProjectionMatrix.multiplyMatrices(camera.projectionMatrix, _viewMatrix);
+        _frustum2.setFromProjectionMatrix(_viewProjectionMatrix);
+        _objectCount = 0;
+        _renderData.objects.length = 0;
+        _renderData.lights.length = 0;
+        projectObject(scene);
+        if (sortObjects === true) {
+          _renderData.objects.sort(painterSort);
+        }
+        const objects = _renderData.objects;
+        for (let o = 0, ol = objects.length; o < ol; o++) {
+          const object = objects[o].object;
+          const geometry = object.geometry;
+          renderList.setObject(object);
+          _modelMatrix = object.matrixWorld;
+          _vertexCount = 0;
+          if (object.isMesh) {
+            let material = object.material;
+            const isMultiMaterial = Array.isArray(material);
+            const attributes = geometry.attributes;
+            const groups = geometry.groups;
+            if (attributes.position === void 0) continue;
+            const positions = attributes.position.array;
+            for (let i = 0, l = positions.length; i < l; i += 3) {
+              let x = positions[i];
+              let y = positions[i + 1];
+              let z = positions[i + 2];
+              const morphTargets = geometry.morphAttributes.position;
+              if (morphTargets !== void 0) {
+                const morphTargetsRelative = geometry.morphTargetsRelative;
+                const morphInfluences = object.morphTargetInfluences;
+                for (let t = 0, tl = morphTargets.length; t < tl; t++) {
+                  const influence = morphInfluences[t];
+                  if (influence === 0) continue;
+                  const target = morphTargets[t];
+                  if (morphTargetsRelative) {
+                    x += target.getX(i / 3) * influence;
+                    y += target.getY(i / 3) * influence;
+                    z += target.getZ(i / 3) * influence;
+                  } else {
+                    x += (target.getX(i / 3) - positions[i]) * influence;
+                    y += (target.getY(i / 3) - positions[i + 1]) * influence;
+                    z += (target.getZ(i / 3) - positions[i + 2]) * influence;
+                  }
+                }
+              }
+              renderList.pushVertex(x, y, z);
+            }
+            if (attributes.normal !== void 0) {
+              const normals = attributes.normal.array;
+              for (let i = 0, l = normals.length; i < l; i += 3) {
+                renderList.pushNormal(normals[i], normals[i + 1], normals[i + 2]);
+              }
+            }
+            if (attributes.color !== void 0) {
+              const colors = attributes.color.array;
+              for (let i = 0, l = colors.length; i < l; i += 3) {
+                renderList.pushColor(colors[i], colors[i + 1], colors[i + 2]);
+              }
+            }
+            if (attributes.uv !== void 0) {
+              const uvs = attributes.uv.array;
+              for (let i = 0, l = uvs.length; i < l; i += 2) {
+                renderList.pushUv(uvs[i], uvs[i + 1]);
+              }
+            }
+            if (geometry.index !== null) {
+              const indices = geometry.index.array;
+              if (groups.length > 0) {
+                for (let g = 0; g < groups.length; g++) {
+                  const group = groups[g];
+                  material = isMultiMaterial === true ? object.material[group.materialIndex] : object.material;
+                  if (material === void 0) continue;
+                  for (let i = group.start, l = group.start + group.count; i < l; i += 3) {
+                    renderList.pushTriangle(indices[i], indices[i + 1], indices[i + 2], material);
+                  }
+                }
+              } else {
+                for (let i = 0, l = indices.length; i < l; i += 3) {
+                  renderList.pushTriangle(indices[i], indices[i + 1], indices[i + 2], material);
+                }
+              }
+            } else {
+              if (groups.length > 0) {
+                for (let g = 0; g < groups.length; g++) {
+                  const group = groups[g];
+                  material = isMultiMaterial === true ? object.material[group.materialIndex] : object.material;
+                  if (material === void 0) continue;
+                  for (let i = group.start, l = group.start + group.count; i < l; i += 3) {
+                    renderList.pushTriangle(i, i + 1, i + 2, material);
+                  }
+                }
+              } else {
+                for (let i = 0, l = positions.length / 3; i < l; i += 3) {
+                  renderList.pushTriangle(i, i + 1, i + 2, material);
+                }
+              }
+            }
+          } else if (object.isLine) {
+            _modelViewProjectionMatrix.multiplyMatrices(_viewProjectionMatrix, _modelMatrix);
+            const attributes = geometry.attributes;
+            if (attributes.position !== void 0) {
+              const positions = attributes.position.array;
+              for (let i = 0, l = positions.length; i < l; i += 3) {
+                renderList.pushVertex(positions[i], positions[i + 1], positions[i + 2]);
+              }
+              if (attributes.color !== void 0) {
+                const colors = attributes.color.array;
+                for (let i = 0, l = colors.length; i < l; i += 3) {
+                  renderList.pushColor(colors[i], colors[i + 1], colors[i + 2]);
+                }
+              }
+              if (geometry.index !== null) {
+                const indices = geometry.index.array;
+                for (let i = 0, l = indices.length; i < l; i += 2) {
+                  renderList.pushLine(indices[i], indices[i + 1]);
+                }
+              } else {
+                const step = object.isLineSegments ? 2 : 1;
+                for (let i = 0, l = positions.length / 3 - 1; i < l; i += step) {
+                  renderList.pushLine(i, i + 1);
+                }
+              }
+            }
+          } else if (object.isPoints) {
+            _modelViewProjectionMatrix.multiplyMatrices(_viewProjectionMatrix, _modelMatrix);
+            const attributes = geometry.attributes;
+            if (attributes.position !== void 0) {
+              const positions = attributes.position.array;
+              for (let i = 0, l = positions.length; i < l; i += 3) {
+                _vector42.set(positions[i], positions[i + 1], positions[i + 2], 1);
+                _vector42.applyMatrix4(_modelViewProjectionMatrix);
+                pushPoint(_vector42, object, camera);
+              }
+            }
+          } else if (object.isSprite) {
+            object.modelViewMatrix.multiplyMatrices(camera.matrixWorldInverse, object.matrixWorld);
+            _vector42.set(_modelMatrix.elements[12], _modelMatrix.elements[13], _modelMatrix.elements[14], 1);
+            _vector42.applyMatrix4(_viewProjectionMatrix);
+            pushPoint(_vector42, object, camera);
+          }
+        }
+        if (sortElements === true) {
+          _renderData.elements.sort(painterSort);
+        }
+        return _renderData;
+      };
+      function pushPoint(_vector43, object, camera) {
+        const invW = 1 / _vector43.w;
+        _vector43.z *= invW;
+        if (_vector43.z >= -1 && _vector43.z <= 1) {
+          _sprite = getNextSpriteInPool();
+          _sprite.id = object.id;
+          _sprite.x = _vector43.x * invW;
+          _sprite.y = _vector43.y * invW;
+          _sprite.z = _vector43.z;
+          _sprite.renderOrder = object.renderOrder;
+          _sprite.object = object;
+          _sprite.rotation = object.rotation;
+          _sprite.scale.x = object.scale.x * Math.abs(_sprite.x - (_vector43.x + camera.projectionMatrix.elements[0]) / (_vector43.w + camera.projectionMatrix.elements[12]));
+          _sprite.scale.y = object.scale.y * Math.abs(_sprite.y - (_vector43.y + camera.projectionMatrix.elements[5]) / (_vector43.w + camera.projectionMatrix.elements[13]));
+          _sprite.material = object.material;
+          _renderData.elements.push(_sprite);
+        }
+      }
+      function getNextObjectInPool() {
+        if (_objectCount === _objectPoolLength) {
+          const object = new RenderableObject();
+          _objectPool.push(object);
+          _objectPoolLength++;
+          _objectCount++;
+          return object;
+        }
+        return _objectPool[_objectCount++];
+      }
+      function getNextVertexInPool() {
+        if (_vertexCount === _vertexPoolLength) {
+          const vertex2 = new RenderableVertex();
+          _vertexPool.push(vertex2);
+          _vertexPoolLength++;
+          _vertexCount++;
+          return vertex2;
+        }
+        return _vertexPool[_vertexCount++];
+      }
+      function getNextFaceInPool() {
+        if (_faceCount === _facePoolLength) {
+          const face = new RenderableFace();
+          _facePool.push(face);
+          _facePoolLength++;
+          _faceCount++;
+          return face;
+        }
+        return _facePool[_faceCount++];
+      }
+      function getNextLineInPool() {
+        if (_lineCount === _linePoolLength) {
+          const line = new RenderableLine();
+          _linePool.push(line);
+          _linePoolLength++;
+          _lineCount++;
+          return line;
+        }
+        return _linePool[_lineCount++];
+      }
+      function getNextSpriteInPool() {
+        if (_spriteCount === _spritePoolLength) {
+          const sprite = new RenderableSprite();
+          _spritePool.push(sprite);
+          _spritePoolLength++;
+          _spriteCount++;
+          return sprite;
+        }
+        return _spritePool[_spriteCount++];
+      }
+      function painterSort(a, b) {
+        if (a.renderOrder !== b.renderOrder) {
+          return a.renderOrder - b.renderOrder;
+        } else if (a.z !== b.z) {
+          return b.z - a.z;
+        } else if (a.id !== b.id) {
+          return a.id - b.id;
+        } else {
+          return 0;
+        }
+      }
+      function clipTriangle(vertices) {
+        _clipInput[0] = vertices[0];
+        _clipInput[1] = vertices[1];
+        _clipInput[2] = vertices[2];
+        let inputCount = 3;
+        let outputCount = 0;
+        for (let p = 0; p < _clipPlanes.length; p++) {
+          const plane = _clipPlanes[p];
+          outputCount = 0;
+          if (inputCount === 0) break;
+          for (let i = 0; i < inputCount; i++) {
+            const v1 = _clipInput[i];
+            const v2 = _clipInput[(i + 1) % inputCount];
+            const d1 = plane.sign * v1.z + v1.w;
+            const d2 = plane.sign * v2.z + v2.w;
+            const v1Inside = d1 >= 0;
+            const v2Inside = d2 >= 0;
+            if (v1Inside && v2Inside) {
+              _clipOutput[outputCount++] = v1;
+            } else if (v1Inside && !v2Inside) {
+              _clipOutput[outputCount++] = v1;
+              const t = d1 / (d1 - d2);
+              let intersection = _clipVertexPool[outputCount];
+              if (!intersection) {
+                intersection = new Vector4();
+                _clipVertexPool[outputCount] = intersection;
+              }
+              intersection.lerpVectors(v1, v2, t);
+              _clipOutput[outputCount++] = intersection;
+            } else if (!v1Inside && v2Inside) {
+              const t = d1 / (d1 - d2);
+              let intersection = _clipVertexPool[outputCount];
+              if (!intersection) {
+                intersection = new Vector4();
+                _clipVertexPool[outputCount] = intersection;
+              }
+              intersection.lerpVectors(v1, v2, t);
+              _clipOutput[outputCount++] = intersection;
+            }
+          }
+          const temp = _clipInput;
+          _clipInput = _clipOutput;
+          _clipOutput = temp;
+          inputCount = outputCount;
+        }
+        return inputCount;
+      }
+      function clipLine(s1, s2) {
+        let alpha1 = 0, alpha2 = 1;
+        const bc1near = s1.z + s1.w, bc2near = s2.z + s2.w, bc1far = -s1.z + s1.w, bc2far = -s2.z + s2.w;
+        if (bc1near >= 0 && bc2near >= 0 && bc1far >= 0 && bc2far >= 0) {
+          return true;
+        } else if (bc1near < 0 && bc2near < 0 || bc1far < 0 && bc2far < 0) {
+          return false;
+        } else {
+          if (bc1near < 0) {
+            alpha1 = Math.max(alpha1, bc1near / (bc1near - bc2near));
+          } else if (bc2near < 0) {
+            alpha2 = Math.min(alpha2, bc1near / (bc1near - bc2near));
+          }
+          if (bc1far < 0) {
+            alpha1 = Math.max(alpha1, bc1far / (bc1far - bc2far));
+          } else if (bc2far < 0) {
+            alpha2 = Math.min(alpha2, bc1far / (bc1far - bc2far));
+          }
+          if (alpha2 < alpha1) {
+            return false;
+          } else {
+            s1.lerp(s2, alpha1);
+            s2.lerp(s1, 1 - alpha2);
+            return true;
+          }
+        }
+      }
+    }
+  };
+
+  // dev-notes/cross-platform-major-20261113/clean-root-tools/node_modules/three/examples/jsm/renderers/SVGRenderer.js
+  var SVGRenderer = class {
+    /**
+     * Constructs a new SVG renderer.
+     */
+    constructor() {
+      let _renderData, _elements, _lights, _svgWidth, _svgHeight, _svgWidthHalf, _svgHeightHalf, _v12, _v22, _v32, _svgNode, _pathCount = 0, _svgObjectCount = 0, _renderListCount = 0, _precision = null, _quality = 1, _currentPath, _currentStyle;
+      const _this = this, _clipBox = new Box2(), _elemBox = new Box2(), _color3 = new Color(), _diffuseColor = new Color(), _ambientLight = new Color(), _directionalLights = new Color(), _pointLights = new Color(), _clearColor2 = new Color(), _vector3 = new Vector3(), _centroid = new Vector3(), _normal2 = new Vector3(), _normalViewMatrix = new Matrix3(), _viewMatrix = new Matrix4(), _viewProjectionMatrix = new Matrix4(), _svgPathPool = [], _svgObjectsPool = [], _renderListPool = [], _projector = new Projector(), _svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      this.domElement = _svg;
+      this.autoClear = true;
+      this.sortObjects = true;
+      this.sortElements = true;
+      this.overdraw = 0.5;
+      this.outputColorSpace = SRGBColorSpace;
+      this.info = {
+        render: {
+          vertices: 0,
+          faces: 0
+        }
+      };
+      this.setQuality = function(quality) {
+        switch (quality) {
+          case "high":
+            _quality = 1;
+            break;
+          case "low":
+            _quality = 0;
+            break;
+        }
+      };
+      this.setClearColor = function(color) {
+        _clearColor2.set(color);
+      };
+      this.setPixelRatio = function() {
+      };
+      this.setSize = function(width, height) {
+        _svgWidth = width;
+        _svgHeight = height;
+        _svgWidthHalf = _svgWidth / 2;
+        _svgHeightHalf = _svgHeight / 2;
+        _svg.setAttribute("viewBox", -_svgWidthHalf + " " + -_svgHeightHalf + " " + _svgWidth + " " + _svgHeight);
+        _svg.setAttribute("width", _svgWidth);
+        _svg.setAttribute("height", _svgHeight);
+        _clipBox.min.set(-_svgWidthHalf, -_svgHeightHalf);
+        _clipBox.max.set(_svgWidthHalf, _svgHeightHalf);
+      };
+      this.getSize = function() {
+        return {
+          width: _svgWidth,
+          height: _svgHeight
+        };
+      };
+      this.setPrecision = function(precision) {
+        _precision = precision;
+      };
+      function removeChildNodes() {
+        _pathCount = 0;
+        while (_svg.childNodes.length > 0) {
+          _svg.removeChild(_svg.childNodes[0]);
+        }
+      }
+      function convert(c) {
+        return _precision !== null ? c.toFixed(_precision) : c;
+      }
+      function renderSort(a, b) {
+        const aOrder = a.data.renderOrder !== void 0 ? a.data.renderOrder : 0;
+        const bOrder = b.data.renderOrder !== void 0 ? b.data.renderOrder : 0;
+        if (aOrder !== bOrder) {
+          return aOrder - bOrder;
+        } else {
+          const aZ = a.data.z !== void 0 ? a.data.z : 0;
+          const bZ = b.data.z !== void 0 ? b.data.z : 0;
+          return bZ - aZ;
+        }
+      }
+      this.clear = function() {
+        removeChildNodes();
+        _svg.style.backgroundColor = _clearColor2.getStyle(_this.outputColorSpace);
+      };
+      this.render = function(scene, camera) {
+        if (camera instanceof Camera === false) {
+          console.error("THREE.SVGRenderer.render: camera is not an instance of Camera.");
+          return;
+        }
+        const background = scene.background;
+        if (background && background.isColor) {
+          removeChildNodes();
+          _svg.style.backgroundColor = background.getStyle(_this.outputColorSpace);
+        } else if (this.autoClear === true) {
+          this.clear();
+        }
+        _this.info.render.vertices = 0;
+        _this.info.render.faces = 0;
+        _viewMatrix.copy(camera.matrixWorldInverse);
+        _viewProjectionMatrix.multiplyMatrices(camera.projectionMatrix, _viewMatrix);
+        _renderData = _projector.projectScene(scene, camera, this.sortObjects, this.sortElements);
+        _elements = _renderData.elements;
+        _lights = _renderData.lights;
+        _normalViewMatrix.getNormalMatrix(camera.matrixWorldInverse);
+        calculateLights(_lights);
+        _renderListCount = 0;
+        for (let e = 0, el = _elements.length; e < el; e++) {
+          const element = _elements[e];
+          const material = element.material;
+          if (material === void 0 || material.opacity === 0) continue;
+          getRenderItem(_renderListCount++, "element", element, material);
+        }
+        _svgObjectCount = 0;
+        scene.traverseVisible(function(object) {
+          if (object.isSVGObject) {
+            _vector3.setFromMatrixPosition(object.matrixWorld);
+            _vector3.applyMatrix4(_viewProjectionMatrix);
+            if (_vector3.z < -1 || _vector3.z > 1) return;
+            const x = _vector3.x * _svgWidthHalf;
+            const y = -_vector3.y * _svgHeightHalf;
+            const svgObject = getSVGObjectData(_svgObjectCount++);
+            svgObject.node = object.node;
+            svgObject.x = x;
+            svgObject.y = y;
+            svgObject.z = _vector3.z;
+            svgObject.renderOrder = object.renderOrder;
+            getRenderItem(_renderListCount++, "svgObject", svgObject, null);
+          }
+        });
+        _renderListPool.length = _renderListCount;
+        if (this.sortElements && _svgObjectCount > 0) {
+          _renderListPool.sort(renderSort);
+        }
+        _currentPath = "";
+        _currentStyle = "";
+        for (let i = 0; i < _renderListCount; i++) {
+          const item = _renderListPool[i];
+          if (item.type === "svgObject") {
+            flushPath();
+            const svgObject = item.data;
+            const node = svgObject.node;
+            node.setAttribute("transform", "translate(" + svgObject.x + "," + svgObject.y + ")");
+            _svg.appendChild(node);
+          } else {
+            const element = item.data;
+            const material = item.material;
+            _elemBox.makeEmpty();
+            if (element instanceof RenderableSprite) {
+              _v12 = element;
+              _v12.x *= _svgWidthHalf;
+              _v12.y *= -_svgHeightHalf;
+              renderSprite(_v12, element, material);
+            } else if (element instanceof RenderableLine) {
+              _v12 = element.v1;
+              _v22 = element.v2;
+              _v12.positionScreen.x *= _svgWidthHalf;
+              _v12.positionScreen.y *= -_svgHeightHalf;
+              _v22.positionScreen.x *= _svgWidthHalf;
+              _v22.positionScreen.y *= -_svgHeightHalf;
+              _elemBox.setFromPoints([_v12.positionScreen, _v22.positionScreen]);
+              if (_clipBox.intersectsBox(_elemBox) === true) {
+                renderLine(_v12, _v22, material);
+              }
+            } else if (element instanceof RenderableFace) {
+              _v12 = element.v1;
+              _v22 = element.v2;
+              _v32 = element.v3;
+              _v12.positionScreen.x *= _svgWidthHalf;
+              _v12.positionScreen.y *= -_svgHeightHalf;
+              _v22.positionScreen.x *= _svgWidthHalf;
+              _v22.positionScreen.y *= -_svgHeightHalf;
+              _v32.positionScreen.x *= _svgWidthHalf;
+              _v32.positionScreen.y *= -_svgHeightHalf;
+              if (this.overdraw > 0) {
+                expand(_v12.positionScreen, _v22.positionScreen, this.overdraw);
+                expand(_v22.positionScreen, _v32.positionScreen, this.overdraw);
+                expand(_v32.positionScreen, _v12.positionScreen, this.overdraw);
+              }
+              _elemBox.setFromPoints([
+                _v12.positionScreen,
+                _v22.positionScreen,
+                _v32.positionScreen
+              ]);
+              if (_clipBox.intersectsBox(_elemBox) === true) {
+                renderFace3(_v12, _v22, _v32, element, material);
+              }
+            }
+          }
+        }
+        flushPath();
+      };
+      function calculateLights(lights) {
+        _ambientLight.setRGB(0, 0, 0);
+        _directionalLights.setRGB(0, 0, 0);
+        _pointLights.setRGB(0, 0, 0);
+        for (let l = 0, ll = lights.length; l < ll; l++) {
+          const light = lights[l];
+          const lightColor = light.color;
+          if (light.isAmbientLight) {
+            _ambientLight.r += lightColor.r;
+            _ambientLight.g += lightColor.g;
+            _ambientLight.b += lightColor.b;
+          } else if (light.isDirectionalLight) {
+            _directionalLights.r += lightColor.r;
+            _directionalLights.g += lightColor.g;
+            _directionalLights.b += lightColor.b;
+          } else if (light.isPointLight) {
+            _pointLights.r += lightColor.r;
+            _pointLights.g += lightColor.g;
+            _pointLights.b += lightColor.b;
+          }
+        }
+      }
+      function calculateLight(lights, position, normal, color) {
+        for (let l = 0, ll = lights.length; l < ll; l++) {
+          const light = lights[l];
+          const lightColor = light.color;
+          if (light.isDirectionalLight) {
+            const lightPosition = _vector3.setFromMatrixPosition(light.matrixWorld).normalize();
+            let amount = normal.dot(lightPosition);
+            if (amount <= 0) continue;
+            amount *= light.intensity;
+            color.r += lightColor.r * amount;
+            color.g += lightColor.g * amount;
+            color.b += lightColor.b * amount;
+          } else if (light.isPointLight) {
+            const lightPosition = _vector3.setFromMatrixPosition(light.matrixWorld);
+            let amount = normal.dot(_vector3.subVectors(lightPosition, position).normalize());
+            if (amount <= 0) continue;
+            amount *= light.distance == 0 ? 1 : 1 - Math.min(position.distanceTo(lightPosition) / light.distance, 1);
+            if (amount == 0) continue;
+            amount *= light.intensity;
+            color.r += lightColor.r * amount;
+            color.g += lightColor.g * amount;
+            color.b += lightColor.b * amount;
+          }
+        }
+      }
+      function renderSprite(v1, element, material) {
+        let scaleX = element.scale.x * _svgWidthHalf;
+        let scaleY = element.scale.y * _svgHeightHalf;
+        if (material.isPointsMaterial) {
+          scaleX *= material.size;
+          scaleY *= material.size;
+        }
+        const path = "M" + convert(v1.x - scaleX * 0.5) + "," + convert(v1.y - scaleY * 0.5) + "h" + convert(scaleX) + "v" + convert(scaleY) + "h" + convert(-scaleX) + "z";
+        let style = "";
+        if (material.isSpriteMaterial || material.isPointsMaterial) {
+          style = "fill:" + material.color.getStyle(_this.outputColorSpace) + ";fill-opacity:" + material.opacity;
+        }
+        addPath(style, path);
+      }
+      function renderLine(v1, v2, material) {
+        const path = "M" + convert(v1.positionScreen.x) + "," + convert(v1.positionScreen.y) + "L" + convert(v2.positionScreen.x) + "," + convert(v2.positionScreen.y);
+        if (material.isLineBasicMaterial) {
+          let style = "fill:none;stroke:" + material.color.getStyle(_this.outputColorSpace) + ";stroke-opacity:" + material.opacity + ";stroke-width:" + material.linewidth + ";stroke-linecap:" + material.linecap;
+          if (material.isLineDashedMaterial) {
+            style = style + ";stroke-dasharray:" + material.dashSize + "," + material.gapSize;
+          }
+          addPath(style, path);
+        }
+      }
+      function renderFace3(v1, v2, v3, element, material) {
+        _this.info.render.vertices += 3;
+        _this.info.render.faces++;
+        const path = "M" + convert(v1.positionScreen.x) + "," + convert(v1.positionScreen.y) + "L" + convert(v2.positionScreen.x) + "," + convert(v2.positionScreen.y) + "L" + convert(v3.positionScreen.x) + "," + convert(v3.positionScreen.y) + "z";
+        let style = "";
+        if (material.isMeshBasicMaterial) {
+          _color3.copy(material.color);
+          if (material.vertexColors) {
+            _color3.multiply(element.color);
+          }
+        } else if (material.isMeshLambertMaterial || material.isMeshPhongMaterial || material.isMeshStandardMaterial) {
+          _diffuseColor.copy(material.color);
+          if (material.vertexColors) {
+            _diffuseColor.multiply(element.color);
+          }
+          _color3.copy(_ambientLight);
+          _centroid.copy(v1.positionWorld).add(v2.positionWorld).add(v3.positionWorld).divideScalar(3);
+          calculateLight(_lights, _centroid, element.normalModel, _color3);
+          _color3.multiply(_diffuseColor).add(material.emissive);
+        } else if (material.isMeshNormalMaterial) {
+          _normal2.copy(element.normalModel).applyMatrix3(_normalViewMatrix).normalize();
+          _color3.setRGB(_normal2.x, _normal2.y, _normal2.z).multiplyScalar(0.5).addScalar(0.5);
+        }
+        if (material.wireframe) {
+          style = "fill:none;stroke:" + _color3.getStyle(_this.outputColorSpace) + ";stroke-opacity:" + material.opacity + ";stroke-width:" + material.wireframeLinewidth + ";stroke-linecap:" + material.wireframeLinecap + ";stroke-linejoin:" + material.wireframeLinejoin;
+        } else {
+          style = "fill:" + _color3.getStyle(_this.outputColorSpace) + ";fill-opacity:" + material.opacity;
+        }
+        addPath(style, path);
+      }
+      function expand(v1, v2, pixels) {
+        let x = v2.x - v1.x, y = v2.y - v1.y;
+        const det = x * x + y * y;
+        if (det === 0) return;
+        const idet = pixels / Math.sqrt(det);
+        x *= idet;
+        y *= idet;
+        v2.x += x;
+        v2.y += y;
+        v1.x -= x;
+        v1.y -= y;
+      }
+      function addPath(style, path) {
+        if (_currentStyle === style) {
+          _currentPath += path;
+        } else {
+          flushPath();
+          _currentStyle = style;
+          _currentPath = path;
+        }
+      }
+      function flushPath() {
+        if (_currentPath) {
+          _svgNode = getPathNode(_pathCount++);
+          _svgNode.setAttribute("d", _currentPath);
+          _svgNode.setAttribute("style", _currentStyle);
+          _svg.appendChild(_svgNode);
+        }
+        _currentPath = "";
+        _currentStyle = "";
+      }
+      function getPathNode(id) {
+        let path = _svgPathPool[id];
+        if (path === void 0) {
+          path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+          if (_quality == 0) {
+            path.setAttribute("shape-rendering", "crispEdges");
+          }
+          _svgPathPool[id] = path;
+        }
+        return path;
+      }
+      function getSVGObjectData(id) {
+        let svgObject = _svgObjectsPool[id];
+        if (svgObject === void 0) {
+          svgObject = {
+            node: null,
+            x: 0,
+            y: 0,
+            z: 0,
+            renderOrder: 0
+          };
+          _svgObjectsPool[id] = svgObject;
+        }
+        return svgObject;
+      }
+      function getRenderItem(id, type, data, material) {
+        let item = _renderListPool[id];
+        if (item === void 0) {
+          item = {
+            type,
+            data,
+            material
+          };
+          _renderListPool[id] = item;
+          return item;
+        }
+        item.type = type;
+        item.data = data;
+        item.material = material;
+        return item;
+      }
+    }
+  };
+
+  // dev-notes/cross-platform-major-20261113/clean-root-tools/node_modules/three/examples/jsm/geometries/RoundedBoxGeometry.js
   var _tempNormal = new Vector3();
   function getUv(faceDirVector, normal, uvAxis, projectionAxis, radius, sideLength) {
     const totArcLength = 2 * Math.PI * radius / 4;
@@ -50386,6 +51343,11 @@ void main() {
 
   // src/scene3d-v6.js
   (() => {
+    function createGLRenderer(options) {
+      const canvas = document.createElement("canvas"), context = canvas.getContext("webgl2", options);
+      if (!context) throw Error("WEBGL_UNAVAILABLE");
+      return new WebGLRenderer({ ...options, canvas, context });
+    }
     const stages = /* @__PURE__ */ new Map();
     let renderer = null;
     let active = null;
@@ -50764,7 +51726,7 @@ void main() {
           let stage = null;
           try {
             if (!job.renderer) {
-              const r = job.renderer = new WebGLRenderer({ antialias: true, alpha: false });
+              const r = job.renderer = createGLRenderer({ antialias: true, alpha: false });
               r.setSize(480, 290, false);
               r.setPixelRatio(1);
               r.outputColorSpace = SRGBColorSpace;
@@ -50797,7 +51759,7 @@ void main() {
     }
     function makeRenderer(shell) {
       if (renderer) return renderer;
-      renderer = new WebGLRenderer({ antialias: true, alpha: false, powerPreference: "high-performance", preserveDrawingBuffer: false });
+      renderer = createGLRenderer({ antialias: true, alpha: false, powerPreference: "high-performance", preserveDrawingBuffer: false });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.65));
       renderer.shadowMap.enabled = true;
       renderer.shadowMap.type = PCFShadowMap;
@@ -51365,7 +52327,7 @@ void main() {
       controls.update();
       stage.wrap.querySelector("[data-view-orbit6]")?.setAttribute("aria-pressed", "false");
     }
-    window.SCENE3D6 = { THREE: three_module_exports, OrbitControls, RoundedBoxGeometry, stages, install, mount, prepareGallery, focusView, motionControl9, resize: () => resize(active), get active() {
+    window.SCENE3D6 = { THREE: three_module_exports, OrbitControls, RoundedBoxGeometry, SVGRenderer, stages, install, mount, prepareGallery, focusView, motionControl9, resize: () => resize(active), get active() {
       return active;
     }, rangeOptions, createPreview };
   })();
@@ -51397,10 +52359,16 @@ function snapshot(s){return copy({schema:1,kind:s.kind,time:s.time,status:s.stat
 return{create,step,ik,fk,leg,gait,target,run,snapshot,clamp,droneWaypoints,armPath};
 });
 
+/* Same 3D geometry/camera on WebGL or the Three.js software vector renderer. */
+(function(root){'use strict';function create(engine){const T=engine.THREE,canvas=document.createElement('canvas');let context=null;try{context=canvas.getContext('webgl2',{antialias:true,alpha:false,powerPreference:'high-performance'});}catch{}if(context){const r=new T.WebGLRenderer({canvas,context,antialias:true,alpha:false,powerPreference:'high-performance'});r.zthMode='webgl';return r;}
+ if(!engine.SVGRenderer)throw Error('SOFTWARE_3D_RENDERER_MISSING');const svg=new engine.SVGRenderer(),converted=new WeakMap();svg.setQuality('low');svg.setPrecision(3);const nativeRender=svg.render.bind(svg);svg.zthMode='software-vector';svg.shadowMap={enabled:false};svg.info={memory:{geometries:0,textures:0},render:{calls:0}};svg.setPixelRatio=()=>{};svg.getPixelRatio=()=>1;svg.dispose=()=>svg.clear();svg.forceContextLoss=()=>{};svg.domElement.style.display='block';svg.domElement.style.touchAction='none';
+ svg.render=(scene,camera)=>{const geometries=new Set();scene.traverse(node=>{if(node.geometry)geometries.add(node.geometry);if(!node.isMesh)return;if(node.geometry?.type==='PlaneGeometry'&&node.geometry.parameters?.width>=4&&node.geometry.parameters?.height>=4){node.visible=false;return;}const adapt=material=>{if(!material?.isMeshStandardMaterial&&!material?.isMeshPhysicalMaterial)return material;let next=converted.get(material);if(!next){next=new T.MeshLambertMaterial({color:material.color,emissive:material.emissive,opacity:material.opacity,transparent:material.transparent,side:material.side,wireframe:material.wireframe,flatShading:true});converted.set(material,next);for(const value of Object.values(material))if(value?.isTexture)value.dispose();material.dispose();}return next;};node.material=Array.isArray(node.material)?node.material.map(adapt):adapt(node.material);});nativeRender(scene,camera);svg.info.memory.geometries=geometries.size;svg.info.render.calls=svg.domElement.childElementCount;};return svg;}
+root.RoboticsRenderer={create};})(window);
+
 /* Original articulated teaching geometry; explicitly not a manufacturer's CAD/dynamics model. */
 (function(root){'use strict';
 function createViewport(host,{getState,onTarget,onInvalidate,language='zh'}={}){const engine=root.ZTHRobotEngine||root.SCENE3D6;if(!engine?.THREE)throw Error('3D_ENGINE_MISSING');const T=engine.THREE,Orbit=engine.OrbitControls;let disposed=false,model=null,kind='',dragging=false,down=null,renderCount=0,contextLost=false,follow=true,anchor=null;
-const renderer=new T.WebGLRenderer({antialias:true,alpha:false,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(root.devicePixelRatio||1,1.6));renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;host.append(renderer.domElement);renderer.domElement.setAttribute('aria-label',language==='en'?'Interactive articulated robot scene':'可交互三维机器人场景');renderer.domElement.tabIndex=0;
+const renderer=root.RoboticsRenderer.create(engine);renderer.setPixelRatio(Math.min(root.devicePixelRatio||1,1.6));renderer.shadowMap.enabled=renderer.zthMode==='webgl';renderer.shadowMap.type=T.PCFSoftShadowMap;renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;host.append(renderer.domElement);let renderNote=null;if(renderer.zthMode==='software-vector'){renderNote=document.createElement('p');renderNote.className='robotics-render-mode';renderNote.textContent=language==='en'?'Compatible 3D · software vector rendering; simplified lighting':'兼容三维视图 · 软件矢量绘制，光照已简化';host.append(renderNote);}renderer.domElement.setAttribute('aria-label',language==='en'?'Interactive articulated robot scene':'可交互三维机器人场景');renderer.domElement.tabIndex=0;
 const scene=new T.Scene(),camera=new T.PerspectiveCamera(42,1,.02,60);scene.background=new T.Color('#e7eee9');camera.position.set(2.4,1.8,2.7);const controls=new Orbit(camera,renderer.domElement);controls.target.set(.35,.4,0);controls.enableDamping=true;controls.minDistance=.5;controls.maxDistance=10;controls.maxPolarAngle=Math.PI*.49;
 scene.add(new T.HemisphereLight('#fff8e8','#6d837a',2.2));const sun=new T.DirectionalLight('#fff5e4',3);sun.position.set(2,5,3);sun.castShadow=true;sun.shadow.mapSize.set(1536,1536);sun.shadow.camera.left=-4;sun.shadow.camera.right=4;sun.shadow.camera.top=4;sun.shadow.camera.bottom=-4;sun.shadow.normalBias=.025;scene.add(sun);const fill=new T.DirectionalLight('#bfd5ef',1);fill.position.set(-3,2,-2);scene.add(fill);
 const mat=(color,metalness=.15,roughness=.42)=>new T.MeshStandardMaterial({color,metalness,roughness});function mesh(geometry,material,parent,x=0,y=0,z=0){const m=new T.Mesh(geometry,material);m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m;}function box(w,h,d,color,parent,x=0,y=0,z=0){return mesh(engine.RoundedBoxGeometry?new engine.RoundedBoxGeometry(w,h,d,3,Math.min(w,h,d)*.16):new T.BoxGeometry(w,h,d),mat(color),parent,x,y,z);}function cyl(r,h,color,parent,x=0,y=0,z=0){return mesh(new T.CylinderGeometry(r,r,h,28),mat(color,.4,.32),parent,x,y,z);}function ball(r,color,parent,x=0,y=0,z=0){return mesh(new T.SphereGeometry(r,20,16),mat(color),parent,x,y,z);}const floor=mesh(new T.PlaneGeometry(14,12),mat('#c8d7cb',0,.9),scene,1,-.012,0);floor.rotation.x=-Math.PI/2;const grid=new T.GridHelper(10,40,'#829b8e','#b4c6b8');grid.position.y=-.008;scene.add(grid);scene.add(new T.AxesHelper(.3));
@@ -51419,7 +52387,7 @@ function onUp(e){if(disposed)return;const p=project(e);if(p&&(dragging||down&&Ma
 renderer.domElement.addEventListener('pointerdown',onDown,true);renderer.domElement.addEventListener('pointermove',onMove);renderer.domElement.addEventListener('pointerup',onUp);renderer.domElement.addEventListener('pointercancel',()=>{dragging=false;controls.enabled=true;down=null;});renderer.domElement.addEventListener('webglcontextlost',()=>{if(!disposed){contextLost=true;getState().running=false;host.dataset.contextLost='true';}});
 controls.addEventListener('change',()=>onInvalidate?.());
 function draw(){if(disposed||contextLost)return;const s=getState();if(s.kind!==kind)changeKind(s.kind);model.update(s);if(follow&&s.kind!=='arm'){const next=bodyAnchor();if(anchor){const delta=next.clone().sub(anchor);camera.position.add(delta);controls.target.add(delta);}anchor=next;}missionLine.visible=s.mode==='mission';handle.position.set(s.target.x,s.kind==='dog'?.04:s.target.y,s.target.z);handle.material.color.set(['unreachable','obstacle','table-collision'].includes(s.status)?'#db5553':'#de775d');stem.visible=s.kind!=='dog';stem.position.set(s.target.x,s.target.y/2,s.target.z);stem.scale.y=Math.max(.001,s.target.y);ring.position.set(s.target.x,.006,s.target.z);obstacle.visible=s.options.obstacle;obstacle.position.set(s.kind==='arm'?.5:1,.25,s.kind==='drone'?.3:0);controls.update();renderer.render(scene,camera);renderCount++;}
-resize();draw();return{draw,home,resize,setFollow(value){follow=!!value;anchor=bodyAnchor();if(follow)home();onInvalidate?.();},stats:()=>({pixelRatio:renderer.getPixelRatio(),follow,frames:renderCount,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,calls:renderer.info.render.calls,contextLost,kind}),projectPoint(p){const v=new T.Vector3(p.x,p.y,p.z).project(camera),r=renderer.domElement.getBoundingClientRect();return{x:r.left+(v.x+1)*r.width/2,y:r.top+(1-v.y)*r.height/2};},get camera(){return camera;},dispose(){if(disposed)return;disposed=true;observer.disconnect();controls.dispose();renderer.domElement.removeEventListener('pointerdown',onDown,true);renderer.domElement.removeEventListener('pointermove',onMove);renderer.domElement.removeEventListener('pointerup',onUp);release(scene);renderer.dispose();renderer.forceContextLoss();renderer.domElement.remove();}};}
+resize();draw();return{draw,home,resize,setFollow(value){follow=!!value;anchor=bodyAnchor();if(follow)home();onInvalidate?.();},stats:()=>({renderer:renderer.zthMode,pixelRatio:renderer.getPixelRatio(),follow,frames:renderCount,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,calls:renderer.info.render.calls,contextLost,kind}),projectPoint(p){const v=new T.Vector3(p.x,p.y,p.z).project(camera),r=renderer.domElement.getBoundingClientRect();return{x:r.left+(v.x+1)*r.width/2,y:r.top+(1-v.y)*r.height/2};},get camera(){return camera;},dispose(){if(disposed)return;disposed=true;observer.disconnect();controls.dispose();renderer.domElement.removeEventListener('pointerdown',onDown,true);renderer.domElement.removeEventListener('pointermove',onMove);renderer.domElement.removeEventListener('pointerup',onUp);release(scene);renderer.dispose();renderer.forceContextLoss();renderer.domElement.remove();renderNote?.remove();}};}
 root.RoboticsViewport={create:createViewport};
 })(window);
 

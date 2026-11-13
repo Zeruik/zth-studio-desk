@@ -24,8 +24,8 @@
     },
     {
       "path": "APP-FILES.json",
-      "size": 2736,
-      "sha256": "6d1ffa7044ccfbe128fa80e56b51ac8b4895577d2b7346e9e52cb9b22a581981"
+      "size": 2770,
+      "sha256": "1493379b8819e3ef94ae20dbe3b7fed2e06e8014c9e08d528f592c9c6b544715"
     },
     {
       "path": "app.js",
@@ -64,8 +64,8 @@
     },
     {
       "path": "build-product.cjs",
-      "size": 14707,
-      "sha256": "75e000abb6f6f4bc6d272e3961c399890c83035d9d764f23c504257a72e8407b"
+      "size": 14795,
+      "sha256": "dd5ddc8ef02867d4b07d660431769b6e308a2e575d60561bfbf59aa237c4affa"
     },
     {
       "path": "build-release.cjs",
@@ -90,7 +90,7 @@
     {
       "path": "CI-ACTIONS.json",
       "size": 765,
-      "sha256": "f937e99de31a76b643cd6d379fc8684af588bcd150cb96ab09c7c9e4f7e357e4"
+      "sha256": "c95448a2fa4b8bac44e05d79e1bf375aee76ceb5c3af4441a324b92e7f27f92b"
     },
     {
       "path": "ci-native.cjs",
@@ -109,8 +109,8 @@
     },
     {
       "path": "cross-platform.cjs",
-      "size": 16059,
-      "sha256": "8a040e983c75c881c6b080540e77bb152257b084b47a759d502b156d22a4e225"
+      "size": 17172,
+      "sha256": "2851d3b779d7b86c79a9dc92cf16756338ba82d7b4be30c9cb761a2ccf4a72b5"
     },
     {
       "path": "cross-runtime-lock.json",
@@ -179,8 +179,8 @@
     },
     {
       "path": "display-controls.css",
-      "size": 1515,
-      "sha256": "e27e097a82ba3198aa2f4b515d5431aed71c26637299f59c6c8e20e21d911be8"
+      "size": 1560,
+      "sha256": "40c367a306e9bc932f56a2e06c5b2e20e5d99d37dc2d6ad47771a062ef8a788b"
     },
     {
       "path": "display-controls.js",
@@ -189,8 +189,8 @@
     },
     {
       "path": "index.html",
-      "size": 2305,
-      "sha256": "a9055ce422ff01f34ccda26c00514492d21732847d0463b48a2ded2d5160d991"
+      "size": 2363,
+      "sha256": "af6cc6705d5bdae3d95737868f822395b70dd9cb14e7cd8bfa7a9f9b12241e49"
     },
     {
       "path": "installer-template.cjs",
@@ -209,13 +209,13 @@
     },
     {
       "path": "modules/academy/academy.css",
-      "size": 162124,
-      "sha256": "f51cf12518803ef93bf87d5fbab69ef34ee00d3c1c6f019757e62ee3f6fbb761"
+      "size": 162342,
+      "sha256": "a8b37bcff6f505254faa04b16b69fef7fcdb423a61f87f3aaffd9d1207360674"
     },
     {
       "path": "modules/academy/academy.js",
-      "size": 8683928,
-      "sha256": "c77185e22d7296b553e1ae42f7b55b3b8b67be85571ee9f096be666153e15b4c"
+      "size": 8727817,
+      "sha256": "8f4d665b0adde34581fd957e2aefaa349d91f57d2c286c5eda137682dc14056d"
     },
     {
       "path": "modules/academy/file-key.cjs",
@@ -240,7 +240,7 @@
     {
       "path": "modules/academy/ORIGIN.json",
       "size": 264,
-      "sha256": "91f208ab62311c6f19953bb1e47975789be2d92e6689e7d887c70eb3557d75bc"
+      "sha256": "96f7bb77871bf0d25e6bfbda271e5dd35aa3be03e3c46d959f905959bff17a71"
     },
     {
       "path": "modules/academy/PRIVACY-ZH.txt",
@@ -394,8 +394,8 @@
     },
     {
       "path": "modules/robotics/engine.js",
-      "size": 1836737,
-      "sha256": "21b5a270ea4a9156aa1ef8192a8b5ea7db59689dc7e58dceb0380bd53456bb7c"
+      "size": 1877921,
+      "sha256": "4b270de50bf23a0734e3849bcd98e0ece4cc65ef1dca2a7e7bfa32068b6139c5"
     },
     {
       "path": "modules/robotics/LICENSE-CONTENT.txt",
@@ -418,9 +418,14 @@
       "sha256": "11dee4819461a4097127a03e94c71508292e0ca6814ff86e13e8d8ac6b026b86"
     },
     {
+      "path": "modules/robotics/renderer.js",
+      "size": 2052,
+      "sha256": "c421f8c9bbc85966e50c18653f06335b92f11be2ace95e0571776001142e1a80"
+    },
+    {
       "path": "modules/robotics/style.css",
-      "size": 4282,
-      "sha256": "8fad80f2fc3c1b209d864cc9dd111bb6c698d7f80c9c08b7c3decfe4cd4eb43c"
+      "size": 4500,
+      "sha256": "6c16d124304e9d3ee13f1d7d960fe8a0a6e428644aeeac3058b0e8577a285d60"
     },
     {
       "path": "modules/robotics/ui.js",
@@ -429,8 +434,8 @@
     },
     {
       "path": "modules/robotics/viewport.js",
-      "size": 12031,
-      "sha256": "a21b98488a8482304df8c41f714e0cb81849cb146c15bad704b369d612187e51"
+      "size": 12387,
+      "sha256": "cdb281f31e8d5c2ecf2570863b365f972f1e0a851b44dd4a56488190eb45a222"
     },
     {
       "path": "modules/screen/adapter.js",
@@ -574,8 +579,8 @@
     },
     {
       "path": "qa-native-platform.cjs",
-      "size": 14447,
-      "sha256": "a2f1fb81fb843499f8172551f3080ecd63f610b1d51798e70a1fda85ae7eb157"
+      "size": 15101,
+      "sha256": "01538ebc874c67441465f746ff84afbad4525c237f67ddf835b1c163600244c0"
     },
     {
       "path": "qa-project-v2.cjs",
