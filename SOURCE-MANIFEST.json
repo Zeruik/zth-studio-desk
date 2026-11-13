@@ -1,6 +1,6 @@
 {
   "product": "ZTH Studio Desk",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "files": [
     {
       "path": ".gitattributes",
@@ -14,23 +14,23 @@
     },
     {
       "path": "API.md",
-      "size": 12413,
-      "sha256": "b93477afb60dce61a1d0cae888c65130604aff2b3dcbff39f522b609911ec595"
+      "size": 12425,
+      "sha256": "18830001e70750eaded6fc73daff700357bf070695c0f67d994d7cd1666055a6"
     },
     {
       "path": "ATTRIBUTION.md",
       "size": 1153,
-      "sha256": "f31f07d68386869947b0263f62f472b0234a3727aa988bbae6111ef34f522747"
+      "sha256": "bd175b83377b63075902421f133006ef807324491ddda3902c301c28214e2dc3"
     },
     {
       "path": "BUILD.md",
-      "size": 5037,
-      "sha256": "bfaa437d9c3880c277deddc2d216870f600651762479ef2c22c608c43da7fa23"
+      "size": 5333,
+      "sha256": "b43f4b5ea9e9ff143a3b5ca209ea8ef49da3dfe4edb5c96fa8085410ad98328a"
     },
     {
       "path": "CHANGELOG.md",
-      "size": 5522,
-      "sha256": "2fc273496dc22ad5bfbff164fcd9a8b5d738cb8af6b08c0229cf22c103233298"
+      "size": 6653,
+      "sha256": "8ad4b85e49fdb8e24cc96f86e88986e5ef00dd2ed51846337ac92b2c005e777c"
     },
     {
       "path": "CONTRACT.md",
@@ -49,18 +49,18 @@
     },
     {
       "path": "README.md",
-      "size": 13230,
-      "sha256": "d1bab2f42b683efb7a3202b8d0eb7a379bf97f083a10007677e16ce4831fbc15"
+      "size": 14545,
+      "sha256": "8008f58d133bcca64c868310799218ef5d91c8bbd29027bd82a757f8eb8e124b"
     },
     {
       "path": "THIRD-PARTY.md",
       "size": 2252,
-      "sha256": "32926dfad14d320d06a95c34a119a01dafe9f63c130cab27b4b14f2c9bdb2906"
+      "sha256": "b57b14679e8a1811ab0c9fc82e373e434b79c370716ae4386f11f2249b86c5bc"
     },
     {
       "path": "app.js",
-      "size": 76278,
-      "sha256": "c09341059fee8f33601b9db6fc75e74078a0c47080d71e011c4a813c3e1efc7c"
+      "size": 77269,
+      "sha256": "b7f264d2da814ab3c0401ada5b179816b4959c9540a72da5133140f8c77b0dd0"
     },
     {
       "path": "assets/zth-green-icon.svg",
@@ -74,8 +74,8 @@
     },
     {
       "path": "build-product.cjs",
-      "size": 14427,
-      "sha256": "2120da988d8d27cc3d5577838385c513532656972e056efa8b76d92c1b09a7c2"
+      "size": 12852,
+      "sha256": "2a43e2abd1e02731c20c26633c837f63078f79387272afbbb6e8a2b7434b1bcd"
     },
     {
       "path": "build-release.cjs",
@@ -84,18 +84,18 @@
     },
     {
       "path": "build-runtime/package-lock.json",
-      "size": 47148,
-      "sha256": "b5077b7fdac3d7822b65b726613c9aee18e85dea4095d25b37af196ef51bbaa6"
+      "size": 46528,
+      "sha256": "44c9c19f554143e1e8a47b7362bcc137b281d93a24d063353db92005cae4133f"
     },
     {
       "path": "build-runtime/package.json",
-      "size": 309,
-      "sha256": "7f987e7cc410e583d84705f0a58cc17ed9a0cb1c657a95afa03e41bd412bc557"
+      "size": 283,
+      "sha256": "cbc11e689e917b94168af316483cc56a5a2f22f4876cd985e3bc473915bd17f5"
     },
     {
       "path": "core.js",
       "size": 19239,
-      "sha256": "373c72534f407fd8aacbf78cc74cee056cbd31cf7ed5562a68c91439257ae9d0"
+      "sha256": "a844a0372b2e086652bb768e317ea81e8cc4662dce313117efd364ddd26e263a"
     },
     {
       "path": "desktop/integrations.cjs",
@@ -114,8 +114,8 @@
     },
     {
       "path": "index.html",
-      "size": 1062,
-      "sha256": "01879b3579ef76eddd20ad308cf34faf5594687bf817a6070c6e6ec42bb9c6bf"
+      "size": 1249,
+      "sha256": "3fa402f219df4161f60ddc3a3aa4df5299aded2354ee54f5ebb124f2d4fada84"
     },
     {
       "path": "installer-template.cjs",
@@ -126,6 +126,16 @@
       "path": "logo.svg",
       "size": 108810,
       "sha256": "3eb839ab7677c8684d5488411c6c6fbc41817b5d3cc08581b361e2173ed37b78"
+    },
+    {
+      "path": "modules/bench.js",
+      "size": 10712,
+      "sha256": "f929f762adb9b0df5ba7419a39ed66542ea655b6d2933e24cf6d8a5e69f6dd34"
+    },
+    {
+      "path": "modules/commands.js",
+      "size": 4438,
+      "sha256": "777f336841f8350d1992376fc895df64292e31b989e2941a468394d4ea989f3f"
     },
     {
       "path": "modules/forge/LICENSE",
@@ -158,14 +168,19 @@
       "sha256": "2f287e5367431ae9741211aa0ffafd695f6726a5f156cad1acd777cce42fa21e"
     },
     {
+      "path": "modules/journey.js",
+      "size": 10074,
+      "sha256": "72620961cbaf6f7497758a26c6ebe4778f5471b08aebcca5d6cc06f64b1014a7"
+    },
+    {
       "path": "modules/lab-records.js",
       "size": 1268,
       "sha256": "c2f9b897bae7e05876f0bdc8e371a279573489c4871505e5eb18a36a99ed0a8e"
     },
     {
       "path": "modules/lab.js",
-      "size": 16130,
-      "sha256": "42fc54dfb972ddbf73ac754d79c70416e6ef8d9daa1af4d5ae77d634090b61f9"
+      "size": 16142,
+      "sha256": "64110c85e9c5e28aa5cfd52f8d53018b78dc155cf39a68ef9963fd0f938e9449"
     },
     {
       "path": "modules/screen/LICENSE",
@@ -210,17 +225,17 @@
     {
       "path": "package.json",
       "size": 179,
-      "sha256": "7a69e0fa41e3e0ad86442a7712717a15e4423825c27e206edb78fcfe17810cc5"
+      "sha256": "0acc79782982817a9e4caa6187679672a92eaad82381dabe0aff8c3f57472310"
     },
     {
       "path": "prepare-runtime.cjs",
-      "size": 313,
-      "sha256": "4dd931a7c333c6735687e9abf45a197ca789c00a45d89eb2624426510387f74f"
+      "size": 436,
+      "sha256": "53d69af68f6ec85a1ef04e814b6f1e2ccd33b91ba4a63276ccaae666b6620ae8"
     },
     {
       "path": "product.json",
-      "size": 907,
-      "sha256": "595771018443a84b3a5cfe1c13c30fb0ba12d3fb9e87b883e4e98eaf3619ec44"
+      "size": 905,
+      "sha256": "3d9b37d989878d23716bf13f90675b97dc2484aaaf1c42068a65b715dbbf3507"
     },
     {
       "path": "python/github_pages.py",
@@ -279,13 +294,18 @@
     },
     {
       "path": "qa-release.cjs",
-      "size": 5205,
-      "sha256": "732af44a05d5598d0030581b83e58042c24eb7099f5c9896631a0f246cadcbf4"
+      "size": 5094,
+      "sha256": "e5d8b1ce57557b3342634f725023a599ae38162c90f4ecb20864005f94aca8f8"
     },
     {
       "path": "qa-runtime.cjs",
       "size": 2952,
       "sha256": "7af1e634768da7c89b51be4f8847971e8a0e18581034b0c61e44b5703c62824e"
+    },
+    {
+      "path": "qa-studio-v3.cjs",
+      "size": 1713,
+      "sha256": "3ec8f92943358456ab4207118d69764079704511af89410eba0142134b99d56c"
     },
     {
       "path": "qa-ui.cjs",
@@ -300,12 +320,17 @@
     {
       "path": "runtime-lock.json",
       "size": 909,
-      "sha256": "6f7eac936150926daeb8f439f9afb0073558ccbceb7aae6829c218ae70b4888b"
+      "sha256": "3cd619f67912e87633cba1303072cbd01b8fc8df673ac6ab8ae9c9dc3e3f3213"
     },
     {
       "path": "runtime-tools.cjs",
-      "size": 5086,
-      "sha256": "fcec9cb6c82b9309fa49ca6f5be4a5575e912d86a6c96134517a8c44cb536b1d"
+      "size": 6174,
+      "sha256": "ebdce59662f167985deb706c22924dd15e2afa8002020ccf2192a6cab634f84f"
+    },
+    {
+      "path": "studio-v3.css",
+      "size": 3784,
+      "sha256": "c562e9291c264c7f3f8c5d09830eee6d85b4e06c5bbe88a57e254b8fdb1eb144"
     },
     {
       "path": "styles.css",

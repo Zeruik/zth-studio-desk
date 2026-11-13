@@ -1,4 +1,4 @@
-# 赋形造物工作台 / ZTH Studio Desk 2.2.0
+# 赋形造物工作台 / ZTH Studio Desk 3.0.0
 
 面向小型工作室的本地桌面工作台：在同一个项目里管理工程简报、验收清单、物料、屏幕界面、环境准备、运营任务、活动日历、文案草稿和多页网站。赋形造物工作室是向阳科创工作室旗下的子工作室。创作者与权利人为理工阿白菌（阿白菌 / TechABJ）；代码采用 MIT 许可，原工作室图形标识的权利单独保留。
 
@@ -64,7 +64,7 @@ Forge inspects the machine only on explicit action. Environment changes require 
 
 ## 升级与整合 / Upgrading and integration
 
-2.2.0 沿用 Desk 1 的安装标识、安装文件夹和 data 存储。schema 1 项目可在内存中迁移到 schema 2，保留原字段；保存迁移结果前会备份原文件字节。升级前仍应另行导出完整项目。换安装目录时，先正常退出并完整复制整个旧目录（包括 data），不要只复制 exe。
+3.0.0 沿用 Desk 1 的安装标识、安装文件夹和 data 存储。schema 1 项目可在内存中迁移到 schema 2，保留原字段；保存迁移结果前会备份原文件字节。升级前仍应另行导出完整项目。换安装目录时，先正常退出并完整复制整个旧目录（包括 data），不要只复制 exe。
 
 Version 2 retains the Desk 1 installer identity, folder and data storage. Schema 1 is migrated in memory without losing existing fields; saving retains a backup of original file bytes. Export an independent backup before upgrading. When changing folders, close the app and copy the complete old folder including data before running Setup.
 
@@ -96,3 +96,13 @@ Runtime versions/hashes are pinned in `runtime-lock.json`. The Python worker is 
 回归测试覆盖合成项目、公开/私有边界、三主题生成、ZIP/manifest、路径与字段拒绝、ICS 折行、模拟 GitHub 所有权/并发保护/部分成功和隔离入口。测试不会发布客户网站，也不证明所有 DNS、GitHub 账号策略或真实网络环境都相同。
 
 Regression tests use synthetic projects and mocked provider responses. They verify real generated files and boundary handling, but do not publish a customer's site or certify every account policy, DNS provider or network environment.
+
+## 3.0 项目与实验 / Guided projects and experiments
+
+从“从零到成品”创建桌面环境屏、电磁执行器或工作室活动项目。创建的是独立新工程，会准备建议物料、任务和证据记录页；需要自己填写单价、接线/编译条件与实际验收结果。快捷搜索 Ctrl+K 可以打开工具、任务、草稿和物料。
+
+The project journeys create independent starter projects with suggested materials, linked tasks and evidence worksheets. They do not claim hardware success. The software path through screen editing, report creation, static-site generation and private handoff was exercised with a synthetic starter project. Physical wiring, flashing, temperature and clone-board pinouts require their own checks.
+
+工程计算台含稳态理想R-L负载的PWM/续流模型与LED限流选阻。前者忽略二极管压降、反电动势和损耗；后者按估计压降选择向上取整的E24标称电阻。结果用于理解和初步设计，不能替代器件数据手册或实测。模型记录留在私有工程，不进入公开网站。
+
+Version 3.0.0 is a new GitHub tag/Release. Existing 1.x/2.x release files remain available. Close the old app, export a backup and upgrade in the same writable installation folder; schema 2 and the AppId are retained.

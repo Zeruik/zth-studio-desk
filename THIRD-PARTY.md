@@ -4,7 +4,7 @@ Studio Desk original code is MIT, copyright 2026 理工阿白菌（阿白菌 / T
 
 | Component | Version | License / notice | Source |
 |---|---|---|---|
-| Electron | 45.0.0, Windows x64 | MIT; Chromium/Node bundled notices in LICENSE.electron.txt and LICENSES.chromium.html | https://github.com/electron/electron/releases/tag/v45.0.0 |
+| Electron | 45.3.2, Windows x64 | MIT; Chromium/Node bundled notices in LICENSE.electron.txt and LICENSES.chromium.html | https://github.com/electron/electron/releases/tag/v45.3.2 |
 | CPython embeddable | 3.14.10, Windows amd64 | PSF-2.0 and bundled third-party notices in runtime/python/LICENSE.txt | https://www.python.org/downloads/release/python-31410/ |
 | sharp | 0.35.5 | Apache-2.0; build-time only | https://github.com/lovell/sharp |
 | rcedit | 5.0.2 | MIT; build-time only | https://github.com/electron/rcedit |

@@ -42,3 +42,12 @@ Added a bilingual loaded-divider and RC learning bench: adjustable supply/resist
 - Pause/reset stop animation scheduling; final charging values update at the endpoint. Labels follow the selected language.
 - Saving failures are visible, duplicate concurrent saves are blocked, and report/BOM/task additions preserve project undo history.
 - Snapshot validation rejects invalid ranges and malformed input. No user profiles, saves or developer logs are part of the release.
+
+## 3.0.0 — Guided studio projects
+
+- Three bilingual zero-to-one project starters: desk display, electromagnetic actuator control and studio workshop launch. Each creates a separate project with a brief, suggested BOM, linked tasks and evidence worksheets; no task is auto-marked complete.
+- New engineering bench for PWM/freewheeling R-L loads and LED E24 current-limit sizing, with editable parameters, current waveforms, slowed switch animation, explicit ideal-model limits and private design reports/review tasks.
+- Ctrl+K command search across tools, tasks, drafts and BOM; direct navigation to the selected item.
+- Refined project entry points, responsive layouts, focus states, local transitions, modal backdrop and reduced-motion support. Fixed sidebar horizontal overflow and a rare negative first-frame delta that stopped RC animation.
+- Electron updated to 45.3.2 from its official SHA-256-pinned archive. Runtime preparation no longer depends on npm carrying the release binary.
+- Stable AppId/schema 2 and privacy projection retained. Publish 3.0.0 as a separate GitHub Release; retain all historical tags/assets.

@@ -1,12 +1,12 @@
-# Reproduce Studio Desk 2.0.0
+# Reproduce Studio Desk 3.0.0
 
 Build on Windows 10/11 x64 with Node.js 22.22.2 or later and official Inno Setup 7. These are developer tools; end users need neither Node nor Python installed.
 
-1. In build-runtime/, run npm ci. This downloads the pinned Electron/sharp/rcedit/jsdom development dependencies.
-2. Return to the product directory and run node prepare-runtime.cjs. It downloads the official CPython embeddable archive to excluded .cache/, checks runtime-lock.json SHA-256 and checks every extracted file. No global Python is registered and no pip runs.
-3. Run node build-release.cjs. Set ZTH_ISCC for a nonstandard Inno compiler path. Optional process-only ZTH_BUILD_MODULES, ZTH_RUNTIME_CACHE and ZTH_ELECTRON_ZIP can select existing verified build inputs. No environment variable needs to be set permanently.
+1. In build-runtime/, run npm ci. This downloads the pinned sharp/rcedit/jsdom development dependencies.
+2. Return to the product directory and run node prepare-runtime.cjs. It downloads the official Electron and CPython embeddable archives to excluded .cache/, checks runtime-lock.json SHA-256 and checks every extracted file. No global Python is registered and no pip runs.
+3. Run node build-release.cjs. Set ZTH_ISCC for a nonstandard Inno compiler path. Optional process-only ZTH_BUILD_MODULES and ZTH_RUNTIME_CACHE can select existing verified build inputs. No environment variable needs to be set permanently.
 
-Outputs are out/build/studio-desk, out/source/zth-studio-desk-v2 and out/release/ZTH-Studio-Desk-Windows-v2.0.0.zip. The builder refuses pre-existing output folders. Preserve old outputs and select a new output root in the buildProduct API; it never recursively erases them.
+Outputs are out/build/studio-desk, out/source/zth-studio-desk-v3 and out/release/ZTH-Studio-Desk-Windows-v3.0.0.zip. The builder refuses pre-existing output folders. Preserve old outputs and select a new output root in the buildProduct API; it never recursively erases them.
 
 Runtime archives are pinned by official release SHA-256. The Electron archive is located in its download cache or downloaded from its official release; every stock runtime file is compared before branding. Python is copied exactly from its checked archive, including PSF and dependency licenses. Both runtimes remain inside the selected installed folder. Runtime files, private data, caches and toolchains do not enter the public source repository.
 
@@ -33,3 +33,5 @@ Renderer/core checks: run node qa-core.cjs. For standalone source DOM checks, ru
 Additional integrated checks: `node qa-native-guards.cjs` and `node qa-project-v2.cjs <absolute-path-to-bundled-python.exe>`. These use synthetic projects; the native guard test replaces the environment service and performs no system installation. Source documentation can advance after a release: use the tagged source for an exact installer snapshot, and verify its SOURCE-MANIFEST.json. Documentation-only commits do not replace historical release ZIPs or their checksums.
 
 Product name: 赋形造物工作台 / ZTH Studio Desk. Studio: 赋形造物工作室, a subsidiary of 向阳科创工作室. Creator/rightsholder: 理工阿白菌（阿白菌 / TechABJ）. Public Git identity remains Zeruik with a GitHub noreply address. Stable AppId, executable and installation folder are unchanged from Desk 1; do not regenerate them for updates. MIT code and separately reserved original artwork rights are described in LICENSE and ATTRIBUTION.md.
+
+The shipped Electron runtime is prepared directly from its official pinned release archive, independently of npm Electron availability. Native acceptance should use .cache/electron-45.3.2/electron.exe. Historical release tags/assets must be retained: create a new tag and Release for each published version.
