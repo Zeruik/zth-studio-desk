@@ -64,8 +64,8 @@
     },
     {
       "path": "build-product.cjs",
-      "size": 14795,
-      "sha256": "dd5ddc8ef02867d4b07d660431769b6e308a2e575d60561bfbf59aa237c4affa"
+      "size": 14819,
+      "sha256": "7694b78e8ef1a51d5dc91fae5a538ff7ae0ad2c463b1c795d442a688af3849c9"
     },
     {
       "path": "build-release.cjs",
@@ -90,12 +90,12 @@
     {
       "path": "CI-ACTIONS.json",
       "size": 765,
-      "sha256": "bf5eb1d904041b3a3cfcb3acf7a470a7099bcddd480a70faada1d820318ff90c"
+      "sha256": "bc7626f91bfbbdae736b2469b16b9599dd5b573956226cf2d6289f99aeec01ff"
     },
     {
       "path": "ci-native.cjs",
-      "size": 2461,
-      "sha256": "5acf85c0d151f233154555d81f2b51cf2e1d575cf0ef81d6d6641ef563e5ade0"
+      "size": 3005,
+      "sha256": "ed62ab8bde859ddf97b90d387327695208e4c03202408d3db82a6f493ae82280"
     },
     {
       "path": "CONTRACT.md",
@@ -579,8 +579,13 @@
     },
     {
       "path": "qa-native-platform.cjs",
-      "size": 15101,
-      "sha256": "01538ebc874c67441465f746ff84afbad4525c237f67ddf835b1c163600244c0"
+      "size": 15379,
+      "sha256": "bd72e88fde7c764b29a20710d188afe599891f22bf394de2b40e4e1a797d9e7c"
+    },
+    {
+      "path": "qa-package-native.cjs",
+      "size": 6334,
+      "sha256": "c70fee148dead0c889ed3f3594ae9c2b68d8f79f82ba8daf3db298f59afd3bf5"
     },
     {
       "path": "qa-project-v2.cjs",
