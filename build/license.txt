@@ -1,0 +1,9 @@
+ZTH-平面设计器 / ZTH Design Studio
+作者 / Creator: 理工阿白菌 / TechABJ · ZeroToHand Studio
+
+使用条款 / Terms of use
+本软件代码采用 MIT 许可，按现状提供。您可以使用本软件创作和导出设计。
+请仅导入和传播您有权使用的素材。工作室及社团标识的权利属于其各自权利人，不因软件开源而授权商标使用。
+作品与自动保存均保存在本机；本软件不会自动上传作品。卸载前请自行导出 .zthpmsj 备份。
+
+Code is provided under the MIT license, as-is, without warranty. You may use the software to create and export designs. Use only assets you have the rights to use. Studio and club marks remain the property of their respective rightsholders. Projects remain on your device and are not uploaded automatically. Export .zthpmsj backups before uninstalling.

@@ -1,0 +1,36 @@
+name: Design Studio preview
+on:
+  push:
+    branches: [zth-design-studio]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  core:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm test
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: choco install nsis --no-progress -y
+      - run: npm run build:win
+        env:
+          ZTH_MAKENSIS: C:\Program Files (x86)\NSIS\makensis.exe
+          ZTH_NSIS_DIR: C:\Program Files (x86)\NSIS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ZTH-Design-Studio-Windows-preview
+          path: release/*Setup.exe
