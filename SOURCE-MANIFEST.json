@@ -90,7 +90,7 @@
     {
       "path": "CI-ACTIONS.json",
       "size": 765,
-      "sha256": "02d09d7b9eb0b91f4835b33eeb16899ceb0b3d5fc0eabab4ceec9576c488aed6"
+      "sha256": "f6a24305a5c48e4f26ad81d5383d5353f240dab740e261ae534b685d7cede3b2"
     },
     {
       "path": "ci-native.cjs",
@@ -214,8 +214,8 @@
     },
     {
       "path": "modules/academy/academy.js",
-      "size": 8727817,
-      "sha256": "8f4d665b0adde34581fd957e2aefaa349d91f57d2c286c5eda137682dc14056d"
+      "size": 8728724,
+      "sha256": "7e4c11957a9fca38d0d7033f9bf4840a5084ca72888831245f22eb3d65eb7840"
     },
     {
       "path": "modules/academy/file-key.cjs",
@@ -240,7 +240,7 @@
     {
       "path": "modules/academy/ORIGIN.json",
       "size": 264,
-      "sha256": "96f7bb77871bf0d25e6bfbda271e5dd35aa3be03e3c46d959f905959bff17a71"
+      "sha256": "ee6640158abd7776415d5827ecf2c64d7a55919137f5dee8870d6a69ace2560b"
     },
     {
       "path": "modules/academy/PRIVACY-ZH.txt",
@@ -419,8 +419,8 @@
     },
     {
       "path": "modules/robotics/renderer.js",
-      "size": 2052,
-      "sha256": "c421f8c9bbc85966e50c18653f06335b92f11be2ace95e0571776001142e1a80"
+      "size": 2950,
+      "sha256": "7b77c79b3f2b2080044c96d291445aafbb4ff717f75f6e8d9d8da200c4a99fdd"
     },
     {
       "path": "modules/robotics/style.css",
@@ -429,13 +429,13 @@
     },
     {
       "path": "modules/robotics/ui.js",
-      "size": 16103,
-      "sha256": "aafd0a9b278596a2b53390f16725d5d3c5ed9df68d448834acef373fca0d2fd7"
+      "size": 16096,
+      "sha256": "280faa3e0d29e15e5ec31ea6c5c08896515c1c96806b359b8b75e9db83806003"
     },
     {
       "path": "modules/robotics/viewport.js",
-      "size": 12387,
-      "sha256": "cdb281f31e8d5c2ecf2570863b365f972f1e0a851b44dd4a56488190eb45a222"
+      "size": 12403,
+      "sha256": "ce1e1288ef1f795dcc8b6096ac99b2ebac65515042230d424b0b6d72f263bf82"
     },
     {
       "path": "modules/screen/adapter.js",
@@ -584,8 +584,8 @@
     },
     {
       "path": "qa-package-native.cjs",
-      "size": 6718,
-      "sha256": "fb171cf118e46d882c6a22dace4369b13489f9f003e316c49cc0d9f9711b2efc"
+      "size": 6797,
+      "sha256": "380c425cb0a04054bac8f52f0683dd873efdd24eacbf0ec35e01f9806f248cf4"
     },
     {
       "path": "qa-project-v2.cjs",
@@ -619,8 +619,8 @@
     },
     {
       "path": "README.md",
-      "size": 8512,
-      "sha256": "778115bf36c30d560329d2ddc9e02e1cc6968f1dd985ed12021bb1d90f2e5775"
+      "size": 8541,
+      "sha256": "e69ce628bbd6b4dbb8f13db01429f2ce3eea658f32fa144193a4096c28fdfcd3"
     },
     {
       "path": "runtime-lock.json",
