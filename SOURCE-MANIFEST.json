@@ -90,7 +90,7 @@
     {
       "path": "CI-ACTIONS.json",
       "size": 765,
-      "sha256": "3a80f601c3acbc2a8a2fd2cb639d5a4ae7184f0197abeb33568f5af4a597d6ba"
+      "sha256": "bf5eb1d904041b3a3cfcb3acf7a470a7099bcddd480a70faada1d820318ff90c"
     },
     {
       "path": "ci-native.cjs",
@@ -614,8 +614,8 @@
     },
     {
       "path": "README.md",
-      "size": 8323,
-      "sha256": "6a1a07f395935f25d4203de53be16f95805ec6d910ff98a7eabafdd7002ffc90"
+      "size": 8512,
+      "sha256": "778115bf36c30d560329d2ddc9e02e1cc6968f1dd985ed12021bb1d90f2e5775"
     },
     {
       "path": "runtime-lock.json",

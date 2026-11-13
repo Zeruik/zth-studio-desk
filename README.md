@@ -7,8 +7,8 @@ One workspace for learning, simulation, projects, design, acceptance and studio 
 - 完整 186 节课程，电子、机械、编程、运营四赛道；12 节新增衔接课，配单位计算、屏幕迁移、框坐标和评价计数操作台。
 - 186 lessons across electronics, mechanics, programming and operations; 12 bridge lessons with unit-aware display, box-coordinate and evaluation benches.
 
-- 真实 WebGL 教学场景：机械臂关节/逆运动学/抓取，四足步态与点击目标，无人机航点、故障与任务；暂停、单步、复位及观察视角。
-- WebGL teaching scenes: articulated arm/IK/grasp, quadruped gait and goals, drone waypoints/faults/missions; pause, step, reset and camera controls.
+- 原创三维教学场景（WebGL 优先，不支持时使用同一几何模型的矢量绘制并简化光照）：机械臂关节/逆运动学/抓取，四足步态与点击目标，无人机航点、故障与任务；暂停、单步、复位及观察视角。
+- Original 3D teaching scenes (WebGL preferred, with a same-geometry vector renderer and simplified lighting when unavailable): articulated arm/IK/grasp, quadruped gait and goals, drone waypoints/faults/missions; pause, step, reset and camera controls.
 
 - 内嵌屏幕工程与环境/数据审查；私有简报、BOM、任务、日历、草稿、实验报告与验收记录，区分仿真、编译和实物依据，保留失败与复测历史。
 - Integrated screen engineering, environments and data review; private brief, BOM, tasks, calendar, drafts, reports and acceptance evidence. Distinguish simulation/compile/physical results and retain failed/retest history.
