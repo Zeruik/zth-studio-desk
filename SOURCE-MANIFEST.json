@@ -90,7 +90,7 @@
     {
       "path": "CI-ACTIONS.json",
       "size": 765,
-      "sha256": "f6a24305a5c48e4f26ad81d5383d5353f240dab740e261ae534b685d7cede3b2"
+      "sha256": "2ffa5a1ee81cd438da74688a43871fa83c7ef21cda97e83f6c32bfa0d9ebd67b"
     },
     {
       "path": "ci-native.cjs",
@@ -215,7 +215,7 @@
     {
       "path": "modules/academy/academy.js",
       "size": 8728724,
-      "sha256": "7e4c11957a9fca38d0d7033f9bf4840a5084ca72888831245f22eb3d65eb7840"
+      "sha256": "73c100a4628b36027c02918e0c4524b23511a050aa128141bfc037dc4a5b4620"
     },
     {
       "path": "modules/academy/file-key.cjs",
@@ -240,7 +240,7 @@
     {
       "path": "modules/academy/ORIGIN.json",
       "size": 264,
-      "sha256": "ee6640158abd7776415d5827ecf2c64d7a55919137f5dee8870d6a69ace2560b"
+      "sha256": "3d9634576038328c5a6cf8222f9be0b0e759faebae20140271f6a384caea5f07"
     },
     {
       "path": "modules/academy/PRIVACY-ZH.txt",

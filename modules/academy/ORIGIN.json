@@ -1,6 +1,6 @@
 {
   "product": "ZTH Studio Academy",
   "version": "14.0.0",
-  "htmlSha256": "6197182398c518fe31855b33507f2d2ca7f0c9410cdc5ed11b2d71d103b2784a",
+  "htmlSha256": "c4b856a3fafa9a2fea309890ebd4a169a7eb44030d8375c1217f3ebe33fcac78",
   "scope": "Content/UI module. Offline MCU compiler/USB/OTA runtime is in the separate Academy Windows distribution."
 }
