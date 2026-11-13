@@ -1,10 +1,10 @@
-# Studio Desk 2.0.0 implementation contract
+# Studio Desk 5.0.0 implementation contract
 
 Desktop product, not a hosted website service. Local-first Windows 10/11 x64; MIT code, separate studio artwork rights. Existing Academy/Forge/Screen releases are unchanged. All runtime dependencies and writable data resolve relative to the selected installation folder, with no PATH edits. Native main/preload are product-specific. Python is bundled, isolated (`-I -B`), standard library only, invoked without shell, request JSON on stdin, response JSON on stdout.
 
 ## Current schema 2
 
-Schema 2 retains the schema 1 fields below and adds `workspace:{brief,acceptance,bom,screen,resources}` and task `target:{kind,ref}`. New projects and native saves use producer 2.0.0. Schema 1 is accepted and migrated in memory; only a save replaces the local file after backing up its original bytes. See [API.md](API.md#integrated-desktop-apis--整合桌面接口) for field bounds, native screen/environment methods and private handoff export. Unknown/future formats fail without replacing existing data.
+Schema 2 retains the schema 1 fields below and adds `workspace:{brief,acceptance,bom,screen,resources}` and task `target:{kind,ref}`. New projects and native saves use producer 5.0.0. Schema 1 is accepted and migrated in memory; only a save replaces the local file after backing up its original bytes. See [API.md](API.md#integrated-desktop-apis--整合桌面接口) for field bounds, native screen/environment methods and private handoff export. Unknown/future formats fail without replacing existing data.
 
 The task allowlist also includes `handoff`. `exportScreen` generates a separate native `screen` artifact job; it is not a Python task. Embedded modules use one shared runtime and install-relative data. Studio: 赋形造物工作室, a subsidiary of 向阳科创工作室. Creator/rightsholder: 理工阿白菌 / TechABJ. See ATTRIBUTION.md.
 

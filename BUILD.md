@@ -1,4 +1,4 @@
-# Reproduce Studio Desk 3.0.0
+# Reproduce Studio Desk 5.0.0
 
 Build on Windows 10/11 x64 with Node.js 22.22.2 or later and official Inno Setup 7. These are developer tools; end users need neither Node nor Python installed.
 
@@ -6,7 +6,7 @@ Build on Windows 10/11 x64 with Node.js 22.22.2 or later and official Inno Setup
 2. Return to the product directory and run node prepare-runtime.cjs. It downloads the official Electron and CPython embeddable archives to excluded .cache/, checks runtime-lock.json SHA-256 and checks every extracted file. No global Python is registered and no pip runs.
 3. Run node build-release.cjs. Set ZTH_ISCC for a nonstandard Inno compiler path. Optional process-only ZTH_BUILD_MODULES and ZTH_RUNTIME_CACHE can select existing verified build inputs. No environment variable needs to be set permanently.
 
-Outputs are out/build/studio-desk, out/source/zth-studio-desk-v3 and out/release/ZTH-Studio-Desk-Windows-v3.0.0.zip. The builder refuses pre-existing output folders. Preserve old outputs and select a new output root in the buildProduct API; it never recursively erases them.
+Outputs are out/build/studio-desk, out/source/zth-studio-desk-v4 and out/release/ZTH-Studio-Desk-Windows-v5.0.0.zip. The builder refuses pre-existing output folders. Preserve old outputs and select a new output root in the buildProduct API; it never recursively erases them.
 
 Runtime archives are pinned by official release SHA-256. The Electron archive is located in its download cache or downloaded from its official release; every stock runtime file is compared before branding. Python is copied exactly from its checked archive, including PSF and dependency licenses. Both runtimes remain inside the selected installed folder. Runtime files, private data, caches and toolchains do not enter the public source repository.
 

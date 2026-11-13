@@ -1,4 +1,4 @@
-# Studio Desk 3.0.0 API / 引擎协议
+# Studio Desk 5.0.0 API / 引擎协议
 
 这是本地应用与独立 Python 子进程之间的协议，不是可公开监听的 HTTP 服务。标准输出只含一个 UTF-8 JSON 响应；没有服务器端口、pip 依赖或 shell 命令执行。
 
@@ -52,7 +52,7 @@ The calendar exports dated tasks as all-day events with an exclusive next-day en
 
 ## Project schema / 项目结构
 
-完整形状见 [CONTRACT.md](CONTRACT.md)。未知字段、未来 schema、重复编号和非法类型被拒绝。格式为 `format=zth-desk-project`, `schema=2`（兼容读入 schema 1）；`producer` 是合法 semver，保存时写当前应用版本（3.0.0），兼容检查以 schema 和严格字段为准，导入不抹除原 producer。必需顶层字段：`id,name,updatedAt,settings,operations,site,workspace`；`updatedAt` 为 UTC ISO 时间，如 `2026-11-06T08:00:00.000Z`。
+完整形状见 [CONTRACT.md](CONTRACT.md)。未知字段、未来 schema、重复编号和非法类型被拒绝。格式为 `format=zth-desk-project`, `schema=2`（兼容读入 schema 1）；`producer` 是合法 semver，保存时写当前应用版本（5.0.0），兼容检查以 schema 和严格字段为准，导入不抹除原 producer。必需顶层字段：`id,name,updatedAt,settings,operations,site,workspace`；`updatedAt` 为 UTC ISO 时间，如 `2026-11-06T08:00:00.000Z`。
 
 Unknown fields, unsupported schemas, duplicate IDs and invalid types are rejected. Valid producer semver is preserved on import; native saving updates it to the saving app version. Each ID matches `[A-Za-z][A-Za-z0-9_-]{0,63}`. IDs and slugs exclude Windows device names such as CON and NUL. A website has exactly one `index` page; other slugs use lowercase ASCII letters/digits separated by hyphens, at most 64 characters.
 

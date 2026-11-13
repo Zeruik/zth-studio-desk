@@ -1,0 +1,19 @@
+/* Screen engineering workflow · MIT · TechABJ */
+(function(root,factory){const api=factory(typeof module==='object'?require('./core.js'):root.ScreenCore);if(typeof module==='object')module.exports=api;else root.ScreenWorkflow=api;})(typeof globalThis==='undefined'?this:globalThis,function(C){'use strict';
+function migrate(raw,device,mode='contain'){
+ const p=C.validate(raw),before=C.dimensions(p);if(!['contain','stretch','keep'].includes(mode))throw Error('MIGRATION_MODE');
+ p.device=C.clone(device);const after=C.dimensions(C.validate(p)),sx=after.width/before.width,sy=after.height/before.height,s=Math.min(sx,sy),ox=(after.width-before.width*s)/2,oy=(after.height-before.height*s)/2;
+ for(const page of p.pages)for(const n of page.nodes){if(mode==='keep')continue;const x=mode==='contain'?s:sx,y=mode==='contain'?s:sy;n.x=Math.round(n.x*x+(mode==='contain'?ox:0));n.y=Math.round(n.y*y+(mode==='contain'?oy:0));n.w=Math.max(1,Math.round(n.w*x));n.h=Math.max(1,Math.round(n.h*y));n.radius=Math.max(0,Math.min(128,Math.round(n.radius*Math.min(x,y))));n.fontSize=Math.max(1,Math.min(8,Math.round(n.fontSize*Math.min(x,y))));}
+ return C.validate(p);
+}
+function lines(text,width,fontSize){const max=Math.max(1,Math.floor(width/(fontSize*4.8)));let total=0;for(const para of text.split('\n')){let length=0,count=1;for(const ch of para){const size=ch.codePointAt(0)>255?1.7:1;if(length+size>max&&length){count++;length=0;}length+=size;}total+=count;}return total;}
+function audit(raw){const p=C.validate(raw),d=C.dimensions(p),issues=[],edges=[],pages=p.pages.map(page=>({id:page.id,name:page.name})),seen=new Set();
+ const add=(code,page,n,zh,en)=>issues.push({code,page:page.id,pageName:page.name,node:n?.id||'',name:n?.name||'',zh,en});
+ for(const page of p.pages){const visible=page.nodes.filter(n=>!n.hidden);for(const n of visible){if(n.x<0||n.y<0||n.x+n.w>d.width||n.y+n.h>d.height)add('outside',page,n,'组件超出屏幕，导出后会裁切。','Widget extends beyond the logical screen and will be clipped.');if(['text','button'].includes(n.type)&&lines(n.text,n.w,n.fontSize)*n.fontSize*9>n.h)add('text-height',page,n,'文字行高超过组件高度，请加高、缩字或减少文字。','Text rows exceed the widget height; resize, reduce the font or shorten the text.');if(n.type==='button'){if(n.target)edges.push({from:page.id,to:n.target,node:n.id,label:n.text});if(!n.target&&!n.event)add('no-action',page,n,'按钮既没有页面链接，也没有事件。','Button has neither a page link nor an event.');for(const other of visible){if(other===n||other.type!=='button'||other.id<n.id)continue;if(Math.min(n.x+n.w,other.x+other.w)>Math.max(n.x,other.x)&&Math.min(n.y+n.h,other.y+other.h)>Math.max(n.y,other.y))add('button-overlap',page,n,'两个按钮重叠；后绘制的按钮会遮挡点击。','Buttons overlap; the later button covers the earlier click target.');}}}}
+ const visit=id=>{if(seen.has(id))return;seen.add(id);for(const edge of edges)if(edge.from===id)visit(edge.to);};visit(p.pages[0].id);for(const page of p.pages)if(!seen.has(page.id))add('unreachable',page,null,'从首页没有按钮可到达此页；仍可通过外部串口命令访问。','No button path from Home; external serial page commands can still select it.');
+ const live=p.pages.flatMap(x=>x.nodes).filter(n=>!n.hidden&&n.binding),bindings=[...new Set(live.map(n=>n.binding))];
+ return{format:'zth-screen-workflow-review',version:1,logical:d,pages,edges,issues,bindings,refreshMs:p.settings.refreshMs,scope:'Static geometry, link and binding checks; not compilation, physical touch or electrical acceptance.'};
+}
+function sample(values){const limits={temperature:[-100,200],battery:[0,100],counter:[0,1000000]},out={};if(!values||typeof values!=='object')throw Error('SAMPLE_INVALID');for(const [k,v]of Object.entries(values)){if(!limits[k]||typeof v!=='number'||!Number.isFinite(v)||v<limits[k][0]||v>limits[k][1])throw Error('SAMPLE_OUT_OF_RANGE');out[k]=v;}return out;}
+return{migrate,audit,sample,lines};
+});

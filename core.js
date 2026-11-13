@@ -1,7 +1,7 @@
 /* ZTH Studio Desk · MIT · Zeruik / TechABJ */
 (function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.DeskCore=api;})(typeof globalThis!=='undefined'?globalThis:this,function(){
 'use strict';
-const VERSION='3.0.0',LIMITS={json:32*1024*1024,asset:5*1024*1024,assets:20*1024*1024,tasks:500,drafts:200,pages:20,sections:30,items:30},TYPES=['hero','text','cards','gallery','faq','cta','contact'];
+const VERSION='5.0.0',LIMITS={json:32*1024*1024,asset:5*1024*1024,assets:20*1024*1024,tasks:500,drafts:200,pages:20,sections:30,items:30},TYPES=['hero','text','cards','gallery','faq','cta','contact'];
 const clone=value=>JSON.parse(JSON.stringify(value));let sequence=0;
 function uid(prefix='id'){if(!/^[A-Za-z][A-Za-z0-9_-]{0,15}$/.test(prefix))throw Error('ID_PREFIX');const random=typeof globalThis.crypto?.getRandomValues==='function'?globalThis.crypto.getRandomValues(new Uint32Array(2)).join(''):Math.random().toString(36).slice(2);return(prefix+'_'+Date.now().toString(36)+'_'+(++sequence).toString(36)+'_'+random).slice(0,64);}
 function fail(code,path){throw Error(code+': '+path);}

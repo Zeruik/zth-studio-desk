@@ -158,7 +158,7 @@ begin
  Notice := TNewStaticText.Create(WizardForm);Notice.Parent := WizardForm.SelectDirPage;
  Notice.SetBounds(ScaleX(0),ScaleY(148),WizardForm.SelectDirPage.Width,ScaleY(60));
  Notice.WordWrap := True;Notice.AutoSize := False;
- Notice.Caption := Tr('请使用英文路径（盘符、英文字母、数字和常见标点）。运行时与 data 存档均在安装目录；卸载保留 data，不修改 PATH。更新请沿用旧目录，迁移须先完整复制旧文件夹。','Use an English path. Runtimes and data stay here. Uninstall retains data; PATH is unchanged. Upgrade in place, or copy the entire old folder before migration.');
+ Notice.Caption := Tr('请使用英文绝对路径（允许空格）。'+#13#10+'运行时与 data 存档均在安装目录；卸载保留 data。'+#13#10+'安装器不修改 PATH。升级沿用旧目录；迁移前完整备份。','Use an English absolute path; spaces are allowed.'+#13#10+'Runtimes and data stay here. Uninstall retains data.'+#13#10+'PATH is unchanged. Upgrade in place; copy before moving.');
 end;
 function PrepareToInstall(var NeedsRestart: Boolean): String;
 var Version:String;

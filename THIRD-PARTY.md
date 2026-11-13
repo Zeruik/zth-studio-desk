@@ -18,3 +18,14 @@ The desktop installer bundles both runtimes. It does not install a global Python
 ## Integrated studio modules
 
 Desk 2 embeds Screen Studio and Forge source modules under modules/ and retains their MIT license notices. They share the Desk Electron runtime; no second installed application or hidden desktop runtime is required. Original source versions and copied files are recorded by the module provenance documentation. Forge external tools and Screen generated-firmware libraries remain governed by their own licenses and are not converted to MIT by integration.
+
+| Three.js | 0.186.1 | MIT; notice in modules/robotics/LICENSE.three.txt | https://github.com/mrdoob/three.js |
+
+New authored robotics course and project-route text: separate noncommercial license in modules/robotics/LICENSE-CONTENT.txt. Original procedural geometry/runtime code remain MIT. Models do not embed vendor CAD.
+
+Academy 13 course/UI module: separate LICENSE-ZH.txt, PRIVACY-ZH.txt and third-party notices inside modules/academy. Original source HTML is identified by ORIGIN.json; source code repository https://github.com/Zeruik/zerotohand-academy. No Academy offline compiler binaries or GPL toolchain materials are duplicated in Desk.
+
+
+Noto Sans SC, Copyright the Noto Project Authors, is bundled under SIL Open Font License 1.1. The unmodified font, full license and reviewed source/commit/checksums are retained in assets/fonts/. It is used locally for consistent Chinese UI and screen bitmap export; there is no font CDN.
+
+Linux/macOS include a private CPython 3.14.10 runtime from the pinned official python-build-standalone release. Its upstream dependency license metadata and notices are retained in runtime/python/redistribution/. The optional Berkeley DB extension is excluded. Pip vendor notices remain with the runtime. This does not license the separately labelled authored Academy/robotics content under MIT.

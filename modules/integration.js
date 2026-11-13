@@ -25,6 +25,7 @@ function screen(o){
  return{async flush(){if(!same())return;if(!ready)throw Error(t('编辑器尚未连接，请稍候','The editor is still connecting'));await new Promise((resolve,reject)=>{const id=send('snapshot'),timer=setTimeout(()=>{pending.delete(id);reject(Error('Screen snapshot timed out'));},10000);pending.set(id,{resolve,reject,timer});});},update(next){ctx={...ctx,...next};if(next.project&&next.project.id!==capturedId)throw Error('Remount for a different workspace');send('context',{language:ctx.language,theme:ctx.theme});},dispose(){send('close');active=false;window.removeEventListener('message',receive);for(const p of pending.values()){clearTimeout(p.timer);p.reject(Error('Editor disposed'));}pending.clear();frame.remove();}};
 }
 function environment(o){
+ if(o.platform&&o.platform!=='win32'){o.container.innerHTML=window.ForgeNativeUI.html(null,o.platform);return{async flush(){},update(){o.container.innerHTML=window.ForgeNativeUI.html(null,o.platform);},dispose(){}};}
  const id=o.project.id,box=o.container,bridge=o.bridge;let alive=true,lang=o.language||'zh',unsubscribe=null,timer=null;
  const state=sessions.get(id)||{task:'linux',matrixId:'jazzy',location:'',distro:'ZTH-Desk-Jazzy',desktop:true,withTools:true,plan:null,jobs:[],detect:null,detail:'',busy:false,artifactId:'',rootfs:'',checksum:''};sessions.set(id,state);
  const t=(zh,en)=>lang==='en'?en:zh,call=(name,arg)=>{if(!bridge?.forge)throw Error('Native environment service is unavailable');return arg===undefined?bridge.forge(name):bridge.forge(name,arg);};
