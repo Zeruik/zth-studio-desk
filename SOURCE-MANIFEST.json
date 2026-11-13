@@ -90,7 +90,7 @@
     {
       "path": "CI-ACTIONS.json",
       "size": 765,
-      "sha256": "48f6364c5908686a4fbe93dbac8643382e799ec93de47cabdea5637f428f8544"
+      "sha256": "6a7df4f0cbd89180083dadb448b95a9d5675ea51fb1b5332d3d3c27583e1dd17"
     },
     {
       "path": "ci-native.cjs",
@@ -584,8 +584,8 @@
     },
     {
       "path": "qa-package-native.cjs",
-      "size": 6472,
-      "sha256": "600bcb1a8668c1451e556c2ab0ccbccc7903cc4c7fa7b460c7820e3e87c212c3"
+      "size": 6577,
+      "sha256": "8546be79ec5179209ad3b777787cc6a0ffbceceb311c93c2e0f0b5b7c4c5d529"
     },
     {
       "path": "qa-project-v2.cjs",
