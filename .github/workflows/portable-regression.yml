@@ -22,6 +22,7 @@ jobs:
         run: |
           set -euo pipefail
           npm ci --prefix build-runtime --no-audit --no-fund
+          node qa-package-permissions.cjs
           node qa-core.cjs
           node qa-native-guards.cjs
           node qa-backend.cjs "$(command -v python3)" /tmp/desk-backend.json

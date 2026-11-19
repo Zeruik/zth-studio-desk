@@ -6,9 +6,13 @@
 
 嵌入屏幕导出拒绝 Windows 设备名、非法字符和尾随点/空格；后端拒绝不属于当前工程的位图资源。
 
+另修复 Linux 打包权限：生成的 TAR/DEB 负载和控制目录使用明确的公开读取/执行权限，不继承开发机器的私有 umask；新增 umask 077 下实际构建 DEB 的回归测试。
+
 ## 当前云实例验证 / Current cloud validation
 
 10 core groups plus archive-path regression; 13 backend groups; 7 integrated project groups; 11 DOM groups; 4 native integration guards passed using host Python 3.12 (not bundled runtime acceptance).
+
+Additional check: node qa-package-permissions.cjs passed with a real synthetic DEB under umask 077.
 
 New portable-regression CI workflows, where present, have not yet been observed running on GitHub. They use synthetic data and do not replace native acceptance.
 
