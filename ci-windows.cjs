@@ -16,6 +16,8 @@ const run=(file,args)=>new Promise((resolve,reject)=>{const child=cp.spawn(file,
   await run(process.execPath,['qa-backend.cjs',path.join(result.bundle,'runtime/python/python.exe'),path.join(work,'backend-proof.json')]);
   await run(process.execPath,['qa-project-v2.cjs',path.join(result.bundle,'runtime/python/python.exe')]);
   await run(process.execPath,['qa-release.cjs']);
+  process.env.ZTH_QA_ICON=path.join(work,'icon.ico');
+  await fs.access(process.env.ZTH_QA_ICON);
   await run(process.execPath,['qa-installer.cjs']);
  }
  if(!result.zip||!/^[a-f0-9]{64}$/.test(result.sha256))throw Error('WINDOWS_PACKAGE_MISSING');

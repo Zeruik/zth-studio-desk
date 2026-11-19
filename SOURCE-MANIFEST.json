@@ -144,8 +144,8 @@
     },
     {
       "path": "ci-windows.cjs",
-      "size": 3214,
-      "sha256": "12ca345fd1641c8c4636faa45c402d7e4a3fb5938ffc82c60a050c7c04de8757"
+      "size": 3312,
+      "sha256": "ce070cfe3701b2f5d4d22029f37eec7bb757ccef091fb62c7b71bf2fd22fd5ea"
     },
     {
       "path": "core.js",
