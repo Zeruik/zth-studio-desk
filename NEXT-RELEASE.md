@@ -10,9 +10,9 @@
 
 ## 当前云实例验证 / Current cloud validation
 
-10 core groups plus archive-path regression; 13 backend groups; 7 integrated project groups; 11 DOM groups; 4 native integration guards passed using host Python 3.12 (not bundled runtime acceptance).
+10 core groups plus archive-path regression; 13 backend groups; 7 integrated project groups; 11 DOM groups; 4 native integration guards passed using host Python 3.12 (host checks were subsequently repeated with the freshly bundled Python 3.14.10: 13 backend and 7 project groups passed; no GUI acceptance).
 
-Additional check: node qa-package-permissions.cjs passed with a real synthetic DEB under umask 077.
+Additional checks: node qa-package-permissions.cjs passed with a real synthetic DEB under umask 077. Actual Linux x64 TAR and DEB builds passed using checksum-pinned runtimes; SHA256SUMS and installed payload permissions were verified. These are validation builds with the current version number, not next-version release assets. No GUI/install lifecycle acceptance was performed.
 
 New portable-regression CI workflows, where present, have not yet been observed running on GitHub. They use synthetic data and do not replace native acceptance.
 
