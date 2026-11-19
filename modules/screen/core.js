@@ -1,7 +1,7 @@
 /* ZTH Screen Studio · MIT · Copyright (c) 2026 理工阿白菌 / TechABJ */
 (function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.ScreenCore=api;})(typeof globalThis!=='undefined'?globalThis:this,function(){
 'use strict';
-const VERSION='3.0.0';
+const VERSION='3.0.1';
 const BOARDS={
  s3n16r8:{name:'ESP32-S3 N16R8',chip:'esp32s3',fqbn:'esp32:esp32:esp32s3:FlashSize=16M,PSRAM=opi,CDCOnBoot=cdc',pins:{sck:12,mosi:11,miso:13,cs:10,dc:9,rst:14,bl:8,sda:4,scl:5,sdcs:7}},
  c3mini:{name:'ESP32-C3 Super Mini',chip:'esp32c3',fqbn:'esp32:esp32:esp32c3:FlashSize=4M,CDCOnBoot=cdc',pins:{sck:4,mosi:6,miso:7,cs:10,dc:3,rst:1,bl:0,sda:8,scl:9,sdcs:5}},

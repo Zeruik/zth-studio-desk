@@ -1,6 +1,6 @@
 {
   "product": "studio-desk",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "files": [
     {
       "path": ".gitattributes",
@@ -10,7 +10,7 @@
     {
       "path": ".github/workflows/native-desktop.yml",
       "size": 2276,
-      "sha256": "92d94c6d8f0b8152d2a7fc6af8f403becea9447f66eb82268bdf2085180de040"
+      "sha256": "230b9673c1f780e0b5d7b71f332051d40d35891668b7559281aa64fa2a237973"
     },
     {
       "path": ".github/workflows/portable-regression.yml",
@@ -64,13 +64,13 @@
     },
     {
       "path": "NEXT-RELEASE.md",
-      "size": 2249,
-      "sha256": "da948dbdf2b78ec0b0bed25781f67e5c006fe709425c1c10edcfc4c389b3d383"
+      "size": 2264,
+      "sha256": "9113d1c14ed3028945a8d03e256f4698c2e1d7363de2e7d4ee4f6f5c781bfc7f"
     },
     {
       "path": "README.md",
       "size": 8541,
-      "sha256": "e69ce628bbd6b4dbb8f13db01429f2ce3eea658f32fa144193a4096c28fdfcd3"
+      "sha256": "6072c38a620f1a19881d6b4d5abedfac986cd31415f7ab12a8f06ba4be7a70c8"
     },
     {
       "path": "THIRD-PARTY.md",
@@ -80,7 +80,7 @@
     {
       "path": "app.js",
       "size": 82449,
-      "sha256": "f40074da5de4e5630743094e6e05cf9ca684a85c9d73db6ffd81de7dd78cd126"
+      "sha256": "09b74ad2c0535b3d4bccdb26500435e8c4642fa88b62ce66f84b3cf71cfa293e"
     },
     {
       "path": "assets/fonts/NotoSansSC.ttf",
@@ -135,7 +135,7 @@
     {
       "path": "core.js",
       "size": 19239,
-      "sha256": "33af287ba2b1790163ef4c854191e539c3bbf40515cf3605a0828fa8b816119a"
+      "sha256": "7a5652bd979008487acad7166338fda6b230de6e3d869b127602685fa51075c3"
     },
     {
       "path": "cross-platform.cjs",
@@ -480,7 +480,7 @@
     {
       "path": "modules/screen/core.js",
       "size": 31292,
-      "sha256": "0c00c18bf5dd73f45cf8146f94e38e207c3b154a37cc524c4e865c780a2e9c30"
+      "sha256": "c5ff2fe52dd120eb9cfd8c6eeaf74b1eda34d65665a97fb19ead4b5a1c6697ba"
     },
     {
       "path": "modules/screen/desk-theme.css",
@@ -530,7 +530,7 @@
     {
       "path": "package.json",
       "size": 154,
-      "sha256": "d7a463c55fb817151dff2c88e23256931c9844ea45eb16e02f68524493a6a07a"
+      "sha256": "a5473466e14e3ed7248035039bdccf15fabaeee195d703595a74b33aee7f69cd"
     },
     {
       "path": "prepare-runtime.cjs",
@@ -540,7 +540,7 @@
     {
       "path": "product.json",
       "size": 890,
-      "sha256": "2b535872bb5c4777c13bc4aa8d3329e98a242463316b3d256b205d023dd06f35"
+      "sha256": "e46393ffd409ae66e7ec2f535cc5a100677d36b7b5fa0a874cd4e06113c680ab"
     },
     {
       "path": "python/github_pages.py",
