@@ -579,8 +579,8 @@
     },
     {
       "path": "qa-backend.cjs",
-      "size": 9099,
-      "sha256": "200ed697d510eacbc02b4abe014ea10bc548a54589c86e7ec899bc731f06f4a4"
+      "size": 9337,
+      "sha256": "e2d7f2e4c8b8408c6bcc6237658db38fd49a054e3d3953aa7ea367637d78675a"
     },
     {
       "path": "qa-core.cjs",
