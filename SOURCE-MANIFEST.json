@@ -9,8 +9,8 @@
     },
     {
       "path": ".github/workflows/native-desktop.yml",
-      "size": 2276,
-      "sha256": "230b9673c1f780e0b5d7b71f332051d40d35891668b7559281aa64fa2a237973"
+      "size": 2618,
+      "sha256": "81acedab7ec92fa15e7dcc15b00a0af74bd9952c19cf8b1d5d263b4b00889bd7"
     },
     {
       "path": ".github/workflows/portable-regression.yml",
