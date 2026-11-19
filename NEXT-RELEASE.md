@@ -1,27 +1,21 @@
-# 下一轮维护计划 / Next maintenance iteration
+# 5.0.1 维护记录与后续计划
 
-目标：5.0.1（候选分支已同步版本字段，尚未发布；旧标签保持不变）。
+5.0.1 已发布：[Release](https://github.com/Zeruik/zth-studio-desk/releases/tag/v5.0.1)。发布标签提交：`14fc1e50cb9607c6bc151a2bdb7ae0118b83b740`。本文件是发布后的文档更新；精确构建输入请使用发布标签。
 
-## 已实现 / Implemented
+## 本次改进
 
-嵌入屏幕导出拒绝 Windows 设备名、非法字符和尾随点/空格；后端拒绝不属于当前工程的位图资源。
+嵌入屏幕导出拒绝 Windows 设备名、非法字符及尾随点/空格；后端拒绝当前工程之外的位图资源。Linux TAR/DEB 使用明确的公开读取/执行权限，不继承私有 umask，保留正确配置的 sandbox helper。Windows 后端目录验收使用 realpath 和严格子目录判断；源码审核保留全部二进制属性规则；安装器夹具使用本次构建的图标。
 
-另修复 Linux 打包权限：生成的 TAR/DEB 负载和控制目录使用明确的公开读取/执行权限，不继承开发机器的私有 umask；新增 umask 077 下实际构建 DEB 的回归测试。
+## 已完成验证
 
-## 当前云实例验证 / Current cloud validation
+同一标签提交的 portable 回归、Linux/macOS 四目标原生启动/重开与交付检查、Windows 完整构建/真实生产程序/内嵌 Python 后端/工程/源码检查/隔离安装器生命周期全部通过。早期本地验证还包括真实 umask 077 DEB 权限检查，及摘要固定的 Linux TAR/DEB 构建。
 
-10 core groups plus archive-path regression; 13 backend groups; 7 integrated project groups; 11 DOM groups; 4 native integration guards passed using host Python 3.12 (host checks were subsequently repeated with the freshly bundled Python 3.14.10: 13 backend and 7 project groups passed; no GUI acceptance).
+发布器逐项核对远端大小和 SHA-256 后公开 Release。五个目标平台的九个包和 SHA256SUMS 共十个附件，公开摘要和 Git 标签目标已另行核对。历史版本保留。
 
-Additional checks: node qa-package-permissions.cjs passed with a real synthetic DEB under umask 077. Actual Linux x64 TAR and DEB builds passed using checksum-pinned runtimes; SHA256SUMS and installed payload permissions were verified. These are validation builds with the current version number, not next-version release assets. No GUI/install lifecycle acceptance was performed.
+发布 CI：https://github.com/Zeruik/zth-studio-desk/actions/runs/44454674653
 
-The maintenance-branch portable regression succeeded on GitHub. Local regression also passed on Node 22.23.5. Native candidate CI is required separately before publication.
+Windows Setup 未签名，macOS 为 ad-hoc 签名。安装器生命周期测试使用随机 AppId 的合成夹具；它不表示每台既有用户机器的真实升级均已验收。未执行实体设备或真实网站发布。升级前导出工程并备份 data/。
 
-## 建议优化 / Recommended follow-up
+## 后续优先项
 
-后续优先：备份恢复入口、长任务错误恢复、跨平台数据目录迁移。需分别核验原生内嵌 Python、安装升级与实际桌面交互。
-
-## 发布条件 / Publication gates
-
-先完成对应平台构建与升级/数据保留验收，再同步版本字段、刷新源码清单、为新版本生成附件与 SHA-256 校验。历史 Release、标签和附件不可覆盖。当前 api.github.com 在代理 CONNECT 阶段返回 403，已将该域名加入环境配置草案；草案保存不等于运行时已应用。恢复 API 后还需核验当前用户、仓库权限、既有 Release 和候选标签是否冲突。
-
-本文件记录源码改进和实际执行范围，不表示新版本已经发布，也不将软件/模拟测试称为实板或手机验收。
+备份恢复入口、长任务错误恢复、跨平台数据目录迁移及真实用户机器的升级反馈。
