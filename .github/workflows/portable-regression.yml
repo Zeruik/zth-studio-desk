@@ -28,3 +28,4 @@ jobs:
           node qa-backend.cjs "$(command -v python3)" /tmp/desk-backend.json
           node qa-project-v2.cjs "$(command -v python3)"
           node -e "process.env.ZTH_JSDOM_MODULE=require.resolve('./build-runtime/node_modules/jsdom/lib/api.js');require('./qa-ui.cjs')"
+          node --test qa-publication.test.cjs

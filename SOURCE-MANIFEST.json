@@ -14,8 +14,13 @@
     },
     {
       "path": ".github/workflows/portable-regression.yml",
-      "size": 1085,
-      "sha256": "acf57c1b51d50986081cf532ef009238dd2158681a3606650f89200cf7f2dd23"
+      "size": 1131,
+      "sha256": "39c25d5a353b3de770e84bb217bfcd391bab6fc0d9a01865eaf817832ddad10f"
+    },
+    {
+      "path": ".github/workflows/publish-release.yml",
+      "size": 694,
+      "sha256": "0e648ccc8f2a58f27701e3c8ebc2e0f5e63b2f2d066c10c415ab6ff53029b536"
     },
     {
       "path": ".github/workflows/windows-candidate.yml",
@@ -74,8 +79,8 @@
     },
     {
       "path": "README.md",
-      "size": 8541,
-      "sha256": "6072c38a620f1a19881d6b4d5abedfac986cd31415f7ab12a8f06ba4be7a70c8"
+      "size": 8845,
+      "sha256": "35dc0cc7a7b5a577f0307cef3fcd25461ecde90af2c0e2db3782f9949b4854e0"
     },
     {
       "path": "THIRD-PARTY.md",
@@ -553,6 +558,11 @@
       "sha256": "e46393ffd409ae66e7ec2f535cc5a100677d36b7b5fa0a874cd4e06113c680ab"
     },
     {
+      "path": "publish-release.cjs",
+      "size": 9767,
+      "sha256": "efd604c7264b4e3cb12f29a23b79b93968b0da78bd3adf0627176a3f98a556e5"
+    },
+    {
       "path": "python/github_pages.py",
       "size": 10508,
       "sha256": "974c984dcf73843bba8be806a257dd30480b409b52db3c771e1e413220c5ae74"
@@ -623,14 +633,19 @@
       "sha256": "63ec6bb7ef34826ca2356b482fde7e4fdb47d4f876fa0ee036c1d95556b3c127"
     },
     {
+      "path": "qa-publication.test.cjs",
+      "size": 2384,
+      "sha256": "ec3489f13ec1fe302c1c2568f4bb67cc21c8171fd29698761c5bf3fdcb1196b9"
+    },
+    {
       "path": "qa-readiness.cjs",
       "size": 1543,
       "sha256": "941a20fddd054536b4a19f1067e6c2047e77fd1c53fc3e353bba5f9b063a2403"
     },
     {
       "path": "qa-release.cjs",
-      "size": 5094,
-      "sha256": "e5d8b1ce57557b3342634f725023a599ae38162c90f4ecb20864005f94aca8f8"
+      "size": 5146,
+      "sha256": "00a51f7e14a3762eb51db756b3a66bc46ec9f45e998952e1ec6bb646cc742350"
     },
     {
       "path": "qa-runtime.cjs",

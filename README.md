@@ -69,3 +69,5 @@ Created by TechABJ for Fuxing Zaowu Studio, a sub-studio of Xiangyang Science & 
 Original tool code follows its LICENSE; logo rights remain reserved. Separately labelled Academy and authored robotics teaching content retain their content terms and are not automatically MIT. Third-party runtimes, fonts and libraries retain their own licenses.
 
 联系 / Contact: zeruik@qq.com · [作者主页 / Creator](https://github.com/Zeruik)
+
+维护补丁由新的版本标签触发发布工作流。只有相同提交的基础回归、Linux/macOS 原生验收与 Windows 验收全部成功，且五个平台的九个包均通过校验，才会上传并公开新 Release。既有标签和附件保持不变，失败时保留草稿以便核对。
