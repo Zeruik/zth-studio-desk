@@ -3,7 +3,7 @@
 // no real learner data, hardware, WSL installation or website publication.
 const fs=require('node:fs/promises'),path=require('node:path'),crypto=require('node:crypto'),cp=require('node:child_process');
 const root=__dirname;
-const run=(file,args)=>new Promise((resolve,reject)=>{const child=cp.spawn(file,args,{cwd:root,shell:false,stdio:'inherit'});child.on('error',reject);child.on('close',code=>code===0?resolve():reject(Error(path.basename(file)+' failed with exit '+code)));});
+const run=(file,args)=>new Promise((resolve,reject)=>{const child=cp.spawn(file,args,{cwd:root,shell:false,stdio:['ignore','pipe','pipe']}),chunks=[];let bytes=0;for(const [stream,output]of [[child.stdout,process.stdout],[child.stderr,process.stderr]])stream.on('data',b=>{output.write(b);chunks.push(b);bytes+=b.length;while(bytes>12000&&chunks.length>1)bytes-=chunks.shift().length;});child.on('error',reject);child.on('close',code=>code===0?resolve():reject(Error(path.basename(file)+' failed with exit '+code+'\n'+Buffer.concat(chunks).toString('utf8').slice(-6000))));});
 (async()=>{
  if(process.platform!=='win32'||process.env.GITHUB_ACTIONS!=='true')throw Error('EPHEMERAL_WINDOWS_RUNNER_REQUIRED');
  const config=require('./product.json'),modules=path.join(root,'build-runtime','node_modules');
