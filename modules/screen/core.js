@@ -39,7 +39,7 @@ function quantize(hex,depth){let r=parseInt(hex.slice(1,3),16),g=parseInt(hex.sl
 function signals(seconds){return{temperature:24+Math.sin(seconds*.45)*3,battery:Math.max(0,100-(seconds*2)%101),counter:Math.floor(seconds)};}
 function nodeValue(n,values){return n.binding?values[n.binding]??n.value:n.value;}
 function cppString(s){return '"'+String(s).replace(/\\/g,'\\\\').replace(/"/g,'\\"').replace(/\r/g,'\\r').replace(/\n/g,'\\n')+'"';}
-function safeFile(name){if(typeof name!=='string'||name.length>150||name.startsWith('/')||name.includes('\\')||name.split('/').some(x=>!x||x==='.'||x==='..')||/[:\x00-\x1f]/.test(name))throw Error('Unsafe output path');return name;}
+function safeFile(name){if(typeof name!=='string'||name.length>150||name.startsWith('/')||name.includes('\\')||name.split('/').some(x=>!x||x==='.'||x==='..'||/[. ]$/.test(x)||/^(?:CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])(?:\.|$)/i.test(x))||/[<>"|?*:\x00-\x1f\x7f]/.test(name))throw Error('Unsafe output path');return name;}
 function createHistory(initial){let value=validate(initial),past=[],future=[];return{get:()=>clone(value),commit(next){const n=validate(next);if(JSON.stringify(value)===JSON.stringify(n))return false;past.push(value);if(past.length>100)past.shift();value=n;future=[];return true;},undo(){if(!past.length)return false;future.push(value);value=past.pop();return true;},redo(){if(!future.length)return false;past.push(value);value=future.pop();return true;},get canUndo(){return !!past.length;},get canRedo(){return !!future.length;}};}
 function generate(project,rasters={}){
  const p=validate(project),issues=pinIssues(p);if(issues.some(x=>x.severity==='error'))throw Error(issues.filter(x=>x.severity==='error').map(x=>x.text).join('\n'));

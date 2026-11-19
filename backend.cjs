@@ -46,6 +46,8 @@ function createDeskService({rootDir,pythonExecutable,workerPath,dialogs={},sendP
    const p=valid(request.project),screen=p.workspace?.screen;if(!screen)throw Error('SCREEN_REQUIRED');
    const Core=require('./modules/screen/core.js'),rasters=request.rasters||{};
    if(!rasters||typeof rasters!=='object'||Array.isArray(rasters)||Buffer.byteLength(JSON.stringify(rasters),'utf8')>16*1024*1024)throw Error('RASTER_LIMIT');
+   const rasterIds=new Set(screen.pages.flatMap(page=>page.nodes.filter(n=>!n.hidden&&(['text','button'].includes(n.type)||(n.type==='image'&&n.asset))).map(n=>n.id)));
+   if(Object.keys(rasters).some(id=>!rasterIds.has(id)))throw Error('RASTER_UNEXPECTED');
    // Generate from trusted templates; no caller-supplied filenames, code or filesystem paths.
    const files=Core.generate(screen,rasters),archive=Core.zip(files);
    if(archive.byteLength>32*1024*1024)throw Error('SCREEN_EXPORT_TOO_LARGE');
